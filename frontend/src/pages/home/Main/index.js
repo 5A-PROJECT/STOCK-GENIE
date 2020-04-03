@@ -1,10 +1,10 @@
 import React from 'react';
-import AppBar from '../../../organisms/AppBar';
+import AppBarContainer from '../../../organisms/AppBar/AppBarContainer';
 
 function Main() {
   return (
     <>
-      <AppBar />
+      <AppBarContainer />
       <section>메인 페이지입니다.</section>
     </>
   );

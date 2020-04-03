@@ -9,7 +9,7 @@ const StyledNav = styled.nav`
   }
 `;
 
-function AppBar(props) {
+function AppBarTemplate({ isLoggedIn }) {
   return (
     <StyledNav>
       <ul>
@@ -23,8 +23,9 @@ function AppBar(props) {
           <Link to="/register">회원가입</Link>
         </li>
       </ul>
+      <div>{isLoggedIn ? '로그인중' : '비로그인상태'}</div>
     </StyledNav>
   );
 }
 
-export default AppBar;
+export default AppBarTemplate;
