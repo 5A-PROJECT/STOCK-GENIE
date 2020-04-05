@@ -6,6 +6,10 @@ const StyledNav = styled.nav`
   ul {
     padding: 0;
     list-style-type: none;
+    display: flex;
+    li {
+      margin-right: 1rem;
+    }
   }
 `;
 
