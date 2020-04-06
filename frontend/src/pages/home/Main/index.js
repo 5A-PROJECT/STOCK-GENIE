@@ -9,7 +9,7 @@ const MainPageWrapper = styled.div`
 function MainPage() {
   return (
     <MainPageWrapper>
-      <section>메인 페이지입니다.</section>
+      <section>메인페이지</section>
     </MainPageWrapper>
   );
 }

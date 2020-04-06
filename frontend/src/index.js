@@ -10,13 +10,13 @@ import RootStore from './stores/RootStore';
 const root = new RootStore();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider {...root}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider {...root}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  // </React.StrictMode >
   document.getElementById('root'),
 );
 
