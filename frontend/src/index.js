@@ -3,10 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'mobx-react';
+import RootStore from './stores/RootStore';
+
+const root = new RootStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider {...root}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
