@@ -21,6 +21,7 @@ function AuthFormTemplate({
   return (
     <form onSubmit={handleSubmit}>
       <MaterialInput
+        label="유저네임"
         value={username}
         name="username"
         type="text"
@@ -30,6 +31,7 @@ function AuthFormTemplate({
         required
       />
       <MaterialInput
+        label="비밀번호"
         value={password}
         name="password"
         type="password"
@@ -47,6 +49,7 @@ function AuthFormTemplate({
         <>
           <MaterialInput
             value={email}
+            label="이메일"
             name="email"
             type="email"
             onChange={handleInputChange}
