@@ -3,9 +3,11 @@ import Spinner from '../Spinner';
 import styled from 'styled-components';
 
 const BackDropWrapper = styled.div`
+  z-index: 100000;
   display: ${({ open }) => (open ? '' : 'none')};
   position: absolute;
-  height: 100vh;
+  /* FIXME: 화면이 길땐 제대로 다 못감싸는 경우가 생김 */
+  height: 100%;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.9);
 `;

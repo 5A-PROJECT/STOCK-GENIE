@@ -7,6 +7,7 @@ function AuthFormContainer({ type, authStore, history }) {
   const { authForm } = authStore;
 
   useEffect(() => {
+    authStore.setHistory(history);
     if (authStore.isLoggedIn) {
       // 이미 로그인 했다면 리다이렉트
       history.push('/');
@@ -27,7 +28,6 @@ function AuthFormContainer({ type, authStore, history }) {
     } else {
       authStore.register(authForm);
     }
-    history.push('/');
   };
 
   return (
