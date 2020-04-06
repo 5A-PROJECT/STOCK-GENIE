@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledNav = styled.nav`
+const AppBarWrapper = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   ul {
     padding: 0;
     list-style-type: none;
@@ -15,7 +18,7 @@ const StyledNav = styled.nav`
 
 function AppBarTemplate({ isLoggedIn }) {
   return (
-    <StyledNav>
+    <AppBarWrapper>
       <ul>
         <li>
           <Link to="/">홈</Link>
@@ -28,7 +31,7 @@ function AppBarTemplate({ isLoggedIn }) {
         </li>
       </ul>
       <div>{isLoggedIn ? '로그인중' : '비로그인상태'}</div>
-    </StyledNav>
+    </AppBarWrapper>
   );
 }
 

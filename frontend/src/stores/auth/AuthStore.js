@@ -1,5 +1,5 @@
 import { observable, action, decorate } from 'mobx';
-import axios from 'axios';
+import AuthRepository from '../../repositories/auth/AuthRepository';
 
 export default class AuthStore {
   // 로그인 여부
@@ -16,7 +16,6 @@ export default class AuthStore {
     username: '',
     password: '',
     email: '',
-    age: 20,
   };
 
   constructor(root) {
@@ -28,36 +27,28 @@ export default class AuthStore {
       username: '',
       password: '',
       email: '',
-      age: null,
     };
   };
 
-  login = async () => {
-    // 로그인 API 요청
-    /*
-    const res = await axios.post(
-      'http://localhost:8080/api/v1/auth/login',
-      {
-        username: this.authForm.username,
-        password: this.authForm.password
-      },
-    );
-    */
-
+  login = async (authForm) => {
     // TODO: 반환된 응답을 보고 로그인 여부 토글
+    try {
+      const res = await AuthRepository.login(authForm);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
     this.isLoggedIn = true;
   };
 
-  register = async () => {
-    // 회원가입 API 요청
-    /*
-    const res = await axios.post(
-      'http://localhost:8080/api/v1/auth/register',
-      this.authForm,
-    );
-    */
-
+  register = async (authForm) => {
     // TODO: 반환된 응답을 보고 로그인 여부 토글
+    try {
+      const res = await AuthRepository.register(authForm);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
     this.isLoggedIn = true;
   };
 }
