@@ -7,19 +7,20 @@ class AuthRepository {
     this.URL = url || this.URL;
   }
 
+  // 로그인
   login(authForm) {
-    // 로그인 API 요청
     return axios.post(`${this.URL}/login`, {
       username: authForm.username,
       password: authForm.password,
     });
   }
 
+  // 회원가입
   register(authForm) {
-    // 회원가입 API 요청
     return axios.post(`${this.URL}/register`, authForm);
   }
 
+  // 토큰 유효성 검사
   checkToken(token) {
     return axios.post(`${this.URL}/check`, {
       header: {

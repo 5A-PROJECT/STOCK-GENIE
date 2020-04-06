@@ -5,6 +5,9 @@ export default class AuthStore {
   // 로그인 여부
   isLoggedIn = false;
 
+  // AuthLoading
+  loading = false;
+
   // 로그인 시 로그인된 유저
   loggedInUser = {
     id: null,
@@ -30,7 +33,12 @@ export default class AuthStore {
     };
   };
 
+  setLoading = (state) => {
+    this.loading = state;
+  };
+
   login = async (authForm) => {
+    this.setLoading(true);
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
       const res = await AuthRepository.login(authForm);
@@ -39,9 +47,11 @@ export default class AuthStore {
       console.log(e);
     }
     this.isLoggedIn = true;
+    this.setLoading(false);
   };
 
   register = async (authForm) => {
+    this.setLoading(true);
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
       const res = await AuthRepository.register(authForm);
@@ -50,6 +60,29 @@ export default class AuthStore {
       console.log(e);
     }
     this.isLoggedIn = true;
+    this.setLoading(false);
+  };
+
+  check = async (token) => {
+    this.setLoading(true);
+    try {
+      const res = await AuthRepository.checkToken(token);
+      console.log(res);
+      // 올바른 토큰이라면
+    } catch (e) {
+      console.log(e);
+    }
+    this.isLoggedIn = true;
+    this.setLoading(false);
+  };
+
+  logout = () => {
+    sessionStorage.removeItem('access_token');
+    this.isLoggedIn = false;
+    this.loggedInUser = {
+      id: null,
+      username: null,
+    };
   };
 }
 
@@ -57,7 +90,10 @@ decorate(AuthStore, {
   isLoggedIn: observable,
   loggedInUser: observable,
   authForm: observable,
+  loading: observable,
+  setLoading: action,
   clearAuthForm: action,
   login: action,
   register: action,
+  logout: action,
 });

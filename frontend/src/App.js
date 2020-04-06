@@ -7,8 +7,10 @@ import CustomAppBar from './organisms/CustomAppBar';
 import CustomFooter from './organisms/CustomFooter';
 import { ThemeProvider } from 'styled-components';
 import theme from './style/theme';
+import { observer, inject } from 'mobx-react';
+import BackDrop from './molecules/Backdrop';
 
-const AppWrppaer = styled.div`
+const AppWrppar = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -19,10 +21,11 @@ const Content = styled.section`
   flex-grow: 1;
 `;
 
-function App() {
+function App({ authStore }) {
+  const { loading } = authStore;
   return (
     <ThemeProvider theme={theme}>
-      <AppWrppaer>
+      <AppWrppar>
         <CustomAppBar />
         <Content>
           <Switch>
@@ -39,9 +42,10 @@ function App() {
           </Switch>
         </Content>
         <CustomFooter />
-      </AppWrppaer>
+        <BackDrop loading={loading} />
+      </AppWrppar>
     </ThemeProvider>
   );
 }
 
-export default App;
+export default inject('authStore')(observer(App));
