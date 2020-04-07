@@ -7,14 +7,13 @@ function AuthFormContainer({ type, authStore, history }) {
   const { authForm } = authStore;
 
   useEffect(() => {
-    authStore.setHistory(history);
     if (authStore.isLoggedIn) {
       // 이미 로그인 했다면 리다이렉트
       history.push('/');
     }
     authStore.clearAuthForm();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authStore.isLoggedIn]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
