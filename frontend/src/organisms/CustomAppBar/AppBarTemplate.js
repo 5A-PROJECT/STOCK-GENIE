@@ -33,6 +33,16 @@ function AppBarTemplate({ isLoggedIn }) {
         </li>
         {isLoggedIn ? (
           <>
+            {/* 로그인 시 보이는 Nav */}
+            <li>
+              <NavLink to="/predict">주가예측</NavLink>
+            </li>
+            <li>
+              <NavLink to="/portfolio">포트폴리오</NavLink>
+            </li>
+            <li>
+              <NavLink to="/search">검색</NavLink>
+            </li>
             <li>
               <LogoutButton />
             </li>

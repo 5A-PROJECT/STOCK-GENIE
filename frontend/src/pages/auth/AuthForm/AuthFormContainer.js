@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import AuthFormTemplate from './AuthFormTemplate';
-import { withRouter } from 'react-router-dom';
+import AccessProtection from '../../../molecules/AccessProtection';
 
-function AuthFormContainer({ type, authStore, history }) {
+function AuthFormContainer({ type, authStore }) {
   const { authForm } = authStore;
 
   useEffect(() => {
-    if (authStore.isLoggedIn) {
-      // 이미 로그인 했다면 리다이렉트
-      history.push('/');
-    }
     authStore.clearAuthForm();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authStore.isLoggedIn]);
+  }, [authStore]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,15 +25,17 @@ function AuthFormContainer({ type, authStore, history }) {
   };
 
   return (
-    <AuthFormTemplate
-      username={authForm.username}
-      password={authForm.password}
-      email={authForm.email}
-      handleInputChange={handleInputChange}
-      handleSubmit={handleSubmit}
-      type={type}
-    />
+    <AccessProtection authed={false} redirectPath={'/'}>
+      <AuthFormTemplate
+        username={authForm.username}
+        password={authForm.password}
+        email={authForm.email}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+        type={type}
+      />
+    </AccessProtection>
   );
 }
 
-export default withRouter(inject('authStore')(observer(AuthFormContainer)));
+export default inject('authStore')(observer(AuthFormContainer));
