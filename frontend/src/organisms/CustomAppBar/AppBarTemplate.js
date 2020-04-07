@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import LogoutButton from '../../molecules/LogoutButton';
 
 const AppBarWrapper = styled.nav`
+  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,31 +20,34 @@ const AppBarWrapper = styled.nav`
   }
 `;
 
-function AppBarTemplate({ isLoggedIn, logout }) {
+const NavLink = styled(Link)`
+  color: white;
+`;
+
+function AppBarTemplate({ isLoggedIn }) {
   return (
     <AppBarWrapper>
       <ul>
         <li>
-          <Link to="/">홈</Link>
+          <NavLink to="/">홈</NavLink>
         </li>
         {isLoggedIn ? (
           <>
             <li>
-              <button onClick={logout}>로그아웃</button>
+              <LogoutButton />
             </li>
           </>
         ) : (
           <>
             <li>
-              <Link to="/login">로그인</Link>
+              <NavLink to="/login">로그인</NavLink>
             </li>
             <li>
-              <Link to="/register">회원가입</Link>
+              <NavLink to="/register">회원가입</NavLink>
             </li>
           </>
         )}
       </ul>
-      <div>{isLoggedIn ? '로그인중' : '비로그인상태'}</div>
     </AppBarWrapper>
   );
 }
