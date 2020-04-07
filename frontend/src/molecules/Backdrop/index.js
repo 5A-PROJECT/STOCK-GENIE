@@ -1,6 +1,6 @@
 import React from 'react';
-import Spinner from '../Spinner';
 import styled from 'styled-components';
+import Spinner from '../../atoms/Spinner';
 
 const BackDropWrapper = styled.div`
   z-index: 100000;

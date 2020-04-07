@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import AccessProtection from '../../molecules/AccessProtection';
 
 const PredictPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -8,9 +9,11 @@ const PredictPageWrapper = styled.div`
 
 function PredictPage(props) {
   return (
-    <PredictPageWrapper>
-      <div>주가예측 페이지</div>
-    </PredictPageWrapper>
+    <AccessProtection authed={true} redirectPath={'/login'}>
+      <PredictPageWrapper>
+        <div>주가예측 페이지</div>
+      </PredictPageWrapper>
+    </AccessProtection>
   );
 }
 
