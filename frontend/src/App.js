@@ -9,6 +9,10 @@ import { ThemeProvider } from 'styled-components';
 import theme from './style/theme';
 import { observer, inject } from 'mobx-react';
 import BackDrop from './molecules/Backdrop';
+import PredictPage from './pages/predict';
+import SearchPage from './pages/search';
+import PortFolioPage from './pages/portfolio';
+import NotFound from './pages/notfound';
 
 const AppWrppar = styled.div`
   display: flex;
@@ -39,6 +43,10 @@ function App({ authStore }) {
               path="/register"
               render={(props) => <AuthPage type="register" {...props} />}
             />
+            <Route path="/predict" component={PredictPage} exact />
+            <Route path="/portfolio" component={PortFolioPage} exact />
+            <Route path="/search" component={SearchPage} exact />
+            <Route path="*" component={NotFound} />
           </Switch>
         </Content>
         <CustomFooter />

@@ -11,6 +11,7 @@ const theme = {
     main: {
       logo: MAIN_COLOR[800],
       background: colors.grey[100],
+      footer: colors.grey[300],
     },
     materialInput: {
       border: '',
