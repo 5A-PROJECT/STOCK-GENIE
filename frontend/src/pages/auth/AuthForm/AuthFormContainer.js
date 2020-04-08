@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import AuthFormTemplate from './AuthFormTemplate';
-import AccessProtection from '../../../molecules/AccessProtection';
 
 function AuthFormContainer({ type, authStore }) {
   const { authForm } = authStore;
@@ -25,16 +24,14 @@ function AuthFormContainer({ type, authStore }) {
   };
 
   return (
-    <AccessProtection authed={false} redirectPath={'/'}>
-      <AuthFormTemplate
-        username={authForm.username}
-        password={authForm.password}
-        email={authForm.email}
-        handleInputChange={handleInputChange}
-        handleSubmit={handleSubmit}
-        type={type}
-      />
-    </AccessProtection>
+    <AuthFormTemplate
+      username={authForm.username}
+      password={authForm.password}
+      email={authForm.email}
+      handleInputChange={handleInputChange}
+      handleSubmit={handleSubmit}
+      type={type}
+    />
   );
 }
 
