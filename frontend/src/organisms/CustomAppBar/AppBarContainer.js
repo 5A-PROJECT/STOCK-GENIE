@@ -20,7 +20,7 @@ function ScrollWrapper(props) {
 
 function AppBarContainer(props) {
   const { authStore } = props;
-  const { isLoggedIn, loggedInUser } = props.authStore;
+  const { isLoggedIn } = props.authStore;
   useEffect(() => {
     console.log('AppBar render');
     const token = sessionStorage.getItem('access_token');
