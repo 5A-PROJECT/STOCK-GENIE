@@ -145,3 +145,5 @@ function Component(props) {
 
 export default inject('numberStore')(observer(Component));
 ```
+
+## 참고할만한 컴포넌트
