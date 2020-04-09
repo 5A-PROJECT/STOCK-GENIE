@@ -22,8 +22,8 @@ class AuthRepository {
 
   // 토큰 유효성 검사
   checkToken(token) {
-    return axios.post(`${this.URL}/check`, {
-      header: {
+    return axios.get(`${this.URL}/check`, {
+      headers: {
         Authorization: token,
       },
     });
