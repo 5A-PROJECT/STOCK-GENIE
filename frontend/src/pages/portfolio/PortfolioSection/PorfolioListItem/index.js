@@ -27,6 +27,7 @@ function PortfolioListItem(props) {
     <PortfolioCard>
       <ItemWrapper>
         <h2 className="name">{name}</h2>
+        {/* TODO : 태그 리스트 빼기 */}
         <span>챌린지!</span>
         <div>
           <h4>총 수익률 </h4>
