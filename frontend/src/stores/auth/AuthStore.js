@@ -3,7 +3,7 @@ import AuthRepository from '../../repositories/auth/AuthRepository';
 
 export default class AuthStore {
   // 로그인 여부
-  isLoggedIn = false;
+  isLoggedIn = true;
 
   // AuthLoading
   loading = false;
