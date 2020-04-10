@@ -3,6 +3,9 @@ import { Button, StylesProvider } from '@material-ui/core';
 import styled from 'styled-components';
 
 const CustomButton = styled(Button)`
+  & + & {
+    margin-left: 0.3rem;
+  }
   color: white;
   background-color: ${({ theme }) => theme.color.materialButton.background};
   :hover {

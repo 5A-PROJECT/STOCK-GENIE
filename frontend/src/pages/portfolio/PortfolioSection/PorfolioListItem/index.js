@@ -6,6 +6,7 @@ import ReturnRatio from '../../../../molecules/ReturnRatio';
 import MaterialChip from '../../../../atoms/Chip/MaterialChip';
 
 const ItemWrapper = styled.div`
+  padding: 1rem;
   height: 100%;
   display: flex;
   flex-direction: column;

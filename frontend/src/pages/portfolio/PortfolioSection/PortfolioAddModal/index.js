@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PorfolioCard from '../PortfolioCard';
 import styled from 'styled-components';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import { StylesProvider } from '@material-ui/core';
+import ModalContents from './ModalContents';
 
 const ModalWrapper = styled.div`
   height: 100%;
@@ -10,6 +11,7 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 `;
 
 const AddIcon = styled(NoteAddIcon)`
@@ -27,9 +29,17 @@ const Texts = styled.div`
 `;
 
 function PortfolioAddModal(props) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <PorfolioCard>
-      <ModalWrapper>
+      <ModalWrapper onClick={handleOpen}>
         <StylesProvider injectFirst>
           <AddIcon />
         </StylesProvider>
@@ -38,6 +48,7 @@ function PortfolioAddModal(props) {
           <span>추가</span>
         </Texts>
       </ModalWrapper>
+      <ModalContents open={open} onClose={handleClose}></ModalContents>
     </PorfolioCard>
   );
 }
