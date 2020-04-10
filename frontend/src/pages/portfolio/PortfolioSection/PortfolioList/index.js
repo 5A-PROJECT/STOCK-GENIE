@@ -32,6 +32,16 @@ function PortfolioList(props) {
           now: ((Math.random() - 0.5) * 100).toFixed(1), //수익률
           prev: ((Math.random() - 0.5) * 100).toFixed(1), // 전날
         },
+        tags: [
+          {
+            id: 1,
+            tag: '챌린지!',
+          },
+          {
+            id: 2,
+            tag: '#삼성전자',
+          },
+        ],
         date: `${now.getMonth()}월 ${now.getDate()}일, ${now.getFullYear()}`,
       });
     }

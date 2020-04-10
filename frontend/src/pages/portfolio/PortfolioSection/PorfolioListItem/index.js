@@ -3,6 +3,7 @@ import PortfolioCard from '../PortfolioCard';
 import styled from 'styled-components';
 import { colors } from '@material-ui/core';
 import ReturnRatio from '../../../../molecules/ReturnRatio';
+import MaterialChip from '../../../../atoms/Chip/MaterialChip';
 
 const ItemWrapper = styled.div`
   height: 100%;
@@ -20,15 +21,29 @@ const ItemWrapper = styled.div`
   }
 `;
 
+const TagWrapper = styled.div`
+  display: flex;
+`;
+
 function PortfolioListItem(props) {
-  const { name, profit, date } = props.portfolio;
+  const { name, profit, date, tags } = props.portfolio;
 
   return (
     <PortfolioCard>
       <ItemWrapper>
-        <h2 className="name">{name}</h2>
-        {/* TODO : 태그 리스트 빼기 */}
-        <span>챌린지!</span>
+        <div>
+          <h2 className="name">{name}</h2>
+          <TagWrapper>
+            {tags.map((tag) => (
+              <MaterialChip
+                key={tag.id}
+                label={tag.tag}
+                size="small"
+                variant="outlined"
+              />
+            ))}
+          </TagWrapper>
+        </div>
         <div>
           <h4>총 수익률 </h4>
           <ReturnRatio ratio={profit.now} />
