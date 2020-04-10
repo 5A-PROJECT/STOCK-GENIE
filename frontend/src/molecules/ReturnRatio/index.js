@@ -43,7 +43,11 @@ function ReturnRatio({ ratio, fontSize = '1.5rem', iconSize = '1.5rem' }) {
   return (
     <ReturnRatioWrapper>
       <StylesProvider injectFirst>
-        {ratio > 0 ? <UpIcon size={iconSize} /> : <DownIcon size={iconSize} />}
+        {ratio > 0 ? (
+          <UpIcon size={iconSize} title="up" />
+        ) : (
+          <DownIcon size={iconSize} title="down" />
+        )}
       </StylesProvider>
       <Ratio fontSize={fontSize}>{ratio}%</Ratio>
     </ReturnRatioWrapper>
