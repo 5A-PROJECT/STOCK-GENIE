@@ -33,12 +33,8 @@ export default class AuthStore {
     };
   };
 
-  setLoading = (state) => {
-    this.loading = state;
-  };
-
   login = async (authForm) => {
-    this.setLoading(true);
+    this.loading = true;
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
       const res = await AuthRepository.login(authForm);
@@ -47,11 +43,11 @@ export default class AuthStore {
       console.log(e);
     }
     this.isLoggedIn = true;
-    this.setLoading(false);
+    this.loading = false;
   };
 
   register = async (authForm) => {
-    this.setLoading(true);
+    this.loading = true;
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
       const res = await AuthRepository.register(authForm);
@@ -60,11 +56,11 @@ export default class AuthStore {
       console.log(e);
     }
     this.isLoggedIn = true;
-    this.setLoading(false);
+    this.loading = false;
   };
 
   check = async (token) => {
-    this.setLoading(true);
+    this.loading = true;
     try {
       const res = await AuthRepository.checkToken(token);
       console.log(res);
@@ -73,7 +69,7 @@ export default class AuthStore {
       console.log(e);
     }
     this.isLoggedIn = true;
-    this.setLoading(false);
+    this.loading = false;
   };
 
   logout = () => {
@@ -91,7 +87,6 @@ decorate(AuthStore, {
   loggedInUser: observable,
   authForm: observable,
   loading: observable,
-  setLoading: action,
   clearAuthForm: action,
   login: action,
   register: action,
