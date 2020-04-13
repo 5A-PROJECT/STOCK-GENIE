@@ -19,24 +19,20 @@ function StockListItem({ stock }) {
   }, [current_price, buy_price]);
 
   return (
-    <div>
-      <div>
+    <tr>
+      <th>
         <h2>{name}</h2>
         <h3>{code}</h3>
-      </div>
-      <h4>
-        {buy_price.toLocaleString()} * {count}주 ={' '}
-        {totalBuyingPrice.toLocaleString()}원
-      </h4>
-
-      <h4>
-        {current_price.toLocaleString()} * {count}주 ={' '}
-        {totalCurrentPrice.toLocaleString()}원
-      </h4>
-
-      <ReturnRatio ratio={getRatio} />
-      <h4>총 수익 {profit.toLocaleString()}원</h4>
-    </div>
+      </th>
+      <th>{count} 주</th>
+      <th>{buy_price.toLocaleString()} 원</th>
+      <th>{totalBuyingPrice.toLocaleString()} 원</th>
+      <th>{totalCurrentPrice.toLocaleString()} 원</th>
+      <th>
+        <ReturnRatio ratio={getRatio} fontSize="1rem" iconSize="1rem" />
+        <span>{profit.toLocaleString()} 원</span>
+      </th>
+    </tr>
   );
 }
 

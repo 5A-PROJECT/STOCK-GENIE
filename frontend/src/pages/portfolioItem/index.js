@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReturnRatio from '../../molecules/ReturnRatio';
 import StockList from './StockList';
+import StockListHeader from './StockList/StockListHeader';
 
 const PortfolioItemPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -27,13 +28,11 @@ function PortfolioItemPage({ match, history }) {
       {portfolio && (
         <>
           <h1>{portfolio.name}</h1>
+          <h5>{portfolio.date} 생성</h5>
           {/* 종목들이 있을때만 보이도록 */}
           {portfolio.stocks.length > 0 ? (
             <>
-              <h2>총 수익률 </h2>
-              <ReturnRatio ratio={portfolio.totalProfit.now} />
-              <h2>전일 총 수익률 </h2>
-              <ReturnRatio ratio={portfolio.totalProfit.prev} />
+              <StockListHeader portfolio={portfolio} />
               <StockList stocks={portfolio.stocks} />
             </>
           ) : (
