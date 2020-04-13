@@ -106,7 +106,40 @@ const sample_portfolio = [
       },
     ],
     date: `${now.getMonth()}월 ${now.getDate()}일, ${now.getFullYear()}`,
-    stocks: [],
+    stocks: [
+      {
+        id: 3,
+        name: 'Berkshire Hathaway Inc. B',
+        count: 2,
+        code: 'BRK-B',
+        buy_price: 206.77 * 1170,
+        current_price: 193.84 * 1170,
+      },
+      {
+        id: 4,
+        name: 'Facebook Inc.',
+        count: 2,
+        code: 'FB',
+        buy_price: 176.82 * 1170,
+        current_price: 175.19 * 1170,
+      },
+      {
+        id: 5,
+        name: 'Dropbox Inc.',
+        count: 8,
+        code: 'DBX',
+        buy_price: 29.18 * 1170,
+        current_price: 18.06 * 1170,
+      },
+      {
+        id: 6,
+        name: '카카오페이 IT펀드',
+        count: 1,
+        code: 'null',
+        buy_price: 1000000,
+        current_price: 1048268,
+      },
+    ],
   },
 ];
 

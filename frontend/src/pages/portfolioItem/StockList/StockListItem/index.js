@@ -20,10 +20,8 @@ function StockListItem({ stock }) {
 
   return (
     <tr>
-      <th>
-        <h2>{name}</h2>
-        <h3>{code}</h3>
-      </th>
+      <th>{name}</th>
+      <th>{code}</th>
       <th>{count} 주</th>
       <th>{buy_price.toLocaleString()} 원</th>
       <th>{totalBuyingPrice.toLocaleString()} 원</th>
