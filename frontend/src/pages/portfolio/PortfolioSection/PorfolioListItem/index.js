@@ -27,7 +27,7 @@ const TagWrapper = styled.div`
 `;
 
 function PortfolioListItem(props) {
-  const { name, profit, date, tags } = props.portfolio;
+  const { name, totalProfit, date, tags } = props.portfolio;
 
   return (
     <PortfolioCard>
@@ -47,11 +47,11 @@ function PortfolioListItem(props) {
         </div>
         <div>
           <h4>총 수익률 </h4>
-          <ReturnRatio ratio={profit.now} />
+          <ReturnRatio ratio={totalProfit.now} />
         </div>
         <div>
           <h4>전일 대비 </h4>
-          <ReturnRatio ratio={profit.prev} />
+          <ReturnRatio ratio={totalProfit.prev} />
         </div>
 
         <div className="date">{date}</div>
