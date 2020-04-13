@@ -4,7 +4,7 @@ import Spinner from '../../atoms/Spinner';
 
 const BackDropWrapper = styled.div`
   z-index: 100000;
-  display: ${({ open }) => (open ? '' : 'none')};
+  /* display: ${({ open }) => (open ? '' : 'none')}; */
   position: absolute;
   /* FIXME: 화면이 길땐 제대로 다 못감싸는 경우가 생김 */
   height: 100%;
@@ -21,11 +21,15 @@ const SpinnerWrapper = styled.span`
 
 function BackDrop({ loading }) {
   return (
-    <BackDropWrapper open={loading}>
-      <SpinnerWrapper>
-        <Spinner color="primary" />
-      </SpinnerWrapper>
-    </BackDropWrapper>
+    <>
+      {loading && (
+        <BackDropWrapper data-testid="backdrop">
+          <SpinnerWrapper>
+            <Spinner color="primary" />
+          </SpinnerWrapper>
+        </BackDropWrapper>
+      )}
+    </>
   );
 }
 
