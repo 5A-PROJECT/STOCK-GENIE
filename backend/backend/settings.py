@@ -140,7 +140,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-# need for restframework JWT
+# need for restframework JWT: change some settings will be needed
 JWT_AUTH = {
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_ALGORITHM': 'HS256',
