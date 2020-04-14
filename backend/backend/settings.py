@@ -33,8 +33,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # app list
     'accounts',
+    # restframework
     'rest_framework',
+    # CORS header
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,6 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# need for restframework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -136,6 +140,7 @@ REST_FRAMEWORK = {
     ),
 }
 
+# need for restframework JWT
 JWT_AUTH = {
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_ALGORITHM': 'HS256',
@@ -144,4 +149,5 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=1),
 }
 
+# need for CORS
 CORS_ORIGIN_ALLOW_ALL = True

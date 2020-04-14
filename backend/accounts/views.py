@@ -11,11 +11,13 @@ from .serializers import UserSerializer
 @api_view(['POST'])
 @permission_classes([AllowAny, ])
 def register(request):
+    # validation username conflict
     username = request.data.get('username')
     users = get_user_model().objects.filter(username__exact=username)
     if len(users) > 0:
         return HttpResponse(status=409)
 
+    # password validation will be needed
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         password = request.data.get('password')
