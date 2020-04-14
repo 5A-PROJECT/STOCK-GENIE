@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import ReturnRatio from '../../../../molecules/ReturnRatio';
 import styled from 'styled-components';
+import ReturnRatio from '../../../molecules/ReturnRatio';
 
 const StockListHeaderWrapper = styled.header`
   margin: 1rem 0;

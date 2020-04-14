@@ -41,6 +41,7 @@ function StockList({ stocks }) {
           <th>매수금액</th>
           <th>평가금액</th>
           <th>평가손익</th>
+          <th>액션</th>
         </tr>
       </TableHead>
       <TableBody>

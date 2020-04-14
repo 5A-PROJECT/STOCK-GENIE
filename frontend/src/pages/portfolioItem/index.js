@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import ReturnRatio from '../../molecules/ReturnRatio';
 import StockList from './StockList';
-import StockListHeader from './StockList/StockListHeader';
+import StockListHeader from './StockListHeader';
+import AddStockModal from './AddStockModal';
 
 const PortfolioItemPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -33,6 +33,10 @@ function PortfolioItemPage({ match, history }) {
           {portfolio.stocks.length > 0 ? (
             <>
               <StockListHeader portfolio={portfolio} />
+              <AddStockModal />
+              <h4>증권(주식/채권)</h4>
+              <StockList stocks={portfolio.stocks} />
+              <h4>파생상품(선물/옵션)</h4>
               <StockList stocks={portfolio.stocks} />
             </>
           ) : (

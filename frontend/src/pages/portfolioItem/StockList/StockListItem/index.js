@@ -30,6 +30,7 @@ function StockListItem({ stock }) {
         <ReturnRatio ratio={getRatio} fontSize="1rem" iconSize="1rem" />
         <span>{profit.toLocaleString()} 원</span>
       </th>
+      <th>수정 / 삭제</th>
     </tr>
   );
 }
