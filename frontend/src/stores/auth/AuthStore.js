@@ -5,7 +5,6 @@ export default class AuthStore {
   token = window.sessionStorage.getItem('access_token');
   // 로그인 여부
   isLoggedIn = false;
-  // AuthLoading
   loading = false;
   loggedInUser = {
     id: null,
