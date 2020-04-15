@@ -27,7 +27,7 @@ function AppBarContainer(props) {
     if (!authStore.isLoggedin && token) {
       console.log('토큰 유효 확인 요청');
       // TODO: token 확인 요청
-      authStore.check();
+      authStore.check(token);
     }
   }, [authStore]);
 
