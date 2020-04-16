@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { colors } from '@material-ui/core';
 import ReturnRatio from '../../../../molecules/ReturnRatio';
 import MaterialChip from '../../../../atoms/Chip/MaterialChip';
+import { withRouter } from 'react-router-dom';
 
 const ItemWrapper = styled.div`
   padding: 1rem;
@@ -27,11 +28,14 @@ const TagWrapper = styled.div`
 `;
 
 function PortfolioListItem(props) {
-  const { name, profit, date, tags } = props.portfolio;
-
+  const { id, name, totalProfit, date, tags } = props.portfolio;
+  const { history } = props;
+  const goToPortfolio = () => {
+    history.push(`portfolio/${id}`);
+  };
   return (
     <PortfolioCard>
-      <ItemWrapper>
+      <ItemWrapper onClick={goToPortfolio}>
         <div>
           <h2 className="name">{name}</h2>
           <TagWrapper>
@@ -47,11 +51,11 @@ function PortfolioListItem(props) {
         </div>
         <div>
           <h4>총 수익률 </h4>
-          <ReturnRatio ratio={profit.now} />
+          <ReturnRatio ratio={totalProfit.now} />
         </div>
         <div>
           <h4>전일 대비 </h4>
-          <ReturnRatio ratio={profit.prev} />
+          <ReturnRatio ratio={totalProfit.prev} />
         </div>
 
         <div className="date">{date}</div>
@@ -60,4 +64,4 @@ function PortfolioListItem(props) {
   );
 }
 
-export default PortfolioListItem;
+export default withRouter(PortfolioListItem);

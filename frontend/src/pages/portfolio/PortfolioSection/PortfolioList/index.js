@@ -28,7 +28,7 @@ function PortfolioList(props) {
       sampleDatas.push({
         id: i, // 고유 아이디
         name: `포트폴리오 - ${i}`, // 포폴 제목
-        profit: {
+        totalProfit: {
           now: ((Math.random() - 0.5) * 100).toFixed(1), //수익률
           prev: ((Math.random() - 0.5) * 100).toFixed(1), // 전날
         },
