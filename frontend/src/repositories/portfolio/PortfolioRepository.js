@@ -6,11 +6,26 @@ class PortfolioRepository {
     this.URL = url || this.URL;
   }
 
-  create(portfolioForm, token) {
+  createPortfolio(portfolioForm, token) {
     return axios.post(
-      `${this.URL}/create`,
+      `${this.URL}`,
       {
         name: portfolioForm.name,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+  }
+
+  createStock(portfolioId, stock, token) {
+    return axios.post(
+      `${this.URL}/addstock`,
+      {
+        portfolioId,
+        ...stock,
       },
       {
         headers: {
