@@ -28,7 +28,7 @@ const TagWrapper = styled.div`
 `;
 
 function PortfolioListItem(props) {
-  const { id, name, totalProfit, date, tags } = props.portfolio;
+  const { id, name, createdAt, tags, totalProfit } = props.portfolio;
   const { history } = props;
   const goToPortfolio = () => {
     history.push(`portfolio/${id}`);
@@ -38,27 +38,33 @@ function PortfolioListItem(props) {
       <ItemWrapper onClick={goToPortfolio}>
         <div>
           <h2 className="name">{name}</h2>
-          <TagWrapper>
-            {tags.map((tag) => (
-              <MaterialChip
-                key={tag.id}
-                label={tag.tag}
-                size="small"
-                variant="outlined"
-              />
-            ))}
-          </TagWrapper>
+          {tags && (
+            <TagWrapper>
+              {tags.map((tag) => (
+                <MaterialChip
+                  key={tag.id}
+                  label={tag.tag}
+                  size="small"
+                  variant="outlined"
+                />
+              ))}
+            </TagWrapper>
+          )}
         </div>
-        <div>
-          <h4>총 수익률 </h4>
-          <ReturnRatio ratio={totalProfit.now} />
-        </div>
-        <div>
-          <h4>전일 대비 </h4>
-          <ReturnRatio ratio={totalProfit.prev} />
-        </div>
+        {totalProfit && (
+          <>
+            <div>
+              <h4>총 수익률 </h4>
+              <ReturnRatio ratio={totalProfit.now} />
+            </div>
+            <div>
+              <h4>전일 대비 </h4>
+              <ReturnRatio ratio={totalProfit.prev} />
+            </div>
+          </>
+        )}
 
-        <div className="date">{date}</div>
+        <div className="date">{createdAt}</div>
       </ItemWrapper>
     </PortfolioCard>
   );
