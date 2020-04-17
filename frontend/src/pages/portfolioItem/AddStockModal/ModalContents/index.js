@@ -28,6 +28,7 @@ function ModalContents({ open, onClose, portfolioStore }) {
     buy_price: 1,
     current_price: 1,
     category: 'stock',
+    currency: 'USD',
   });
 
   const handleInputChange = (e) => {

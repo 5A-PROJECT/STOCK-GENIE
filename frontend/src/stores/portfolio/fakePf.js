@@ -39,7 +39,7 @@ export const fakePf = [
     ],
     totalBuyingPrice: 1000000, // stocks 전체의 buy_price * count 합
     totalCurrentPrice: 2000000, // stocks 전체의 current_price * count 합
-    totalProfit2: 2000000 - 1000000, // totalBuyingPrice - totalCurrentPrice,
+    totalProfit: 2000000 - 1000000, // totalBuyingPrice - totalCurrentPrice,
     totalRatio: (((2000000 - 1000000) / 1000000) * 100).toFixed(2), // ((totalProfit / totalBuyingPrice) * 100)
   },
   {
@@ -92,7 +92,7 @@ export const fakePf = [
     ],
     totalBuyingPrice: 1000000, // stocks 전체의 buy_price * count 합
     totalCurrentPrice: 2000000, // stocks 전체의 current_price * count 합
-    totalProfit2: 2000000 - 1000000, // totalBuyingPrice - totalCurrentPrice,
+    totalProfit: 2000000 - 1000000, // totalBuyingPrice - totalCurrentPrice,
     totalRatio: (((2000000 - 1000000) / 1000000) * 100).toFixed(2), // ((totalProfit / totalBuyingPrice) * 100)
   },
   {
@@ -108,7 +108,7 @@ export const fakePf = [
     stocks: [],
     totalBuyingPrice: 1000000, // stocks 전체의 buy_price * count 합
     totalCurrentPrice: 2000000, // stocks 전체의 current_price * count 합
-    totalProfit2: 2000000 - 1000000, // totalBuyingPrice - totalCurrentPrice,
+    totalProfit: 2000000 - 1000000, // totalBuyingPrice - totalCurrentPrice,
     totalRatio: (((2000000 - 1000000) / 1000000) * 100).toFixed(2), // ((totalProfit / totalBuyingPrice) * 100)
   },
 ];

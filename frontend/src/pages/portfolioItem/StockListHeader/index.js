@@ -21,7 +21,7 @@ function StockListHeader({ portfolio }) {
   const {
     totalBuyingPrice,
     totalCurrentPrice,
-    totalProfit2,
+    totalProfit,
     totalRatio,
   } = portfolio;
 
@@ -34,7 +34,7 @@ function StockListHeader({ portfolio }) {
         총평가금액 <Price>{totalCurrentPrice.toLocaleString()}</Price>원
       </Title>
       <Title>
-        총평가손익 <Price>{totalProfit2.toLocaleString()}</Price>원
+        총평가손익 <Price>{totalProfit.toLocaleString()}</Price>원
       </Title>
       <Title>
         총평가수익률 <ReturnRatio ratio={totalRatio} />
