@@ -27,6 +27,7 @@ export const fakePf = [
         code: '005930',
         buy_price: 48000,
         current_price: 48700,
+        currency: 'KRW',
       },
       {
         id: 2,
@@ -35,6 +36,7 @@ export const fakePf = [
         code: '035720',
         buy_price: 130000,
         current_price: 159000,
+        currency: 'KRW',
       },
     ],
     totalBuyingPrice: 1000000, // stocks 전체의 buy_price * count 합
@@ -64,6 +66,7 @@ export const fakePf = [
         code: 'BRK-B',
         buy_price: 206.77 * 1170,
         current_price: 193.84 * 1170,
+        currency: 'USD',
       },
       {
         id: 4,
@@ -72,6 +75,7 @@ export const fakePf = [
         code: 'FB',
         buy_price: 176.82 * 1170,
         current_price: 175.19 * 1170,
+        currency: 'USD',
       },
       {
         id: 5,
@@ -80,6 +84,7 @@ export const fakePf = [
         code: 'DBX',
         buy_price: 29.18 * 1170,
         current_price: 18.06 * 1170,
+        currency: 'USD',
       },
       {
         id: 6,
@@ -88,6 +93,7 @@ export const fakePf = [
         code: 'null',
         buy_price: 1000000,
         current_price: 1048268,
+        currency: 'USD',
       },
     ],
     totalBuyingPrice: 1000000, // stocks 전체의 buy_price * count 합
