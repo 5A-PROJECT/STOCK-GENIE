@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
-import HeaderBar from '../predict/HeaderBar/index';
-import Main from '../predict/Main/index';
+import Chart from './Chart/index';
+import Select from '../predict/Select/index';
 
 const PredictPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -18,20 +18,30 @@ const MainDiv = styled.div`
   margin-top: 2rem;
 `;
 
+const MainDiv2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 function PredictPage(props) {
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       <PredictPageWrapper>
         <div>주가예측 페이지</div>
         <HeadDiv>
-          <HeaderBar />
-          <HeaderBar />
-          <HeaderBar />
-          <HeaderBar />
+          <Chart size={[300, 150]} />
+          <Chart size={[300, 150]} />
+          <Chart size={[300, 150]} />
+          <Chart size={[300, 150]} />
         </HeadDiv>
-        <MainDiv>
-          <Main />
-        </MainDiv>
+        <MainDiv2>
+          <MainDiv>
+            <Select />
+          </MainDiv>
+          <MainDiv>
+            <Chart size={[700, 300]} />
+          </MainDiv>
+        </MainDiv2>
       </PredictPageWrapper>
     </AccessProtection>
   );
