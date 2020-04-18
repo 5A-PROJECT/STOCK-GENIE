@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
 import Chart from './Chart/index';
 import Select from '../predict/Select/index';
+import CompanyTable from '../predict/CompanyTable/index';
 
 const PredictPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -42,6 +43,7 @@ function PredictPage(props) {
             <Chart size={[700, 300]} />
           </MainDiv>
         </MainDiv2>
+        <CompanyTable />
       </PredictPageWrapper>
     </AccessProtection>
   );

@@ -3,8 +3,6 @@ import React, { useRef, useEffect } from 'react';
 // import styled from 'styled-components';
 
 function Chart(props) {
-  console.log('사이즈체크');
-  console.log(props.size);
   const chartdiv = useRef(null);
   useEffect(() => {
     const chart = createChart(chartdiv.current, { width: 500, height: 300 });
