@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Dialog } from '@material-ui/core';
 import MaterialInput from '../../../../atoms/Input/MaterialInput';
 import MaterialButton from '../../../../atoms/Button/MaterialButton';
+import { inject, observer } from 'mobx-react';
 
 const DialogWrapper = styled.div`
   min-width: 300px;
@@ -19,7 +20,31 @@ const ButtonGroup = styled.div`
   justify-content: flex-end;
 `;
 
-function ModalContents({ open, onClose }) {
+function ModalContents({ open, onClose, portfolioStore }) {
+  const [stockForm, setStockForm] = useState({
+    name: '',
+    count: 1,
+    code: '',
+    buy_price: 1,
+    current_price: 1,
+    category: 'stock',
+    currency: 'USD',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setStockForm({
+      ...stockForm,
+      [name]: value,
+    });
+  };
+
+  const addStock = () => {
+    const token = sessionStorage.getItem('access_token');
+    const { id: portfolioId } = portfolioStore.selectedPortfolio;
+    portfolioStore.addStock(portfolioId, stockForm, token);
+    onClose();
+  };
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogWrapper>
@@ -27,66 +52,66 @@ function ModalContents({ open, onClose }) {
         <ModalForm>
           <MaterialInput
             label="종목명"
-            value={''}
+            value={stockForm.name}
             name="name"
             type="text"
-            // onChange={}
+            onChange={handleInputChange}
             placeholder="종목 이름을 적어주세요"
             required
           />
           <MaterialInput
             label="수량"
-            value={''}
+            value={stockForm.count}
             name="count"
             type="number"
-            // onChange={}
+            onChange={handleInputChange}
             placeholder="수량을 입력하세요."
             required
           />
           <MaterialInput
             label="종목코드"
-            value={''}
+            value={stockForm.code}
             name="code"
             type="text"
-            // onChange={}
+            onChange={handleInputChange}
             placeholder="FB 또는 005930와 같은 형식"
             required
           />
           <MaterialInput
             label="매수금액"
-            value={''}
+            value={stockForm.buy_price}
             name="buy_price"
             type="number"
-            // onChange={}
+            onChange={handleInputChange}
             placeholder="매수 금액을 입력하세요."
             required
           />
           <MaterialInput
             label="현재금액"
-            value={''}
+            value={stockForm.current_price}
             name="current_price"
             type="number"
-            // onChange={}
+            onChange={handleInputChange}
             placeholder="현재 금액을 입력하세요."
             required
           />
           <MaterialInput
             label="카테고리"
-            value={''}
+            value={stockForm.category}
             name="category"
             type="text"
-            // onChange={}
+            onChange={handleInputChange}
             placeholder="매수 금액을 입력하세요."
             required
           />
         </ModalForm>
         <ButtonGroup>
           <MaterialButton onClick={onClose}>취소</MaterialButton>
-          <MaterialButton>추가</MaterialButton>
+          <MaterialButton onClick={addStock}>추가</MaterialButton>
         </ButtonGroup>
       </DialogWrapper>
     </Dialog>
   );
 }
 
-export default ModalContents;
+export default inject('portfolioStore')(observer(ModalContents));

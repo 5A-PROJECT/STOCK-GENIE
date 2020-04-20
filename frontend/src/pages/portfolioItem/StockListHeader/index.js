@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ReturnRatio from '../../../molecules/ReturnRatio';
 
@@ -18,31 +18,12 @@ const Price = styled.span`
 `;
 
 function StockListHeader({ portfolio }) {
-  const { stocks } = portfolio;
-
-  const totalBuyingPrice = useMemo(() => {
-    const price = stocks.reduce(
-      (acc, stock) => (acc += stock.buy_price * stock.count),
-      0,
-    );
-    return price;
-  }, [stocks]);
-
-  const totalCurrentPrice = useMemo(() => {
-    const price = stocks.reduce(
-      (acc, stock) => (acc += stock.current_price * stock.count),
-      0,
-    );
-    return price;
-  }, [stocks]);
-
-  const totalProfit = useMemo(() => {
-    return totalCurrentPrice - totalBuyingPrice;
-  }, [totalCurrentPrice, totalBuyingPrice]);
-
-  const totalRatio = useMemo(() => {
-    return ((totalProfit / totalBuyingPrice) * 100).toFixed(2);
-  }, [totalProfit, totalBuyingPrice]);
+  const {
+    totalBuyingPrice,
+    totalCurrentPrice,
+    totalProfit,
+    totalRatio,
+  } = portfolio;
 
   return (
     <StockListHeaderWrapper>
