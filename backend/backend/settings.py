@@ -35,6 +35,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # app list
     'accounts',
+    'news',
+    'portfolio',
+    'stock',
     # restframework
     'rest_framework',
     # CORS header
