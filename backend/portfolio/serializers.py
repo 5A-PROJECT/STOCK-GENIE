@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Tag, Portfolio
+from stock.serializers import StockSerializer
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -28,3 +29,27 @@ class PortfolioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Portfolio
         fields = ['id', 'name', 'profits', 'tags', 'created_at', ]
+
+
+class PortfolioDetailSerializer(serializers.ModelSerializer):
+    tags = TagSerializer(many=True)
+    stocks = StockSerializer(many=True)
+    profit = serializers.SerializerMethodField()
+
+    def get_profit(self, obj):
+        first, now = 0, 0
+        for stock in obj.stocks.all():
+            first += stock.buy_price * stock.count
+            now += stock.current_price * stock.count
+        diff = now - first
+        ratio = (diff / first) * 100
+
+        data = {
+            'totalBuyingPrice': first, 'totalCurrentPrice': now,
+            'totalProfit': diff, 'totalRatio': ratio
+        }
+        return data
+
+    class Meta:
+        model = Portfolio
+        fields = ['id', 'name', 'tags', 'created_at', 'stocks', 'profit', ]

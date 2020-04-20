@@ -1,8 +1,9 @@
+from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from .serializers import PortfolioSerializer
+from .serializers import PortfolioSerializer, PortfolioDetailSerializer
 from .models import Portfolio
 
 # Create your views here.
@@ -22,3 +23,15 @@ def portfolio(request):
         return JsonResponse({'id': pf.id, 'created_at': pf.created_at})
     else:
         return HttpResponse(status=405)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+def portfolio_detail(request, pf_id):
+    pf = get_object_or_404(Portfolio, id=pf_id)
+    if pf.user != request.user:
+        return HttpResponse(status=401)
+
+    serializer = PortfolioDetailSerializer(pf)
+    return JsonResponse(serializer.data)
