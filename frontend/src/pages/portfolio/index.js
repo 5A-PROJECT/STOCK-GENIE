@@ -7,14 +7,14 @@ import { observer, inject } from 'mobx-react';
 
 const PortFolioPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
+  padding: 0 1rem;
   margin: 0 auto;
 `;
 
 function PortFolioPage({ portfolioStore }) {
   useEffect(() => {
-    const { token } = sessionStorage.getItem('access_token');
-    portfolioStore.getMyPortfolios(token);
-  });
+    portfolioStore.getMyPortfolios();
+  }, [portfolioStore]);
 
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>

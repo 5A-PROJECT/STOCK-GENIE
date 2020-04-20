@@ -5,6 +5,7 @@ import MaterialInput from '../../../../../atoms/Input/MaterialInput';
 import MaterialButton from '../../../../../atoms/Button/MaterialButton';
 import { useState } from 'react';
 import { inject, observer } from 'mobx-react';
+import Spinner from '../../../../../atoms/Spinner';
 
 const DialogWrapper = styled.div`
   min-width: 300px;
@@ -22,6 +23,7 @@ const ButtonGroup = styled.div`
 `;
 
 function ModalContents({ open, onClose, portfolioStore }) {
+  const { loading } = portfolioStore;
   const [portfolioForm, setPortfolioForm] = useState({
     name: '',
   });
@@ -35,9 +37,13 @@ function ModalContents({ open, onClose, portfolioStore }) {
   };
 
   const onAddPortfolio = () => {
-    const { token } = sessionStorage.getItem('access_token');
-    portfolioStore.addPortfolilo(portfolioForm, token);
-    onClose();
+    const isAdded = portfolioStore.addPortfolilo(portfolioForm);
+    if (isAdded) {
+      onClose();
+      setPortfolioForm({
+        name: '',
+      });
+    }
   };
 
   return (
@@ -56,8 +62,14 @@ function ModalContents({ open, onClose, portfolioStore }) {
           />
         </ModalForm>
         <ButtonGroup>
-          <MaterialButton onClick={onClose}>취소</MaterialButton>
-          <MaterialButton onClick={onAddPortfolio}>추가</MaterialButton>
+          {loading['addPortfolilo'] ? (
+            <Spinner />
+          ) : (
+            <>
+              <MaterialButton onClick={onClose}>취소</MaterialButton>
+              <MaterialButton onClick={onAddPortfolio}>추가</MaterialButton>
+            </>
+          )}
         </ButtonGroup>
       </DialogWrapper>
     </Dialog>
