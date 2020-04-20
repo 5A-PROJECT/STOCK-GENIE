@@ -29,7 +29,7 @@ const TagWrapper = styled.div`
 `;
 
 function PortfolioListItem(props) {
-  const { id, name, created_at, tags, totalProfit } = props.portfolio;
+  const { id, name, created_at, tags, profits } = props.portfolio;
   const { history } = props;
   const goToPortfolio = () => {
     history.push(`portfolio/${id}`);
@@ -44,7 +44,7 @@ function PortfolioListItem(props) {
       <ItemWrapper onClick={goToPortfolio}>
         <div>
           <h2 className="name">{name}</h2>
-          {tags && (
+          {tags.length > 0 && (
             <TagWrapper>
               {tags.map((tag) => (
                 <MaterialChip
@@ -57,19 +57,21 @@ function PortfolioListItem(props) {
             </TagWrapper>
           )}
         </div>
-        {totalProfit && (
+        {profits.length > 0 && (
           <>
             <div>
               <h4>총 수익률 </h4>
-              <ReturnRatio ratio={totalProfit.now} />
+              <ReturnRatio ratio={profits.now} />
             </div>
             <div>
               <h4>전일 대비 </h4>
-              <ReturnRatio ratio={totalProfit.prev} />
+              <ReturnRatio ratio={profits.prev} />
             </div>
           </>
         )}
-
+        {tags.length === 0 && profits.length === 0 && (
+          <div>포트폴리오를 작성해주세요.</div>
+        )}
         <div className="date">{formatedCreatedAt}</div>
       </ItemWrapper>
     </PortfolioCard>
