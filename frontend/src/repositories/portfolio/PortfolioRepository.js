@@ -9,7 +9,6 @@ class PortfolioRepository {
   /**
    * @param {object} portfolioForm 생성할 포폴 Form
    * @param {string} token 요청을 보내는 유저의 토큰
-   * @return {Promise} Promise Response
    */
   createPortfolio(portfolioForm, token) {
     return axios.post(
@@ -28,7 +27,6 @@ class PortfolioRepository {
   /**
    * @param {string} portfolioId 가져올 portfolio의 Id
    * @param {string} token 요청을 보내는 유저의 토큰
-   * @return {Promise} 요청한 Id의 portfolio 정보
    */
   getPortfolioById(portfolioId, token) {
     return axios.get(`${this.URL}/${portfolioId}/`, {

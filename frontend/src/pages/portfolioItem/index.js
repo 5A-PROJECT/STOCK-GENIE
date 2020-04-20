@@ -34,7 +34,7 @@ function PortfolioItemPage({ match, history, portfolioStore }) {
       {selectedPortfolio && (
         <>
           <h1>{selectedPortfolio.name}</h1>
-          <h5>{selectedPortfolio.date} 생성</h5>
+          <h5>{selectedPortfolio.created_at} 생성</h5>
           {/* 종목들이 있을때만 보이도록 */}
           {selectedPortfolio.stocks.length > 0 ? (
             <>
