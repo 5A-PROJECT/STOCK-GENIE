@@ -22,25 +22,25 @@ const MainDiv = styled.div`
 const MainDiv2 = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 3rem;
 `;
 
 function PredictPage(props) {
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       <PredictPageWrapper>
-        <div>주가예측 페이지</div>
         <HeadDiv>
-          <Chart size={[300, 150]} />
-          <Chart size={[300, 150]} />
-          <Chart size={[300, 150]} />
-          <Chart size={[300, 150]} />
+          <Chart info={[300, 150, '금']} />
+          <Chart info={[300, 150, '유가']} />
+          <Chart info={[300, 150, '구리']} />
+          <Chart info={[300, 150, '환율']} />
         </HeadDiv>
         <MainDiv2>
           <MainDiv>
             <Select />
           </MainDiv>
           <MainDiv>
-            <Chart size={[700, 300]} />
+            <Chart info={[700, 300, '']} />
           </MainDiv>
         </MainDiv2>
         <CompanyTable />
