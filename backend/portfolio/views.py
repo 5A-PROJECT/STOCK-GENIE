@@ -19,6 +19,6 @@ def portfolio(request):
     elif request.method == 'POST':  # 현재: 동일 유저가 동일 이름으로 생성 가능
         name = request.data.get('name')
         pf = Portfolio.objects.create(name=name, user=request.user)
-        return JsonResponse({'id': pf.id, 'createdAt': pf.created_at})
+        return JsonResponse({'id': pf.id, 'created_at': pf.created_at})
     else:
         return HttpResponse(status=405)
