@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
@@ -14,7 +13,9 @@ from .models import Portfolio
 @authentication_classes([JSONWebTokenAuthentication, ])
 def portfolio(request):
     if request.method == 'GET':
-        return JsonResponse({})
+        pfs = Portfolio.objects.filter(user=request.user)
+        serializer = PortfolioSerializer(pfs, many=True)
+        return JsonResponse({'count': len(pfs), 'data': serializer.data})
     elif request.method == 'POST':  # 현재: 동일 유저가 동일 이름으로 생성 가능
         name = request.data.get('name')
         pf = Portfolio.objects.create(name=name, user=request.user)
