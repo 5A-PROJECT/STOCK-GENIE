@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class PortfolioRepository {
-  URL = 'http://localhost:8080/portfolio';
+  URL = 'http://localhost:8000/portfolio';
   constructor(url) {
     this.URL = url || this.URL;
   }
@@ -13,7 +13,7 @@ class PortfolioRepository {
    */
   createPortfolio(portfolioForm, token) {
     return axios.post(
-      `${this.URL}`,
+      `${this.URL}/`,
       {
         name: portfolioForm.name,
       },
