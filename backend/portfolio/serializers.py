@@ -20,6 +20,7 @@ class PortfolioSerializer(serializers.ModelSerializer):
             now = stock.count * stock.current_price
             diff = now - first
             data = {
+                'name': stock.name,
                 'totalBuyingPrice': first, 'totalCurrentPrice': now,
                 'totalProfit': diff, 'totalRatio': (diff / first) * 100
             }
@@ -42,7 +43,10 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
             first += stock.buy_price * stock.count
             now += stock.current_price * stock.count
         diff = now - first
-        ratio = (diff / first) * 100
+        if first == 0:
+            ratio = 0
+        else:
+            ratio = (diff / first) * 100
 
         data = {
             'totalBuyingPrice': first, 'totalCurrentPrice': now,

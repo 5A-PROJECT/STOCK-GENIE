@@ -49,7 +49,7 @@ def add_stock(request, pf_id):
     stock = Stock.objects.create(
         name=data.get('name'), count=int(data.get('count')),
         buy_price=float(data.get('buy_price')), current_price=float(data.get('current_price')),
-        currency=data.get('currency'), user=request.user
+        currency=data.get('currency'), user=request.user, portfolio=pf
     )
-    pf.stocks.add(stock)
+    # pf.stocks.add(stock)
     return JsonResponse({'id': stock.id})
