@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from .serializers import PortfolioSerializer, PortfolioDetailSerializer
 from .models import Portfolio
+from stock.models import Stock
 
 # Create your views here.
 
@@ -35,3 +36,20 @@ def portfolio_detail(request, pf_id):
 
     serializer = PortfolioDetailSerializer(pf)
     return JsonResponse(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+def add_stock(request, pf_id):
+    pf = get_object_or_404(Portfolio, id=pf_id)
+    if pf.user != request.user:
+        return HttpResponse(status=401)
+    data = request.data
+    stock = Stock.objects.create(
+        name=data.get('name'), count=int(data.get('count')),
+        buy_price=float(data.get('buy_price')), current_price=float(data.get('current_price')),
+        currency=data.get('currency'), user=request.user
+    )
+    pf.stocks.add(stock)
+    return JsonResponse({'id': stock.id})
