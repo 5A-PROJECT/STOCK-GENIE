@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from portfolio.models import Portfolio
 
 # Create your models here.
 
@@ -11,8 +12,12 @@ class Stock(models.Model):
     buy_price = models.FloatField()
     current_price = models.FloatField()
     currency = models.CharField(max_length=10)
+    portfolio = models.ForeignKey(
+        Portfolio, on_delete=models.CASCADE, related_name='stocks'
+    )
     user = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name='stocks')
+        get_user_model(), on_delete=models.CASCADE, related_name='stocks'
+    )
 
     def __str__(self):
         return self.name

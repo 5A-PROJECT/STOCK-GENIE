@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from stock.models import Stock
 
 # Create your models here.
 
@@ -16,9 +15,9 @@ class Portfolio(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, related_name='portfolios')
-    stocks = models.ManyToManyField(Stock, related_name='portfolios')
     user = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name='portfolios')
+        get_user_model(), on_delete=models.CASCADE, related_name='portfolios'
+    )
 
     def __str__(self):
         return self.name
