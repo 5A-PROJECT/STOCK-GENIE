@@ -13,6 +13,9 @@ const PredictPageWrapper = styled.div`
 const HeadDiv = styled.div`
   display: flex;
   justify-content: space-around;
+  .div {
+    margint-right: 2rem;
+  }
 `;
 
 const MainDiv = styled.div`
@@ -30,10 +33,18 @@ function PredictPage(props) {
     <AccessProtection authed={true} redirectPath={'/login'}>
       <PredictPageWrapper>
         <HeadDiv>
-          <Chart info={[300, 150, '금']} />
-          <Chart info={[300, 150, '유가']} />
-          <Chart info={[300, 150, '구리']} />
-          <Chart info={[300, 150, '환율']} />
+          <div>
+            <Chart info={[300, 150, '금']} />
+          </div>
+          <div>
+            <Chart info={[300, 150, '유가']} />
+          </div>
+          <div>
+            <Chart info={[300, 150, '구리']} />
+          </div>
+          <div>
+            <Chart info={[300, 150, '환율']} />
+          </div>
         </HeadDiv>
         <MainDiv2>
           <MainDiv>
