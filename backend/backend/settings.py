@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'news',
     'portfolio',
     'stock',
+    'predict',
     # restframework
     'rest_framework',
     # CORS header
