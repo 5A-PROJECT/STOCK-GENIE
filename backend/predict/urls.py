@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path('', views.predict_main),
+    path('commodities/', views.commodities),
+    path('indices/', views.indices),
 ]
