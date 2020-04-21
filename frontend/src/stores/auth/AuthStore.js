@@ -4,7 +4,7 @@ import AuthRepository from '../../repositories/auth/AuthRepository';
 export default class AuthStore {
   token = window.sessionStorage.getItem('access_token');
   // 로그인 여부
-  isLoggedIn = false;
+  isLoggedIn = true;
   loading = false;
   loggedInUser = {
     id: null,
