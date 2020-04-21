@@ -10,6 +10,13 @@ export default class PortfolioStore {
    * observable
    */
   portfolios = []; // 유저의 현재 포트폴리오들
+  count = null;
+  loading = {
+    getMyPortfolios: false,
+    addPortfolilo: false,
+    getPortfolioById: false,
+    addStock: false,
+  };
   selectedPortfolio = null;
 
   /**
@@ -22,12 +29,41 @@ export default class PortfolioStore {
   /**
    * 본인의 전체 포폴리스트 가져오기
    */
-  getMyPortfolios = async (token) => {
+  getMyPortfolios = async () => {
+    this.loading['getMyPortfolios'] = true;
+    const { token } = this.root.authStore;
     try {
-      this.portfolios = fakePf;
+      const res = await PortfolioRepository.getPortfolios(token);
+      const { data, count } = res.data;
+      this.portfolios = data;
+      this.count = count;
     } catch (e) {
       alert(e);
     }
+    this.loading['getMyPortfolios'] = false;
+  };
+
+  /**
+   * 포폴 추가하기
+   */
+  addPortfolilo = async (portfolio) => {
+    let isAdded = true;
+    this.loading['addPortfolilo'] = true;
+    const { token } = this.root.authStore;
+    try {
+      const res = await PortfolioRepository.createPortfolio(portfolio, token);
+      const { id, created_at } = res.data;
+      this.portfolios.push({
+        id,
+        created_at,
+        ...portfolio,
+      });
+    } catch (e) {
+      alert(e);
+      isAdded = false;
+    }
+    this.loading['addPortfolilo'] = false;
+    return isAdded;
   };
 
   /**
@@ -50,20 +86,6 @@ export default class PortfolioStore {
     } catch (e) {
       alert(e);
       return false;
-    }
-  };
-
-  addPortfolilo = async (portfolio, token) => {
-    try {
-      const res = await PortfolioRepository.createPortfolio(portfolio, token);
-      const { id, createdAt } = res.data;
-      this.portfolios.push({
-        id,
-        createdAt,
-        ...portfolio,
-      });
-    } catch (e) {
-      alert(e);
     }
   };
 
@@ -91,6 +113,8 @@ export default class PortfolioStore {
 
 decorate(PortfolioStore, {
   portfolios: observable,
+  count: observable,
+  loading: observable,
   selectedPortfolio: observable,
   create: action,
   clearSelectedPortfolio: action,
