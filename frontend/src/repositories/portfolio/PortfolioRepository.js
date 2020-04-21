@@ -47,18 +47,17 @@ class PortfolioRepository {
     });
   }
 
+  /**
+   * @param {string} portfolioId stock이 들어가는 포트폴리오 아이디
+   * @param {Object} stock 생성될 stock form
+   * @param {string} token 요청을 보내는 유저의 token
+   */
   createStock(portfolioId, stock, token) {
-    return axios.post(
-      `${this.URL}/${portfolioId}/stock/`,
-      {
-        ...stock,
+    return axios.post(`${this.URL}/${portfolioId}/stock/`, stock, {
+      headers: {
+        Authorization: `JWT ${token}`,
       },
-      {
-        headers: {
-          Authorization: token,
-        },
-      },
-    );
+    });
   }
 }
 

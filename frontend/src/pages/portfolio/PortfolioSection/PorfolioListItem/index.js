@@ -57,15 +57,16 @@ function PortfolioListItem(props) {
             </TagWrapper>
           )}
         </div>
+        {/* TODO: 수익률 받아오는 방법 고민좀 하고, 수정해야함 */}
         {profits && profits.length > 0 && (
           <>
             <div>
               <h4>총 수익률 </h4>
-              <ReturnRatio ratio={profits.now} />
+              <ReturnRatio ratio={0} />
             </div>
             <div>
               <h4>전일 대비 </h4>
-              <ReturnRatio ratio={profits.prev} />
+              <ReturnRatio ratio={0} />
             </div>
           </>
         )}

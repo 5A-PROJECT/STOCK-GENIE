@@ -1,6 +1,5 @@
 import { decorate, observable, action } from 'mobx';
 import PortfolioRepository from '../../repositories/portfolio/PortfolioRepository';
-import { fakePf } from './fakePf';
 
 export default class PortfolioStore {
   constructor(root) {
@@ -90,13 +89,14 @@ export default class PortfolioStore {
   };
 
   addStock = async (portfolioId, stock, token) => {
+    this.loading['addStock'] = true;
+    let isAdded = true;
     try {
       const res = await PortfolioRepository.createStock(
         portfolioId,
         stock,
         token,
       );
-
       // 리턴받은 아이디 받아서 넣기
       const { id } = res.data;
 
@@ -106,8 +106,11 @@ export default class PortfolioStore {
         ...stock,
       });
     } catch (e) {
-      console.log(e);
+      isAdded = false;
+      alert(e);
     }
+    this.loading['addStock'] = false;
+    return isAdded;
   };
 }
 

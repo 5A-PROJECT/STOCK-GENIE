@@ -20,17 +20,17 @@ function StockListItem({ stock }) {
 
   return (
     <tr>
-      <th>{name}</th>
-      <th>{code}</th>
-      <th>{count} 주</th>
-      <th>{buy_price.toLocaleString()} 원</th>
-      <th>{totalBuyingPrice.toLocaleString()} 원</th>
-      <th>{totalCurrentPrice.toLocaleString()} 원</th>
-      <th>
+      <td>{name}</td>
+      <td>{code}</td>
+      <td>{count} 주</td>
+      <td>{buy_price.toLocaleString()} 원</td>
+      <td>{totalBuyingPrice.toLocaleString()} 원</td>
+      <td>{totalCurrentPrice.toLocaleString()} 원</td>
+      <td>
         <ReturnRatio ratio={getRatio} fontSize="1rem" iconSize="1rem" />
         <span>{profit.toLocaleString()} 원</span>
-      </th>
-      <th>수정 / 삭제</th>
+      </td>
+      <td>수정 / 삭제</td>
     </tr>
   );
 }
