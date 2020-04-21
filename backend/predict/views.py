@@ -35,3 +35,17 @@ def indices(request):
         return HttpResponse(data)
     else:
         return HttpResponse(status=405)
+
+
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+@api_view(['GET'])
+def currency_cross(request):
+    if request.method == 'GET':
+        currency_cross = request.GET.get("currency_cross")
+        from_date = request.GET.get("from_date")
+        to_date = request.GET.get("to_date")
+        data = invest.get_currency_cross(currency_cross, from_date, to_date)
+        return HttpResponse(data)
+    else:
+        return HttpResponse(status=405)
