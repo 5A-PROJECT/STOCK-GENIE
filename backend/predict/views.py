@@ -42,7 +42,7 @@ def indices(request):
 @api_view(['GET'])
 def currency_cross(request):
     if request.method == 'GET':
-        currency_cross = request.GET.get("currency_cross")
+        currency_cross = request.GET.get("name")
         from_date = request.GET.get("from_date")
         to_date = request.GET.get("to_date")
         data = invest.get_currency_cross(currency_cross, from_date, to_date)
