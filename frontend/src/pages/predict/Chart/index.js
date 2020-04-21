@@ -1,5 +1,6 @@
 import { createChart } from 'lightweight-charts';
 import React, { useRef, useEffect } from 'react';
+
 // import styled from 'styled-components';
 
 function Chart(props) {
@@ -22,10 +23,11 @@ function Chart(props) {
       { time: '2019-04-19', value: 81.89 },
       { time: '2019-04-20', value: 74.43 },
     ]);
-    // function addOptions({
-    //   watermark: {
-    //     visible: True},
-    // });
+    chart.applyOptions({
+      layout: {
+        backgroundColor: '#11ffee00',
+      },
+    });
   }, []);
   return (
     <div>
