@@ -3,6 +3,8 @@ import json
 
 KOREA = 'south korea'
 US = 'united states'
+KRW = "KRW"
+USD = "USD"
 
 FAIL = json.dumps({"result": "FAIL"})
 SUCCESS = json.dumps({"result": "SUCCESS"})
@@ -34,6 +36,18 @@ def get_indices(name, country, from_date, to_date):
     data = investpy.indices.get_index_historical_data(
         name, from_date=from_date, to_date=to_date, country=country)
     data = data.drop(['Open', 'High', 'Low', 'Volume', 'Currency'], axis=1)
+    data.rename(columns={'Close': 'value'}, inplace=True)
+    data['time'] = data.index.map(lambda x: str(x).split(" ")[0])
+    result = {}
+    result['data'] = data.to_dict('records')
+    result = json.dumps(result)
+    return result
+
+
+def get_currency_cross(currency_cross, from_date, to_date):
+    data = investpy.get_currency_cross_historical_data(
+        currency_cross=currency_cross, from_date=from_date, to_date=to_date)
+    data = data.drop(['Open', 'High', 'Low', 'Currency'], axis=1)
     data.rename(columns={'Close': 'value'}, inplace=True)
     data['time'] = data.index.map(lambda x: str(x).split(" ")[0])
     result = {}
