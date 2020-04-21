@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { colors } from '@material-ui/core';
 import ReturnRatio from '../../../../molecules/ReturnRatio';
 import MaterialChip from '../../../../atoms/Chip/MaterialChip';
+import { withRouter } from 'react-router-dom';
+import { useMemo } from 'react';
 
 const ItemWrapper = styled.div`
   padding: 1rem;
@@ -27,37 +29,53 @@ const TagWrapper = styled.div`
 `;
 
 function PortfolioListItem(props) {
-  const { name, profit, date, tags } = props.portfolio;
+  const { id, name, created_at, tags, profits } = props.portfolio;
+  const { history } = props;
+  const goToPortfolio = () => {
+    history.push(`portfolio/${id}`);
+  };
+
+  const formatedCreatedAt = useMemo(() => {
+    return new Date(created_at).toLocaleDateString();
+  }, [created_at]);
 
   return (
     <PortfolioCard>
-      <ItemWrapper>
+      <ItemWrapper onClick={goToPortfolio}>
         <div>
           <h2 className="name">{name}</h2>
-          <TagWrapper>
-            {tags.map((tag) => (
-              <MaterialChip
-                key={tag.id}
-                label={tag.tag}
-                size="small"
-                variant="outlined"
-              />
-            ))}
-          </TagWrapper>
+          {tags.length > 0 && (
+            <TagWrapper>
+              {tags.map((tag) => (
+                <MaterialChip
+                  key={tag.id}
+                  label={tag.tag}
+                  size="small"
+                  variant="outlined"
+                />
+              ))}
+            </TagWrapper>
+          )}
         </div>
-        <div>
-          <h4>총 수익률 </h4>
-          <ReturnRatio ratio={profit.now} />
-        </div>
-        <div>
-          <h4>전일 대비 </h4>
-          <ReturnRatio ratio={profit.prev} />
-        </div>
-
-        <div className="date">{date}</div>
+        {profits.length > 0 && (
+          <>
+            <div>
+              <h4>총 수익률 </h4>
+              <ReturnRatio ratio={profits.now} />
+            </div>
+            <div>
+              <h4>전일 대비 </h4>
+              <ReturnRatio ratio={profits.prev} />
+            </div>
+          </>
+        )}
+        {tags.length === 0 && profits.length === 0 && (
+          <div>포트폴리오를 작성해주세요.</div>
+        )}
+        <div className="date">{formatedCreatedAt}</div>
       </ItemWrapper>
     </PortfolioCard>
   );
 }
 
-export default PortfolioListItem;
+export default withRouter(PortfolioListItem);
