@@ -13,6 +13,9 @@ const PredictPageWrapper = styled.div`
 const HeadDiv = styled.div`
   display: flex;
   justify-content: space-around;
+  .div {
+    margint-right: 2rem;
+  }
 `;
 
 const MainDiv = styled.div`
@@ -22,25 +25,33 @@ const MainDiv = styled.div`
 const MainDiv2 = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 3rem;
 `;
 
 function PredictPage(props) {
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       <PredictPageWrapper>
-        <div>주가예측 페이지</div>
         <HeadDiv>
-          <Chart size={[300, 150]} />
-          <Chart size={[300, 150]} />
-          <Chart size={[300, 150]} />
-          <Chart size={[300, 150]} />
+          <div>
+            <Chart info={[300, 150, '금']} />
+          </div>
+          <div>
+            <Chart info={[300, 150, '유가']} />
+          </div>
+          <div>
+            <Chart info={[300, 150, '구리']} />
+          </div>
+          <div>
+            <Chart info={[300, 150, '환율']} />
+          </div>
         </HeadDiv>
         <MainDiv2>
           <MainDiv>
             <Select />
           </MainDiv>
           <MainDiv>
-            <Chart size={[700, 300]} />
+            <Chart info={[700, 300, '']} />
           </MainDiv>
         </MainDiv2>
         <CompanyTable />
