@@ -8,11 +8,11 @@ import CustomFooter from './organisms/CustomFooter';
 import { ThemeProvider } from 'styled-components';
 import theme from './style/theme';
 import { observer, inject } from 'mobx-react';
-import BackDrop from './molecules/Backdrop';
 import PredictPage from './pages/predict';
 import SearchPage from './pages/search';
 import PortFolioPage from './pages/portfolio';
 import NotFound from './pages/notfound';
+import PortfolioItem from './pages/portfolioItem';
 
 const AppWrppar = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const Content = styled.section`
 `;
 
 function App({ authStore }) {
-  const { loading } = authStore;
+  // const { loading } = authStore;
   return (
     <ThemeProvider theme={theme}>
       <AppWrppar>
@@ -45,12 +45,12 @@ function App({ authStore }) {
             />
             <Route path="/predict" component={PredictPage} exact />
             <Route path="/portfolio" component={PortFolioPage} exact />
+            <Route path="/portfolio/:id" component={PortfolioItem} />
             <Route path="/search" component={SearchPage} exact />
             <Route path="*" component={NotFound} />
           </Switch>
         </Content>
         <CustomFooter />
-        <BackDrop loading={loading} />
       </AppWrppar>
     </ThemeProvider>
   );
