@@ -29,30 +29,97 @@ const MainDiv2 = styled.div`
 `;
 
 function PredictPage(props) {
+  var today = new Date();
+  var year = today.getFullYear();
+  var month = today.getMonth() + 1;
+  var day = today.getDate();
+  if (month < 10) {
+    month = '0' + month;
+  }
+  if (day < 10) {
+    day = '0' + day;
+  }
+  var totalToday = day + '/' + month + '/' + year;
+
+  // 한달 전 날짜 구하기(최근 한달 날짜를 보여주기위해서)
+  var monthDate = today.getTime() - 30 * 24 * 60 * 60 * 1000;
+  today.setTime(monthDate);
+
+  var monthYear = today.getFullYear();
+  var monthMonth = today.getMonth() + 1;
+  var monthDay = today.getDate();
+
+  if (monthMonth < 10) {
+    monthMonth = '0' + monthMonth;
+  }
+  if (monthDay < 10) {
+    monthDay = '0' + monthDay;
+  }
+
+  var totalPast = monthDay + '/' + monthMonth + '/' + monthYear;
+
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       <PredictPageWrapper>
         <HeadDiv>
           <div>
-            <Chart info={[300, 150, '금']} />
+            <Chart
+              info={{
+                size: [300, 150],
+                url: 'commodities/',
+                params: {
+                  name: 'Gold',
+                  from_date: totalPast,
+                  to_date: totalToday,
+                },
+              }}
+            />
           </div>
           <div>
-            <Chart info={[300, 150, '유가']} />
+            <Chart
+              info={{
+                size: [300, 150],
+                url: 'commodities/',
+                params: {
+                  name: 'Brent Oil',
+                  from_date: totalPast,
+                  to_date: totalToday,
+                },
+              }}
+            />
           </div>
           <div>
-            <Chart info={[300, 150, '구리']} />
+            <Chart
+              info={{
+                size: [300, 150],
+                url: 'commodities/',
+                params: {
+                  name: 'Copper',
+                  from_date: totalPast,
+                  to_date: totalToday,
+                },
+              }}
+            />
           </div>
           <div>
-            <Chart info={[300, 150, '환율']} />
+            <Chart
+              info={{
+                size: [300, 150],
+                url: 'currencycross/',
+                params: {
+                  name: 'USD/KRW',
+                  from_date: totalPast,
+                  to_date: totalToday,
+                },
+              }}
+            />
           </div>
         </HeadDiv>
         <MainDiv2>
           <MainDiv>
             <Select />
           </MainDiv>
-          <MainDiv>
-            <Chart info={[700, 300, '']} />
-          </MainDiv>
+          <MainDiv>{/* <Chart info={[700, 300, '']} /> */}</MainDiv>
         </MainDiv2>
         <CompanyTable />
       </PredictPageWrapper>
