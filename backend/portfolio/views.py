@@ -33,7 +33,6 @@ def portfolio_detail(request, pf_id):
     pf = get_object_or_404(Portfolio, id=pf_id)
     if pf.user != request.user:
         return HttpResponse(status=401)
-
     serializer = PortfolioDetailSerializer(pf)
     return JsonResponse(serializer.data)
 
@@ -47,9 +46,8 @@ def add_stock(request, pf_id):
         return HttpResponse(status=401)
     data = request.data
     stock = Stock.objects.create(
-        name=data.get('name'), count=int(data.get('count')),
+        name=data.get('name'), count=int(data.get('count')), code=data.get('code'),
         buy_price=float(data.get('buy_price')), current_price=float(data.get('current_price')),
-        currency=data.get('currency'), user=request.user, portfolio=pf
+        currency=data.get('currency'), category=data.get('category'), user=request.user, portfolio=pf
     )
-    # pf.stocks.add(stock)
     return JsonResponse({'id': stock.id})

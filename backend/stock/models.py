@@ -12,6 +12,7 @@ class Stock(models.Model):
     buy_price = models.FloatField()
     current_price = models.FloatField()
     currency = models.CharField(max_length=10)
+    category = models.CharField(max_length=20)
     portfolio = models.ForeignKey(
         Portfolio, on_delete=models.CASCADE, related_name='stocks'
     )
