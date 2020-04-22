@@ -13,8 +13,8 @@ const PredictPageWrapper = styled.div`
 const HeadDiv = styled.div`
   display: flex;
   justify-content: space-around;
-  .div {
-    margint-right: 2rem;
+  div {
+    margin-right: 0.5rem;
   }
 `;
 
