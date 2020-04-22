@@ -3,6 +3,7 @@ import PortfolioItemHeader from '../PortfolioItemHeader';
 import StockList from '../StockList';
 import styled from 'styled-components';
 import StockProfits from '../StockProfits';
+import TagList from '../../../organisms/TagList';
 
 const PortfolioItemSectionWrapper = styled.article``;
 
@@ -21,6 +22,7 @@ function PortfolioItemSection({ portfolio }) {
 
   return (
     <PortfolioItemSectionWrapper>
+      <TagList tags={tags} />
       <PortfolioItemHeader name={name} created_at={created_at} />
       <StockProfits profit={profit} />
       <StockList stocks={STOCKS}>증권 - 주식 ・ 채권</StockList>

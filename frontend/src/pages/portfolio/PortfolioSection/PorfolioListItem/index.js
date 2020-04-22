@@ -6,6 +6,7 @@ import ReturnRatio from '../../../../molecules/ReturnRatio';
 import MaterialChip from '../../../../atoms/Chip/MaterialChip';
 import { withRouter } from 'react-router-dom';
 import { useMemo } from 'react';
+import TagList from '../../../../organisms/TagList';
 
 const ItemWrapper = styled.div`
   padding: 1rem;
@@ -44,24 +45,7 @@ function PortfolioListItem(props) {
       <ItemWrapper onClick={goToPortfolio}>
         <div>
           <h2 className="name">{name}</h2>
-          {tags && tags.length > 0 ? (
-            <TagWrapper>
-              {tags.map((tag) => (
-                <MaterialChip
-                  key={tag.id}
-                  label={tag.tag}
-                  size="small"
-                  variant="outlined"
-                />
-              ))}
-            </TagWrapper>
-          ) : (
-            <MaterialChip
-              label="태그를달아보세요"
-              size="small"
-              variant="outlined"
-            />
-          )}
+          <TagList tags={tags} slice={true} />
         </div>
         {/* TODO: 수익률 받아오는 방법 고민좀 하고, 수정해야함 */}
         {profits && profits.length > 0 ? (
