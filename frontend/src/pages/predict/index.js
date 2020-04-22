@@ -72,6 +72,7 @@ function PredictPage(props) {
                   from_date: totalPast,
                   to_date: totalToday,
                 },
+                name_see: true,
               }}
             />
           </div>
@@ -85,6 +86,7 @@ function PredictPage(props) {
                   from_date: totalPast,
                   to_date: totalToday,
                 },
+                name_see: true,
               }}
             />
           </div>
@@ -98,6 +100,7 @@ function PredictPage(props) {
                   from_date: totalPast,
                   to_date: totalToday,
                 },
+                name_see: true,
               }}
             />
           </div>
@@ -111,6 +114,7 @@ function PredictPage(props) {
                   from_date: totalPast,
                   to_date: totalToday,
                 },
+                name_see: true,
               }}
             />
           </div>
@@ -119,7 +123,21 @@ function PredictPage(props) {
           <MainDiv>
             <Select />
           </MainDiv>
-          <MainDiv>{/* <Chart info={[700, 300, '']} /> */}</MainDiv>
+          <MainDiv>
+            <Chart
+              info={{
+                size: [700, 300],
+                url: 'indices/',
+                params: {
+                  name: 'KOSPI',
+                  from_date: totalPast,
+                  to_date: totalToday,
+                  country: 'south korea',
+                },
+                name_see: false,
+              }}
+            />
+          </MainDiv>
         </MainDiv2>
         <CompanyTable />
       </PredictPageWrapper>

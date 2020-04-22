@@ -6,7 +6,10 @@ import axios from 'axios';
 
 function Chart(props) {
   console.log(props.info.params.name);
-  const name = props.info.params.name;
+  var name = '';
+  if (props.info.name_see === true) {
+    name = props.info.params.name;
+  }
   const chartdiv = useRef(null);
   // 마운트될때 실행될 로직
   useEffect(() => {
@@ -28,19 +31,6 @@ function Chart(props) {
       .catch((error) => {
         console.log(error);
       });
-    // const lineSeries = chart.addLineSeries();
-    // lineSeries.setData([
-    //   { time: '2019-04-11', value: 80.01 },
-    //   { time: '2019-04-12', value: 96.63 },
-    //   { time: '2019-04-13', value: 76.64 },
-    //   { time: '2019-04-14', value: 81.89 },
-    //   { time: '2019-04-15', value: 74.43 },
-    //   { time: '2019-04-16', value: 80.01 },
-    //   { time: '2019-04-17', value: 96.63 },
-    //   { time: '2019-04-18', value: 76.64 },
-    //   { time: '2019-04-19', value: 81.89 },
-    //   { time: '2019-04-20', value: 74.43 },
-    // ]);
     chart.applyOptions({
       layout: {
         backgroundColor: '#11ffee00',
