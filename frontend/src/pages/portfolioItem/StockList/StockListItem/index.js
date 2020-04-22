@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import ReturnRatio from '../../../../molecules/ReturnRatio';
 
 function StockListItem({ stock }) {
-  const { name, count, code, buy_price, current_price } = stock;
+  const { name, count, code, buy_price, current_price, currency } = stock;
   const totalBuyingPrice = useMemo(() => {
     return buy_price * count;
   }, [buy_price, count]);
@@ -23,12 +23,20 @@ function StockListItem({ stock }) {
       <td>{name}</td>
       <td>{code}</td>
       <td>{count} 주</td>
-      <td>{buy_price.toLocaleString()} 원</td>
-      <td>{totalBuyingPrice.toLocaleString()} 원</td>
-      <td>{totalCurrentPrice.toLocaleString()} 원</td>
+      <td>
+        {buy_price.toLocaleString()} {currency}
+      </td>
+      <td>
+        {totalBuyingPrice.toLocaleString()} {currency}
+      </td>
+      <td>
+        {totalCurrentPrice.toLocaleString()} {currency}
+      </td>
       <td>
         <ReturnRatio ratio={getRatio} fontSize="1rem" iconSize="1rem" />
-        <span>{profit.toLocaleString()} 원</span>
+        <span>
+          {profit.toLocaleString()} {currency}
+        </span>
       </td>
       <td>수정 / 삭제</td>
     </tr>

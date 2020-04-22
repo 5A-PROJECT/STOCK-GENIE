@@ -102,7 +102,16 @@ function ModalContents({ open, onClose, portfolioStore }) {
             name="category"
             type="text"
             onChange={handleInputChange}
-            placeholder="매수 금액을 입력하세요."
+            placeholder="카테고리를 선택하세요"
+            required
+          />
+          <MaterialInput
+            label="통화"
+            value={stockForm.currency}
+            name="currency"
+            type="text"
+            onChange={handleInputChange}
+            placeholder="통화를 선택하세요."
             required
           />
         </ModalForm>
