@@ -5,12 +5,6 @@ import words from './words';
 import Pop_newsList from '../NewsList/Pop_news.js';
 import styled from 'styled-components';
 
-const WordCloudWrapper = styled.div`
-  margin-top: 5%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-`;
-
 const NewsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,16 +51,9 @@ function Wordcloud(props) {
     setPopNews(news_data);
   }, []);
   return (
-    <WordCloudWrapper>
-      <div>
-        <ReactWordcloud options={options} words={words} />
-      </div>
-      <NewsWrapper>
-        {popnews.map((popnews) => (
-          <Pop_newsList key={popnews.id} popnews={popnews} />
-        ))}
-      </NewsWrapper>
-    </WordCloudWrapper>
+    <div>
+      <ReactWordcloud options={options} words={words} />
+    </div>
   );
 }
 

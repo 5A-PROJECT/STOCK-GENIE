@@ -5,16 +5,11 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Show_allnews from './Show_allnews';
 
 const TitleWrapper = styled.div`
-  margin-left: 7%;
+  margin-left: 20%;
   margin-top: 5%;
   .Button {
     size: large;
   }
-`;
-
-const NewsData = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
 `;
 
 const NewsWrapper = styled.div`
@@ -49,21 +44,21 @@ function AllNewsList() {
   }, []);
   return (
     <>
-      <TitleWrapper>
-        <ButtonGroup variant="text">
-          <Button>전체</Button>
-          <Button>조회수</Button>
-          <Button>GoodNews</Button>
-          <Button>BadNews</Button>
-        </ButtonGroup>
-      </TitleWrapper>
-      <NewsData>
+      <div>
+        <TitleWrapper>
+          <ButtonGroup variant="text">
+            <Button>전체</Button>
+            <Button>조회수</Button>
+            <Button>Good News</Button>
+            <Button>Bad News</Button>
+          </ButtonGroup>
+        </TitleWrapper>
         <NewsWrapper>
           {news.map((news) => (
             <Show_allnews key={news.id} news={news} />
           ))}
         </NewsWrapper>
-      </NewsData>
+      </div>
     </>
   );
 }

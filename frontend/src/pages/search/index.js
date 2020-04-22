@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
 import WordCloud from './WordCloud';
+import PopNewsList from './NewsList/Pop_news';
 import AllNewsList from './NewsList/All_newsList';
-import { TextField, Grid, Button } from '@material-ui/core';
+import Graph from './Graph/pie';
+import { TextField, Grid } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 const SearchPageWrapper = styled.div`
@@ -31,16 +33,24 @@ function SearchBar() {
   );
 }
 
-function handlerSearch() {}
+const ContainWrapper = styled.div`
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+`;
 
 function SearchPage(props) {
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       <SearchPageWrapper>
         <SearchBar />
-
-        <WordCloud />
-        <AllNewsList />
+        <ContainWrapper>
+          <WordCloud />
+          <PopNewsList />
+          <AllNewsList />
+          <Graph />
+        </ContainWrapper>
       </SearchPageWrapper>
     </AccessProtection>
   );
