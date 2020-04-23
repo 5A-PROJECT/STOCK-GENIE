@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Tag, Portfolio
 from stock.serializers import StockSerializer
+from investpy.currency_crosses import get_currency_cross_recent_data
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -16,8 +17,14 @@ class PortfolioSerializer(serializers.ModelSerializer):
     def get_profits(self, obj):
         pfs = []
         for stock in obj.stocks.all():
-            first = stock.count * stock.buy_price
-            now = stock.count * stock.current_price
+            sg = 1
+            if stock.currency != 'KRW':
+                sg = get_currency_cross_recent_data(
+                    f'{stock.currency}/KRW'
+                ).iloc[-2, 3]
+
+            first = stock.count * stock.buy_price * sg
+            now = stock.count * stock.current_price * sg
             diff = now - first
             data = {
                 'name': stock.name,
@@ -40,8 +47,15 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
     def get_profit(self, obj):
         first, now = 0, 0
         for stock in obj.stocks.all():
-            first += stock.buy_price * stock.count
-            now += stock.current_price * stock.count
+            sg = 1
+            if stock.currency != 'KRW':
+                sg = get_currency_cross_recent_data(
+                    f'{stock.currency}/KRW'
+                ).iloc[-2, 3]
+
+            first += stock.buy_price * stock.count * sg
+            now += stock.current_price * stock.count * sg
+
         diff = now - first
         if first == 0:
             ratio = 0
