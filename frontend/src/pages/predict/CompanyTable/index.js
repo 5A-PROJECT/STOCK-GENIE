@@ -8,6 +8,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { IconButton } from '@material-ui/core';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import { Link } from 'react-router-dom';
 
 const columns = [
   { id: 'name', label: '회사명', minWidth: 170 },
@@ -21,27 +24,40 @@ const columns = [
   },
   {
     id: 'rate',
-    label: 'Rate',
+    label: '등락율',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
   },
   {
-    id: 'Predict',
+    id: 'predict',
     label: '예측결과',
     minWidth: 170,
-    align: 'right',
+    align: 'center',
     format: (value) => value.toLocaleString(),
+  },
+  {
+    id: 'move',
+    label: '상세보기',
+    align: 'center',
+    minwidth: 170,
   },
 ];
 
-function createData(name, code, currentprice, yesterdayprice) {
+// 상세보기 + 버튼 => 페이지 이동
+const plusIcon = (
+  <Link to="/stockdetail">
+    <ZoomInIcon />
+  </Link>
+);
+
+function createData(name, code, currentprice, yesterdayprice, predict, move) {
   const rate = ((currentprice - yesterdayprice) / yesterdayprice) * 100;
-  return { name, code, currentprice, yesterdayprice, rate };
+  return { name, code, currentprice, yesterdayprice, rate, predict, move };
 }
 
 // 테이블에 내용이 들어가는 부분
-const rows = [createData('삼성전자', '005930', 50100, 51400)];
+const rows = [createData('삼성전자', '005930', 50100, 51400, '상승', plusIcon)];
 
 const useStyles = makeStyles({
   root: {
