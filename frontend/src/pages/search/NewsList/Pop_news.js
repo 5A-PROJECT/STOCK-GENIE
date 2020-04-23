@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Show_allnews from './Show_allnews';
+import Pagination from '../Utils/Pagination';
 
 const NewsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem 1rem;
+`;
+
+const PageList = styled.ul`
+  display: flex;
 `;
 
 function Pop_newsList(props) {
@@ -32,6 +37,7 @@ function Pop_newsList(props) {
       });
     }
     setPopNews(news_data);
+    console.log(news_data.length);
   }, []);
 
   return (
@@ -39,6 +45,9 @@ function Pop_newsList(props) {
       {popnews.map((popnews) => (
         <Show_allnews key={popnews.id} news={popnews} />
       ))}
+      <PageList>
+        <Pagination pageSize={10} totalItems={100} />
+      </PageList>
     </NewsWrapper>
   );
 }

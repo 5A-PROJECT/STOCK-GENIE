@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import AccessProtection from '../../molecules/AccessProtection';
+// import AccessProtection from '../../molecules/AccessProtection';
 import WordCloud from './WordCloud';
 import PopNewsList from './NewsList/Pop_news';
 import AllNewsList from './NewsList/All_newsList';
-// import SearchingPage from './NewsList/SearchingPage';
 import Graph from './Graph/pie';
 import { TextField, Grid } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
@@ -41,20 +40,14 @@ const ContainWrapper = styled.div`
   grid-template-rows: auto;
 `;
 
-function SearchPage(props) {
+function SearchingPage(props) {
   return (
-    <AccessProtection authed={true} redirectPath={'/login'}>
-      <SearchPageWrapper>
-        <SearchBar />
-        <ContainWrapper>
-          <WordCloud />
-          <PopNewsList />
-          <AllNewsList />
-          <Graph />
-        </ContainWrapper>
-      </SearchPageWrapper>
-    </AccessProtection>
+    // <AccessProtection authed={true} redirectPath={'/login'}>
+    //   <SearchPageWrapper>
+    <SearchBar />
+    //   </SearchPageWrapper>
+    // </AccessProtection>
   );
 }
 
-export default SearchPage;
+export default SearchingPage;

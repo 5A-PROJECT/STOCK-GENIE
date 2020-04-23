@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Show_allnews from './Show_allnews';
+import Pagination from '../Utils/Pagination';
 
 const TitleWrapper = styled.div`
   margin-left: 20%;
@@ -17,6 +18,10 @@ const NewsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1rem 1rem;
+`;
+
+const PageList = styled.ul`
+  display: flex;
 `;
 
 function AllNewsList() {
@@ -57,6 +62,9 @@ function AllNewsList() {
           {news.map((news) => (
             <Show_allnews key={news.id} news={news} />
           ))}
+          <PageList>
+            <Pagination pageSize={10} totalItems={100} />
+          </PageList>
         </NewsWrapper>
       </div>
     </>
