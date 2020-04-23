@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
 import WordCloud from './WordCloud';
-import PopNewsList from './NewsList/Pop_news';
-import AllNewsList from './NewsList/All_newsList';
-// import SearchingPage from './NewsList/SearchingPage';
-import Graph from './Graph/pie';
 import { TextField, Grid } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import PieGraph from './Graph/PieGraph';
+import PopNewsList from './NewsList/PopNews';
+import AllNewsList from './NewsList/AllNewsList';
 
 const SearchPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -50,7 +49,7 @@ function SearchPage(props) {
           <WordCloud />
           <PopNewsList />
           <AllNewsList />
-          <Graph />
+          <PieGraph />
         </ContainWrapper>
       </SearchPageWrapper>
     </AccessProtection>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Show_allnews from './Show_allnews';
 import Pagination from '../Utils/Pagination';
+import ShowAllNews from './ShowAllNews';
 
 const TitleWrapper = styled.div`
   margin-left: 20%;
@@ -60,7 +60,7 @@ function AllNewsList() {
         </TitleWrapper>
         <NewsWrapper>
           {news.map((news) => (
-            <Show_allnews key={news.id} news={news} />
+            <ShowAllNews key={news.id} news={news} />
           ))}
           <PageList>
             <Pagination pageSize={10} totalItems={100} />

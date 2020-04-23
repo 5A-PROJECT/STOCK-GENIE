@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Show_allnews from './Show_allnews';
 import Pagination from '../Utils/Pagination';
+import ShowAllNews from './ShowAllNews';
 
 const NewsWrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const PageList = styled.ul`
   display: flex;
 `;
 
-function Pop_newsList(props) {
+function PopNewsList(props) {
   const [popnews, setPopNews] = useState([]);
   useEffect(() => {
     // const url = '백앤드 주소';
@@ -43,7 +43,7 @@ function Pop_newsList(props) {
   return (
     <NewsWrapper>
       {popnews.map((popnews) => (
-        <Show_allnews key={popnews.id} news={popnews} />
+        <ShowAllNews key={popnews.id} news={popnews} />
       ))}
       <PageList>
         <Pagination pageSize={10} totalItems={100} />
@@ -52,4 +52,4 @@ function Pop_newsList(props) {
   );
 }
 
-export default Pop_newsList;
+export default PopNewsList;

@@ -14,7 +14,7 @@ const ItemWrapper = styled.a`
   text-decoration: none;
 `;
 
-function Show_NewsList(props) {
+function ShowNewsList(props) {
   const { title, url } = props.news;
 
   // console.log(props);
@@ -31,4 +31,4 @@ function Show_NewsList(props) {
   );
 }
 
-export default Show_NewsList;
+export default ShowNewsList;
