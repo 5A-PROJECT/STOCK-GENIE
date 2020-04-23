@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ResponsivePie } from '@nivo/pie';
 
 const MyResponsivePie = ({ data /* see data tab */ }) => (
@@ -38,7 +38,7 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
   />
 );
 
-function Show_Graph() {
+function PieGraph() {
   const [data, setData] = useState([
     {
       id: 'good',
@@ -66,4 +66,4 @@ function Show_Graph() {
   );
 }
 
-export default Show_Graph;
+export default PieGraph;

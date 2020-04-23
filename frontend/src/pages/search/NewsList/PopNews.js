@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Show_allnews from './Show_allnews';
+import ShowAllNews from './ShowAllNews';
 
 const NewsWrapper = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ const NewsWrapper = styled.div`
   padding: 1rem 1rem;
 `;
 
-function Pop_newsList(props) {
+function PopNewsList(props) {
   const [popnews, setPopNews] = useState([]);
   useEffect(() => {
     // const url = '백앤드 주소';
@@ -37,10 +37,10 @@ function Pop_newsList(props) {
   return (
     <NewsWrapper>
       {popnews.map((popnews) => (
-        <Show_allnews key={popnews.id} news={popnews} />
+        <ShowAllNews key={popnews.id} news={popnews} />
       ))}
     </NewsWrapper>
   );
 }
 
-export default Pop_newsList;
+export default PopNewsList;
