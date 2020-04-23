@@ -12,7 +12,8 @@ const SelectorWrapper = styled.div``;
 
 const categories = {
   'south korea': ['KOSPI', 'KOSDAQ'],
-  'united states': ['NASDAQ'],
+  // 나스닥은 저 이름으로 해야 검색가능
+  'united states': ['Nasdaq'],
 };
 
 function MainChart() {
