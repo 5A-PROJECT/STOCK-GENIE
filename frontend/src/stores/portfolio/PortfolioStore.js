@@ -1,6 +1,5 @@
 import { decorate, observable, action } from 'mobx';
 import PortfolioRepository from '../../repositories/portfolio/PortfolioRepository';
-import { fakePf } from './fakePf';
 
 export default class PortfolioStore {
   constructor(root) {
@@ -69,34 +68,35 @@ export default class PortfolioStore {
   /**
    * 해당 아이디 포폴 가져오기
    */
-  getPortfolioById = async (portfolioId, token) => {
+  getPortfolioById = async (portfolioId) => {
+    let isPortfolioExist = true;
+    this.loading['getPortfolioById'] = true;
     try {
-      /* API 완료 후 수정
+      const { token } = this.root.authStore;
       const res = await PortfolioRepository.getPortfolioById(
         portfolioId,
         token,
       );
 
-      const { data: portfolio } = res.data;
-      */
-
       // TODO: 받은 응답의 포폴로 교체하기.
-      this.selectedPortfolio = fakePf[portfolioId - 1];
-      return true;
+      this.selectedPortfolio = res.data;
     } catch (e) {
       alert(e);
-      return false;
+      isPortfolioExist = false;
     }
+    this.loading['getPortfolioById'] = false;
+    return isPortfolioExist;
   };
 
   addStock = async (portfolioId, stock, token) => {
+    this.loading['addStock'] = true;
+    let isAdded = true;
     try {
       const res = await PortfolioRepository.createStock(
         portfolioId,
         stock,
         token,
       );
-
       // 리턴받은 아이디 받아서 넣기
       const { id } = res.data;
 
@@ -106,8 +106,11 @@ export default class PortfolioStore {
         ...stock,
       });
     } catch (e) {
-      console.log(e);
+      isAdded = false;
+      alert(e);
     }
+    this.loading['addStock'] = false;
+    return isAdded;
   };
 }
 

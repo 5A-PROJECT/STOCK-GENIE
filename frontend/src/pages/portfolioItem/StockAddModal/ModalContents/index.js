@@ -27,8 +27,8 @@ function ModalContents({ open, onClose, portfolioStore }) {
     code: '',
     buy_price: 1,
     current_price: 1,
-    category: 'stock',
     currency: 'USD',
+    category: 'STOCK',
   });
 
   const handleInputChange = (e) => {
@@ -43,6 +43,7 @@ function ModalContents({ open, onClose, portfolioStore }) {
     const token = sessionStorage.getItem('access_token');
     const { id: portfolioId } = portfolioStore.selectedPortfolio;
     portfolioStore.addStock(portfolioId, stockForm, token);
+    portfolioStore.getPortfolioById(portfolioId, token);
     onClose();
   };
   return (

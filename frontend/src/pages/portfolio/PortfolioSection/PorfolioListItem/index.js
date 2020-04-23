@@ -44,7 +44,7 @@ function PortfolioListItem(props) {
       <ItemWrapper onClick={goToPortfolio}>
         <div>
           <h2 className="name">{name}</h2>
-          {tags.length > 0 && (
+          {tags && tags.length > 0 ? (
             <TagWrapper>
               {tags.map((tag) => (
                 <MaterialChip
@@ -55,22 +55,28 @@ function PortfolioListItem(props) {
                 />
               ))}
             </TagWrapper>
+          ) : (
+            <MaterialChip
+              label="태그를달아보세요"
+              size="small"
+              variant="outlined"
+            />
           )}
         </div>
-        {profits.length > 0 && (
+        {/* TODO: 수익률 받아오는 방법 고민좀 하고, 수정해야함 */}
+        {profits && profits.length > 0 ? (
           <>
             <div>
               <h4>총 수익률 </h4>
-              <ReturnRatio ratio={profits.now} />
+              <ReturnRatio ratio={0} />
             </div>
             <div>
               <h4>전일 대비 </h4>
-              <ReturnRatio ratio={profits.prev} />
+              <ReturnRatio ratio={0} />
             </div>
           </>
-        )}
-        {tags.length === 0 && profits.length === 0 && (
-          <div>포트폴리오를 작성해주세요.</div>
+        ) : (
+          <div>종목을 추가해주세요</div>
         )}
         <div className="date">{formatedCreatedAt}</div>
       </ItemWrapper>
