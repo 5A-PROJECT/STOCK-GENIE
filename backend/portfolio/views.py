@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from .serializers import PortfolioSerializer, PortfolioDetailSerializer
-from .models import Portfolio
+from .models import Portfolio, Tag
 from stock.models import Stock
 
 # Create your views here.
@@ -51,3 +51,16 @@ def add_stock(request, pf_id):
         currency=data.get('currency'), category=data.get('category'), user=request.user, portfolio=pf
     )
     return JsonResponse({'id': stock.id})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+def add_tag(request, pf_id):
+    pf = get_object_or_404(Portfolio, id=pf_id)
+    if pf.user != request.user:
+        return HttpResponse(status=401)
+    name = request.data.get('name')
+    tag = Tag.objects.get_or_create(name=name)[0]
+    pf.tags.add(tag)
+    return JsonResponse({'id': tag.id})
