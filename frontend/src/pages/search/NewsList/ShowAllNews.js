@@ -21,10 +21,13 @@ function ShowNewsList(props) {
   const openNewTab = () => {
     window.open(url);
   };
+
   return (
-    <ItemWrapper href="#" onClick={openNewTab}>
-      {title}
-    </ItemWrapper>
+    <div>
+      <ItemWrapper href="#" onClick={openNewTab}>
+        {title}
+      </ItemWrapper>
+    </div>
   );
 }
 
