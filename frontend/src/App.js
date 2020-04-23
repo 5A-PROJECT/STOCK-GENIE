@@ -13,7 +13,6 @@ import SearchPage from './pages/search';
 import PortFolioPage from './pages/portfolio';
 import NotFound from './pages/notfound';
 import PortfolioItem from './pages/portfolioItem';
-import StockDetailPage from './pages/stockdetail';
 
 const AppWrppar = styled.div`
   display: flex;
@@ -48,7 +47,6 @@ function App({ authStore }) {
             <Route path="/portfolio" component={PortFolioPage} exact />
             <Route path="/portfolio/:id" component={PortfolioItem} />
             <Route path="/search" component={SearchPage} exact />
-            <Route path="/stockdetail" component={StockDetailPage} exact />
             <Route path="*" component={NotFound} />
           </Switch>
         </Content>

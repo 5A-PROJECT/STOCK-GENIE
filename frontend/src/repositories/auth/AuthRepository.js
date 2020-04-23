@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class AuthRepository {
-  URL = 'http://localhost:8080/api/v1/auth';
+  URL = 'http://localhost:8000/auth';
 
   constructor(url) {
     this.URL = url || this.URL;
@@ -9,7 +9,7 @@ class AuthRepository {
 
   // 로그인
   login(authForm) {
-    return axios.post(`${this.URL}/login`, {
+    return axios.post(`${this.URL}/login/`, {
       username: authForm.username,
       password: authForm.password,
     });
@@ -17,14 +17,14 @@ class AuthRepository {
 
   // 회원가입
   register(authForm) {
-    return axios.post(`${this.URL}/register`, authForm);
+    return axios.post(`${this.URL}/register/`, authForm);
   }
 
   // 토큰 유효성 검사
   checkToken(token) {
-    return axios.get(`${this.URL}/check`, {
+    return axios.get(`${this.URL}/check/`, {
       headers: {
-        Authorization: token,
+        Authorization: `JWT ${token}`,
       },
     });
   }
