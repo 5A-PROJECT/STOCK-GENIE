@@ -3,6 +3,7 @@ import ReturnRatio from '../../../../molecules/ReturnRatio';
 
 function StockListItem({ stock }) {
   const { name, count, code, buy_price, current_price, currency } = stock;
+  console.log(stock);
   const totalBuyingPrice = useMemo(() => {
     return buy_price * count;
   }, [buy_price, count]);

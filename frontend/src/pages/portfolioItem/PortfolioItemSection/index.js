@@ -25,8 +25,8 @@ function PortfolioItemSection({ portfolio }) {
       <TagList tags={tags} />
       <PortfolioItemHeader name={name} created_at={created_at} />
       <StockProfits profit={profit} />
-      <StockList stocks={STOCKS}>증권 - 주식 ・ 채권</StockList>
-      <StockList stocks={DERIVATIVES}>파생상품 - 선물 ・ 옵션</StockList>
+      <StockList stocks={STOCKS}>증권 STOCKS</StockList>
+      <StockList stocks={DERIVATIVES}>파생상품 DERIVATIVES</StockList>
     </PortfolioItemSectionWrapper>
   );
 }
