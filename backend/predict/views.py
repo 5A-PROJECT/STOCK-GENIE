@@ -3,7 +3,11 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.response import Response
+from django.core.paginator import Paginator
 from . import invest
+from .models import StockInfo
+from .serializers import StockInfoSerializer
 
 # Create your views here.
 
@@ -47,5 +51,20 @@ def currency_cross(request):
         to_date = request.GET.get("to_date")
         data = invest.get_currency_cross(currency_cross, from_date, to_date)
         return HttpResponse(data)
+    else:
+        return HttpResponse(status=405)
+
+
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+@api_view(['GET'])
+def stock_table(request):
+    if request.method == 'GET':
+        stocks = StockInfo.objects.all()
+        page = request.GET.get("page")
+        paginator = Paginator(stocks, 10)
+        data = paginator.get_page(page)
+        serializer = StockInfoSerializer(data, many=True)
+        return Response(serializer.data)
     else:
         return HttpResponse(status=405)
