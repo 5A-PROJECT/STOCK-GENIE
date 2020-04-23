@@ -1,14 +1,17 @@
-import { observable, action, decorate, reaction } from 'mobx';
+import { observable, action, decorate } from 'mobx';
 import AuthRepository from '../../repositories/auth/AuthRepository';
 
 export default class AuthStore {
-  token = window.sessionStorage.getItem('access_token');
   // 로그인 여부
-  isLoggedIn = false;
+  isLoggedIn = true;
+
+  // AuthLoading
   loading = false;
+
+  // 로그인 시 로그인된 유저
   loggedInUser = {
     id: null,
-    username: '',
+    username: null,
   };
 
   // 로그인 / 회원가입용 폼
@@ -20,19 +23,6 @@ export default class AuthStore {
 
   constructor(root) {
     this.root = root;
-
-    if (this.token) {
-      // const res = this.check(this.token)
-      this.isLoggedIn = true;
-      console.log('로그인되어있음');
-    }
-
-    reaction(
-      () => this.token,
-      (token) => {
-        if (token != null) window.sessionStorage.setItem('access_token', token);
-      },
-    );
   }
 
   clearAuthForm = () => {
@@ -48,17 +38,11 @@ export default class AuthStore {
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
       const res = await AuthRepository.login(authForm);
-      const { token, id } = res.data;
-      sessionStorage.setItem('access_token', token);
-      this.isLoggedIn = true;
-      this.loggedInUser = {
-        id,
-        username: authForm.username,
-      };
+      console.log(res);
     } catch (e) {
       console.log(e);
     }
-
+    this.isLoggedIn = true;
     this.loading = false;
   };
 
@@ -67,12 +51,11 @@ export default class AuthStore {
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
       const res = await AuthRepository.register(authForm);
-      const { token, id } = res.data;
-      sessionStorage.setItem('access_token', token);
-      this.isLoggedIn = true;
+      console.log(res);
     } catch (e) {
       console.log(e);
     }
+    this.isLoggedIn = true;
     this.loading = false;
   };
 
@@ -80,16 +63,12 @@ export default class AuthStore {
     this.loading = true;
     try {
       const res = await AuthRepository.checkToken(token);
+      console.log(res);
       // 올바른 토큰이라면
-      const { id, username } = res.data;
-      this.isLoggedIn = true;
-      this.loggedInUser = {
-        id,
-        username,
-      };
     } catch (e) {
       console.log(e);
     }
+    this.isLoggedIn = true;
     this.loading = false;
   };
 
