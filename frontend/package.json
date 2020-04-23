@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.9.11",
+    "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
-    "@nivo/line": "^0.61.1",
     "@nivo/pie": "^0.61.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -18,11 +17,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-styled-flexboxgrid": "^3.2.1",
-    "react-virtualized": "^9.21.2",
-    "styled-components": "^5.0.1",
-    "yarn": "^1.22.4",
     "react-wordcloud": "^1.2.2",
+    "styled-components": "^5.0.1",
     "wordcloud": "^1.1.1"
   },
   "scripts": {
