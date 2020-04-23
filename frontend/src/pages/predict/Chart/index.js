@@ -24,12 +24,16 @@ function Chart({ width, height, url, params, displayName }) {
   useEffect(() => {
     // API 요청
     if (lineSeries && params.name) {
+      const token = sessionStorage.getItem('access_token');
       axios
         .get(`http://localhost:8000/predict/${url}/`, {
           params: {
             ...params,
             from_date: totalPast,
             to_date: totalToday,
+          },
+          headers: {
+            Authorization: `JWT ${token}`,
           },
         })
         .then((res) => {
