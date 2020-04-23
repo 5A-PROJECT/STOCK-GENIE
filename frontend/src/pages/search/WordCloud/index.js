@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import ReactWordcloud from 'react-wordcloud';
+import ReactWordCloud from 'react-wordcloud';
 import words from './words';
-// import axios from 'axios';
-import Pop_newsList from '../NewsList/Pop_news.js';
-import styled from 'styled-components';
 
-const NewsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 1rem;
-`;
+// import axios from 'axios';
+// import Pop_newsList from '../NewsList/Pop_news.js';
+// import styled from 'styled-components';
+
+// const NewsWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 1rem 1rem;
+// `;
 
 const options = {
   enableTooltip: true,
@@ -52,7 +53,7 @@ function Wordcloud(props) {
   }, []);
   return (
     <div>
-      <ReactWordcloud options={options} words={words} />
+      <ReactWordCloud options={options} words={words} />
     </div>
   );
 }
