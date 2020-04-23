@@ -25,6 +25,7 @@ const ReturnRatioWrapper = styled.div`
   display: flex;
   align-items: center;
   font-weight: bold;
+  min-width: 75px;
 `;
 
 const Ratio = styled.span`
@@ -38,7 +39,7 @@ function ReturnRatio({ ratio, fontSize = '1.5rem', iconSize = '1.5rem' }) {
       <StylesProvider injectFirst>
         {ratio > 0 && <UpIcon size={iconSize} title="up" />}
         {ratio < 0 && <DownIcon size={iconSize} title="down" />}
-        {ratio === 0 && <StableIcon size={iconSize} title="stable" />}
+        {parseInt(ratio) === 0 && <StableIcon size={iconSize} title="stable" />}
       </StylesProvider>
       <Ratio fontSize={fontSize}>{ratio}%</Ratio>
     </ReturnRatioWrapper>

@@ -23,6 +23,11 @@ const theme = {
       background: MAIN_COLOR[300],
       hoverBackground: MAIN_COLOR[500],
     },
+    portfolio: {
+      count: MAIN_COLOR[800],
+      code: colors.grey[600],
+      currency: colors.grey[600],
+    },
   },
 };
 

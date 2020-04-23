@@ -10,7 +10,7 @@ const ProfitWrapper = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
-  margin-bottom: 1rem;
+  margin: 2rem 0;
   grid-gap: 0.5rem;
 `;
 
@@ -41,17 +41,17 @@ function StockProfits({ profit }) {
       <Info>
         <div className="label">총매수금액</div>
         <span className="price">{totalBuyingPrice.toLocaleString()}</span>
-        <span className="won-unit">원</span>
+        <span className="won-unit">KRW</span>
       </Info>
       <Info>
         <div className="label">총평가금액</div>
         <span className="price">{totalCurrentPrice.toLocaleString()}</span>
-        <span className="won-unit">원</span>
+        <span className="won-unit">KRW</span>
       </Info>
       <Info>
         <div className="label">총평가손익</div>
         <span className="price">{totalProfit.toLocaleString()}</span>
-        <span className="won-unit">원</span>
+        <span className="won-unit">KRW</span>
       </Info>
       <Info>
         <div className="label">총평가수익률</div>
