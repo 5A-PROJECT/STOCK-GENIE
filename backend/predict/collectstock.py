@@ -75,13 +75,18 @@ def get_stock_data(path, country, indices):
         testData = pd.merge(stock_df, commodities_df, on="date")[-28:]
         testData = testData.drop(['Currency', 'date'], axis=1)
         predict = prediction(stock, indices, testData)
+        testData_2 = pd.merge(stock_df, commodities_df, on="date")[-29:-1]
+        testData_2 = testData_2.drop(['Currency', 'date'], axis=1)
+        prevpredict = prediction(stock, indices, testData_2)
         prev = data["Prev. Close"]
         open_price = data["Open"]
         symbol = data["Stock Symbol"]
         stockinfo = StockInfo()
+        stockinfo.country = country
         stockinfo.name = name
         stockinfo.code = stock
         stockinfo.close = prev
+        stockinfo.prevpredict = prevpredict
         stockinfo.open = open_price
         stockinfo.predict = predict
         stockinfo.save()
