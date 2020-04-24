@@ -4,12 +4,13 @@ import StockList from '../StockList';
 import styled from 'styled-components';
 import StockProfits from '../StockProfits';
 import TagList from '../../../organisms/TagList';
+import RateCharts from '../RateCharts';
 
 const PortfolioItemSectionWrapper = styled.article``;
 
 function PortfolioItemSection({ portfolio }) {
   const { name, created_at, stocks, tags, profit } = portfolio;
-
+  console.log(portfolio);
   const STOCKS = useMemo(
     () => stocks.filter((stock) => stock.category === 'STOCK'),
     [stocks],
@@ -25,6 +26,7 @@ function PortfolioItemSection({ portfolio }) {
       <TagList tags={tags} />
       <PortfolioItemHeader name={name} created_at={created_at} />
       <StockProfits profit={profit} />
+      <RateCharts profit={profit} />
       <StockList stocks={STOCKS}>증권 STOCKS</StockList>
       <StockList stocks={DERIVATIVES}>파생상품 DERIVATIVES</StockList>
     </PortfolioItemSectionWrapper>
