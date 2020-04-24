@@ -5,10 +5,12 @@ from django.contrib.auth import get_user_model
 
 
 class StockInfo(models.Model):
+    country = models.CharField(max_length=20)
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=20)
     open = models.FloatField()
     close = models.FloatField()
+    prevpredict = models.FloatField(blank=True)
     predict = models.FloatField(blank=True)
 
     @property
@@ -17,7 +19,7 @@ class StockInfo(models.Model):
 
     @property
     def predictpoint(self):
-        if self.open < self.predict:
+        if self.prevpredict < self.predict:
             return 1
         else:
             return 0
