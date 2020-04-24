@@ -1,0 +1,1133 @@
+[
+{
+  "model": "predict.stockinfo",
+  "pk": 130,
+  "fields": {
+    "country": "south korea",
+    "name": "KB\uae08\uc735",
+    "code": "105560",
+    "open": 31100.0,
+    "close": 31300.0,
+    "prevpredict": 31526.5703125,
+    "predict": 31384.634765625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 131,
+  "fields": {
+    "country": "south korea",
+    "name": "LG",
+    "code": "003550",
+    "open": 62200.0,
+    "close": 63300.0,
+    "prevpredict": 61131.921875,
+    "predict": 61359.12890625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 132,
+  "fields": {
+    "country": "south korea",
+    "name": "LG\uc0dd\ud65c\uac74\uac15",
+    "code": "051900",
+    "open": 1424000.0,
+    "close": 1444000.0,
+    "prevpredict": 1345238.0,
+    "predict": 1361812.625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 133,
+  "fields": {
+    "country": "south korea",
+    "name": "LG\uc804\uc790",
+    "code": "066570",
+    "open": 52800.0,
+    "close": 53300.0,
+    "prevpredict": 51641.83984375,
+    "predict": 51727.73046875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 134,
+  "fields": {
+    "country": "south korea",
+    "name": "LG\ud654\ud559",
+    "code": "051910",
+    "open": 358000.0,
+    "close": 361000.0,
+    "prevpredict": 354338.53125,
+    "predict": 352005.25
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 135,
+  "fields": {
+    "country": "south korea",
+    "name": "NAVER",
+    "code": "035420",
+    "open": 189000.0,
+    "close": 190000.0,
+    "prevpredict": 177017.515625,
+    "predict": 180855.65625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 136,
+  "fields": {
+    "country": "south korea",
+    "name": "S-Oil",
+    "code": "010950",
+    "open": 72600.0,
+    "close": 71800.0,
+    "prevpredict": 68956.15625,
+    "predict": 69932.5390625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 137,
+  "fields": {
+    "country": "south korea",
+    "name": "SK",
+    "code": "034730",
+    "open": 180500.0,
+    "close": 182500.0,
+    "prevpredict": 179953.28125,
+    "predict": 177842.421875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 138,
+  "fields": {
+    "country": "south korea",
+    "name": "SK\uc774\ub178\ubca0\uc774\uc158",
+    "code": "096770",
+    "open": 100500.0,
+    "close": 99400.0,
+    "prevpredict": 98110.984375,
+    "predict": 98492.46875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 139,
+  "fields": {
+    "country": "south korea",
+    "name": "SK\ud154\ub808\ucf64",
+    "code": "017670",
+    "open": 211500.0,
+    "close": 215500.0,
+    "prevpredict": 207981.75,
+    "predict": 208489.125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 140,
+  "fields": {
+    "country": "south korea",
+    "name": "SK\ud558\uc774\ub2c9\uc2a4",
+    "code": "000660",
+    "open": 82000.0,
+    "close": 82600.0,
+    "prevpredict": 82779.5078125,
+    "predict": 82579.546875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 141,
+  "fields": {
+    "country": "south korea",
+    "name": "\uae30\uc544\uc790\ub3d9\ucc28",
+    "code": "000270",
+    "open": 28400.0,
+    "close": 28800.0,
+    "prevpredict": 28370.78515625,
+    "predict": 28123.4140625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 142,
+  "fields": {
+    "country": "south korea",
+    "name": "\ub137\ub9c8\ube14",
+    "code": "251270",
+    "open": 92400.0,
+    "close": 92700.0,
+    "prevpredict": 92267.75,
+    "predict": 92196.109375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 143,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc0bc\uc131SDI",
+    "code": "006400",
+    "open": 280000.0,
+    "close": 284500.0,
+    "prevpredict": 261011.234375,
+    "predict": 258329.609375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 144,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc0bc\uc131\ubb3c\uc0b0",
+    "code": "028260",
+    "open": 101000.0,
+    "close": 98700.0,
+    "prevpredict": 96430.0859375,
+    "predict": 98587.8125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 145,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc0bc\uc131\ubc14\uc774\uc624\ub85c\uc9c1\uc2a4",
+    "code": "207940",
+    "open": 598000.0,
+    "close": 601000.0,
+    "prevpredict": 588781.875,
+    "predict": 590974.625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 146,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc0bc\uc131\uc0dd\uba85",
+    "code": "032830",
+    "open": 47150.0,
+    "close": 47650.0,
+    "prevpredict": 46633.578125,
+    "predict": 46448.64453125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 147,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc0bc\uc131\uc5d0\uc2a4\ub514\uc5d0\uc2a4",
+    "code": "018260",
+    "open": 160500.0,
+    "close": 163000.0,
+    "prevpredict": 155384.828125,
+    "predict": 152427.71875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 148,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc0bc\uc131\uc804\uc790",
+    "code": "005930",
+    "open": 49650.0,
+    "close": 49850.0,
+    "prevpredict": 49768.8984375,
+    "predict": 49688.8828125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 149,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc0bc\uc131\ud654\uc7ac\ud574\uc0c1\ubcf4\ud5d8",
+    "code": "000810",
+    "open": 186000.0,
+    "close": 190000.0,
+    "prevpredict": 188341.609375,
+    "predict": 188825.296875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 150,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc140\ud2b8\ub9ac\uc628",
+    "code": "068270",
+    "open": 213500.0,
+    "close": 214000.0,
+    "prevpredict": 199714.3125,
+    "predict": 200760.46875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 151,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc2e0\ud55c\uc9c0\uc8fc",
+    "code": "055550",
+    "open": 27200.0,
+    "close": 27500.0,
+    "prevpredict": 27367.013671875,
+    "predict": 27236.21484375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 152,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc544\ubaa8\ub808\ud37c\uc2dc\ud53d",
+    "code": "090430",
+    "open": 175500.0,
+    "close": 176500.0,
+    "prevpredict": 171000.546875,
+    "predict": 171806.671875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 153,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc5d4\uc528\uc18c\ud504\ud2b8",
+    "code": "036570",
+    "open": 656000.0,
+    "close": 661000.0,
+    "prevpredict": 635665.4375,
+    "predict": 632865.9375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 154,
+  "fields": {
+    "country": "south korea",
+    "name": "\uce74\uce74\uc624",
+    "code": "035720",
+    "open": 184500.0,
+    "close": 185500.0,
+    "prevpredict": 179845.125,
+    "predict": 180301.96875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 155,
+  "fields": {
+    "country": "south korea",
+    "name": "\ucf00\uc774\ud2f0\uc564\uc9c0",
+    "code": "033780",
+    "open": 80300.0,
+    "close": 80200.0,
+    "prevpredict": 78487.9765625,
+    "predict": 78503.8359375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 156,
+  "fields": {
+    "country": "south korea",
+    "name": "\ud3ec\uc2a4\ucf54",
+    "code": "005490",
+    "open": 169500.0,
+    "close": 171500.0,
+    "prevpredict": 172141.90625,
+    "predict": 171884.53125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 157,
+  "fields": {
+    "country": "south korea",
+    "name": "\ud55c\uad6d\uc804\ub825\uacf5\uc0ac",
+    "code": "015760",
+    "open": 23200.0,
+    "close": 23200.0,
+    "prevpredict": 21992.197265625,
+    "predict": 22332.064453125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 158,
+  "fields": {
+    "country": "south korea",
+    "name": "\ud604\ub300\ubaa8\ube44\uc2a4",
+    "code": "012330",
+    "open": 175500.0,
+    "close": 177000.0,
+    "prevpredict": 170694.921875,
+    "predict": 169208.5625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 159,
+  "fields": {
+    "country": "south korea",
+    "name": "CJ ENM",
+    "code": "035760",
+    "open": 112700.0,
+    "close": 112700.0,
+    "prevpredict": 114488.4296875,
+    "predict": 113577.984375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 160,
+  "fields": {
+    "country": "south korea",
+    "name": "NICE\ud3c9\uac00\uc815\ubcf4",
+    "code": "030190",
+    "open": 17400.0,
+    "close": 16900.0,
+    "prevpredict": 15151.8125,
+    "predict": 15676.65625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 161,
+  "fields": {
+    "country": "south korea",
+    "name": "RFHIC",
+    "code": "218410",
+    "open": 39650.0,
+    "close": 41000.0,
+    "prevpredict": 41004.79296875,
+    "predict": 40559.23046875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 162,
+  "fields": {
+    "country": "south korea",
+    "name": "SKC\ucf54\uc624\ub871PI",
+    "code": "178920",
+    "open": 31350.0,
+    "close": 31750.0,
+    "prevpredict": 30524.6328125,
+    "predict": 30188.203125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 163,
+  "fields": {
+    "country": "south korea",
+    "name": "SK\uba38\ud2f0\ub9ac\uc5bc\uc988",
+    "code": "036490",
+    "open": 155200.0,
+    "close": 156700.0,
+    "prevpredict": 155601.71875,
+    "predict": 155050.828125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 164,
+  "fields": {
+    "country": "south korea",
+    "name": "\uace0\uc601",
+    "code": "098460",
+    "open": 79900.0,
+    "close": 80600.0,
+    "prevpredict": 84420.4140625,
+    "predict": 83441.8125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 165,
+  "fields": {
+    "country": "south korea",
+    "name": "\ub9ac\ub178\uacf5\uc5c5",
+    "code": "058470",
+    "open": 83000.0,
+    "close": 83600.0,
+    "prevpredict": 80101.7265625,
+    "predict": 81085.546875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 166,
+  "fields": {
+    "country": "south korea",
+    "name": "\uba54\uc9c0\uc628",
+    "code": "140410",
+    "open": 155000.0,
+    "close": 156000.0,
+    "prevpredict": 133963.296875,
+    "predict": 135869.796875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 167,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc140\ud2b8\ub9ac\uc628\uc81c\uc57d",
+    "code": "068760",
+    "open": 73200.0,
+    "close": 72600.0,
+    "prevpredict": 69761.609375,
+    "predict": 71252.15625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 168,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc140\ud2b8\ub9ac\uc628\ud5ec\uc2a4\ucf00\uc5b4",
+    "code": "091990",
+    "open": 83500.0,
+    "close": 84000.0,
+    "prevpredict": 70640.1953125,
+    "predict": 71372.0859375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 169,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc194\ube0c\ub808\uc778",
+    "code": "036830",
+    "open": 73800.0,
+    "close": 74600.0,
+    "prevpredict": 72326.484375,
+    "predict": 71860.5859375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 170,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc2a4\ud29c\ub514\uc624\ub4dc\ub798\uace4",
+    "code": "253450",
+    "open": 80000.0,
+    "close": 80900.0,
+    "prevpredict": 78032.421875,
+    "predict": 77070.3359375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 171,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc2e0\ub77c\uc820",
+    "code": "215600",
+    "open": 12750.0,
+    "close": 12550.0,
+    "prevpredict": 12705.177734375,
+    "predict": 12817.662109375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 172,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc528\uc820",
+    "code": "096530",
+    "open": 90500.0,
+    "close": 90100.0,
+    "prevpredict": 89316.2578125,
+    "predict": 89117.9140625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 173,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc54c\ud14c\uc624\uc820",
+    "code": "196170",
+    "open": 97000.0,
+    "close": 97900.0,
+    "prevpredict": 92390.171875,
+    "predict": 93831.9375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 174,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc5d0\uc2a4\uc5d0\ud504\uc5d0\uc774",
+    "code": "056190",
+    "open": 33150.0,
+    "close": 33450.0,
+    "prevpredict": 31999.37109375,
+    "predict": 32057.23046875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 175,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc5d0\uc774\uce58\uc5d8\ube44",
+    "code": "028300",
+    "open": 97000.0,
+    "close": 97400.0,
+    "prevpredict": 93407.1015625,
+    "predict": 93772.1875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 176,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc5d0\uc774\uce58\uc5d8\ube44\uc0dd\uba85\uacfc\ud559",
+    "code": "067630",
+    "open": 19450.0,
+    "close": 19750.0,
+    "prevpredict": 19296.330078125,
+    "predict": 19227.35546875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 177,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc5d0\ucf54\ud504\ub85c\ube44\uc5e0",
+    "code": "247540",
+    "open": 74000.0,
+    "close": 74500.0,
+    "prevpredict": 67123.90625,
+    "predict": 64729.296875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 178,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc6d0\uc775IPS",
+    "code": "240810",
+    "open": 28100.0,
+    "close": 28350.0,
+    "prevpredict": 27041.560546875,
+    "predict": 26535.427734375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 179,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc81c\ub125\uc2e0",
+    "code": "095700",
+    "open": 66300.0,
+    "close": 67100.0,
+    "prevpredict": 60617.94921875,
+    "predict": 61958.703125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 180,
+  "fields": {
+    "country": "south korea",
+    "name": "\uc82c\ubc31\uc2a4",
+    "code": "082270",
+    "open": 23000.0,
+    "close": 23400.0,
+    "prevpredict": 24908.9921875,
+    "predict": 24925.30078125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 181,
+  "fields": {
+    "country": "south korea",
+    "name": "\ucef4\ud22c\uc2a4",
+    "code": "078340",
+    "open": 104300.0,
+    "close": 105100.0,
+    "prevpredict": 101484.2578125,
+    "predict": 103484.0
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 182,
+  "fields": {
+    "country": "south korea",
+    "name": "\ucf00\uc774\uc5e0\ub354\ube14\uc720",
+    "code": "032500",
+    "open": 63000.0,
+    "close": 64100.0,
+    "prevpredict": 47570.35546875,
+    "predict": 47548.5234375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 183,
+  "fields": {
+    "country": "south korea",
+    "name": "\ucf54\ubbf8\ud31c",
+    "code": "041960",
+    "open": 20250.0,
+    "close": 20550.0,
+    "prevpredict": 19942.0,
+    "predict": 19987.43359375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 184,
+  "fields": {
+    "country": "south korea",
+    "name": "\ud30c\ub77c\ub2e4\uc774\uc2a4",
+    "code": "034230",
+    "open": 15500.0,
+    "close": 15700.0,
+    "prevpredict": 14584.2587890625,
+    "predict": 14438.1748046875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 185,
+  "fields": {
+    "country": "south korea",
+    "name": "\ud384\uc5b4\ube44\uc2a4",
+    "code": "263750",
+    "open": 203900.0,
+    "close": 205200.0,
+    "prevpredict": 203277.21875,
+    "predict": 203633.890625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 186,
+  "fields": {
+    "country": "south korea",
+    "name": "\ud5ec\ub9ad\uc2a4\ubbf8\uc2a4",
+    "code": "084990",
+    "open": 66500.0,
+    "close": 67800.0,
+    "prevpredict": 69780.1640625,
+    "predict": 68837.046875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 187,
+  "fields": {
+    "country": "south korea",
+    "name": "\ud734\uc824",
+    "code": "145020",
+    "open": 398000.0,
+    "close": 397000.0,
+    "prevpredict": 384114.125,
+    "predict": 395129.375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 188,
+  "fields": {
+    "country": "united states",
+    "name": "Microsoft",
+    "code": "MSFT",
+    "open": 174.11,
+    "close": 173.52,
+    "prevpredict": 167.93585205078125,
+    "predict": 167.98008728027344
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 189,
+  "fields": {
+    "country": "united states",
+    "name": "Apple",
+    "code": "AAPL",
+    "open": 275.87,
+    "close": 276.1,
+    "prevpredict": 274.278076171875,
+    "predict": 273.1324157714844
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 190,
+  "fields": {
+    "country": "united states",
+    "name": "Amazon.com",
+    "code": "AMZN",
+    "open": 2399.98,
+    "close": 2363.49,
+    "prevpredict": 2165.955078125,
+    "predict": 2178.739990234375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 191,
+  "fields": {
+    "country": "united states",
+    "name": "Alphabet",
+    "code": "GOOGL",
+    "open": 1265.74,
+    "close": 1258.41,
+    "prevpredict": 1231.5748291015625,
+    "predict": 1234.9595947265625
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 192,
+  "fields": {
+    "country": "united states",
+    "name": "Facebook",
+    "code": "FB",
+    "open": 184.08,
+    "close": 182.28,
+    "prevpredict": 175.48155212402344,
+    "predict": 176.73265075683594
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 193,
+  "fields": {
+    "country": "united states",
+    "name": "Intel",
+    "code": "INTC",
+    "open": 59.67,
+    "close": 60.1,
+    "prevpredict": 56.84565734863281,
+    "predict": 57.188377380371094
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 194,
+  "fields": {
+    "country": "united states",
+    "name": "PepsiCo",
+    "code": "PEP",
+    "open": 132.5,
+    "close": 132.62,
+    "prevpredict": 132.96434020996094,
+    "predict": 132.36083984375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 195,
+  "fields": {
+    "country": "united states",
+    "name": "Cisco Systems",
+    "code": "CSCO",
+    "open": 41.89,
+    "close": 41.76,
+    "prevpredict": 41.044586181640625,
+    "predict": 41.17631149291992
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 196,
+  "fields": {
+    "country": "united states",
+    "name": "Comcast",
+    "code": "CMCSA",
+    "open": 35.83,
+    "close": 35.73,
+    "prevpredict": 36.38408279418945,
+    "predict": 36.111209869384766
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 197,
+  "fields": {
+    "country": "united states",
+    "name": "NVIDIA",
+    "code": "NVDA",
+    "open": 287.84,
+    "close": 286.15,
+    "prevpredict": 249.52740478515625,
+    "predict": 249.6659393310547
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 198,
+  "fields": {
+    "country": "united states",
+    "name": "Adobe",
+    "code": "ADBE",
+    "open": 338.9,
+    "close": 336.77,
+    "prevpredict": 327.3683776855469,
+    "predict": 327.9967956542969
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 199,
+  "fields": {
+    "country": "united states",
+    "name": "Costco Wholesale",
+    "code": "COST",
+    "open": 307.03,
+    "close": 309.42,
+    "prevpredict": 310.2212219238281,
+    "predict": 308.84423828125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 200,
+  "fields": {
+    "country": "united states",
+    "name": "Amgen",
+    "code": "AMGN",
+    "open": 229.09,
+    "close": 229.29,
+    "prevpredict": 229.1715850830078,
+    "predict": 228.53953552246094
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 201,
+  "fields": {
+    "country": "united states",
+    "name": "PayPal",
+    "code": "PYPL",
+    "open": 115.94,
+    "close": 115.19,
+    "prevpredict": 107.26118469238281,
+    "predict": 108.33592987060547
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 202,
+  "fields": {
+    "country": "united states",
+    "name": "ASML",
+    "code": "ASML",
+    "open": 290.94,
+    "close": 294.97,
+    "prevpredict": 278.9295654296875,
+    "predict": 278.31610107421875
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 203,
+  "fields": {
+    "country": "united states",
+    "name": "Charter Communications",
+    "code": "CHTR",
+    "open": 498.5,
+    "close": 496.08,
+    "prevpredict": 477.8500061035156,
+    "predict": 477.4230651855469
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 204,
+  "fields": {
+    "country": "united states",
+    "name": "T-Mobile",
+    "code": "TMUS",
+    "open": 90.68,
+    "close": 90.16,
+    "prevpredict": 87.59254455566406,
+    "predict": 87.80081176757812
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 205,
+  "fields": {
+    "country": "united states",
+    "name": "Broadcom",
+    "code": "AVGO",
+    "open": 260.25,
+    "close": 259.97,
+    "prevpredict": 256.1266174316406,
+    "predict": 255.97552490234375
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 206,
+  "fields": {
+    "country": "united states",
+    "name": "Texas Instruments",
+    "code": "TXN",
+    "open": 111.74,
+    "close": 111.98,
+    "prevpredict": 109.25601959228516,
+    "predict": 109.57410430908203
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 207,
+  "fields": {
+    "country": "united states",
+    "name": "Tesla",
+    "code": "TSLA",
+    "open": 727.6,
+    "close": 732.11,
+    "prevpredict": 729.19677734375,
+    "predict": 753.62548828125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 208,
+  "fields": {
+    "country": "united states",
+    "name": "Gilead Sciences",
+    "code": "GILD",
+    "open": 82.17,
+    "close": 81.31,
+    "prevpredict": 79.93899536132812,
+    "predict": 79.4206771850586
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 209,
+  "fields": {
+    "country": "united states",
+    "name": "Starbucks",
+    "code": "SBUX",
+    "open": 77.33,
+    "close": 77.45,
+    "prevpredict": 71.61560821533203,
+    "predict": 71.78705596923828
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 210,
+  "fields": {
+    "country": "united states",
+    "name": "QUALCOMM",
+    "code": "QCOM",
+    "open": 75.0,
+    "close": 74.68,
+    "prevpredict": 73.3011245727539,
+    "predict": 73.69415283203125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 211,
+  "fields": {
+    "country": "united states",
+    "name": "Mondelez International",
+    "code": "MDLZ",
+    "open": 51.89,
+    "close": 52.22,
+    "prevpredict": 51.92851638793945,
+    "predict": 51.48148727416992
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 212,
+  "fields": {
+    "country": "united states",
+    "name": "Fiserv",
+    "code": "FISV",
+    "open": 94.95,
+    "close": 95.4,
+    "prevpredict": 92.72666931152344,
+    "predict": 92.55634307861328
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 213,
+  "fields": {
+    "country": "united states",
+    "name": "Vertex Pharmaceuticals",
+    "code": "VRTX",
+    "open": 270.03,
+    "close": 269.37,
+    "prevpredict": 257.195068359375,
+    "predict": 257.8556213378906
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 214,
+  "fields": {
+    "country": "united states",
+    "name": "Intuit",
+    "code": "INTU",
+    "open": 263.03,
+    "close": 263.85,
+    "prevpredict": 250.37738037109375,
+    "predict": 250.47390747070312
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 215,
+  "fields": {
+    "country": "united states",
+    "name": "JD.com",
+    "code": "JD",
+    "open": 45.0,
+    "close": 44.99,
+    "prevpredict": 44.4781608581543,
+    "predict": 44.85205078125
+  }
+},
+{
+  "model": "predict.stockinfo",
+  "pk": 216,
+  "fields": {
+    "country": "united states",
+    "name": "Intuitive Surgical",
+    "code": "ISRG",
+    "open": 515.12,
+    "close": 512.13,
+    "prevpredict": 491.43988037109375,
+    "predict": 492.4580993652344
+  }
+}
+]

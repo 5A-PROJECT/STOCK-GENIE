@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from . import invest
 from .models import StockInfo
 from .serializers import StockInfoSerializer
+from .collectstock import get_stock_data
 
 # Create your views here.
 
@@ -66,5 +67,25 @@ def stock_table(request):
         data = paginator.get_page(page)
         serializer = StockInfoSerializer(data, many=True)
         return Response(serializer.data)
+    else:
+        return HttpResponse(status=405)
+
+
+def test(request):
+    get_stock_data("nasdaq", "united states", "NASDAQ")
+    return HttpResponse(status=200)
+
+
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+@api_view(['GET'])
+def stock_detail(request):
+    if request.method == 'GET':
+        code = request.GET.get("code")
+        country = request.GET.get("country")
+        data = invest.get_stock_detail(code, country)
+        result = {}
+        result["base"] = data
+        return Response(result)
     else:
         return HttpResponse(status=405)

@@ -55,3 +55,9 @@ def get_currency_cross(currency_cross, from_date, to_date):
     result['data'] = data.to_dict('records')
     result = json.dumps(result)
     return result
+
+
+def get_stock_detail(stock, country):
+    data = investpy.stocks.get_stock_information(
+        stock=stock, country=country, as_json=True)
+    return data
