@@ -9,11 +9,18 @@ class StockInfo(models.Model):
     code = models.CharField(max_length=20)
     open = models.FloatField()
     close = models.FloatField()
-    predict = models.IntegerField()
+    predict = models.FloatField(blank=True)
 
     @property
     def rate(self):
         return round(((self.close - self.open)/self.open) * 100, 2)
+
+    @property
+    def predictpoint(self):
+        if self.open < self.predict:
+            return 1
+        else:
+            return 0
 
     def __str__(self):
         return self.name
