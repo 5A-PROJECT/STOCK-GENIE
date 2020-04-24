@@ -22,4 +22,5 @@ urlpatterns = [
     path('auth/', include('accounts.urls')),
     path('portfolio/', include('portfolio.urls')),
     path('predict/', include('predict.urls')),
+    path('stock/', include('stock.urls')),
 ]
