@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -15,6 +15,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const UpIcon = styled(ArrowDropUpIcon)`
   color: red;
@@ -71,11 +72,54 @@ const plusIcon = (
 
 function createData(name, code, currentprice, yesterdayprice, predict, move) {
   const rate = ((currentprice - yesterdayprice) / yesterdayprice) * 100;
-  return { name, code, currentprice, yesterdayprice, rate, predict, move };
+  const token = sessionStorage.getItem('access_token');
+  const info = [];
+  axios
+    .get(
+      'http://localhost:8000/predict/stocktable',
+      {
+        params: {
+          page: 1,
+        },
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      },
+      [],
+    )
+    .then((res) => {
+      // info = res.data;
+      // console.log(res.data);
+      res.data.forEach((stock) => {
+        info.push({
+          name: stock.name,
+          code: stock.code,
+          currentprice: stock.open,
+          rate: stock.rate,
+          predict: stock.predictpoint,
+          move: move,
+        });
+      });
+      info.push({
+        name,
+        code,
+        currentprice,
+        yesterdayprice,
+        rate,
+        predict,
+        move,
+      });
+      // console.log(info);
+    })
+    .catch((e) => {
+      console.log(e);
+    }, []);
+
+  return info;
 }
 
 // 테이블에 내용이 들어가는 부분
-const rows = [createData('삼성전자', '005930', 50100, 51400, '상승', plusIcon)];
+const rows = createData('삼성전자', '005930', 50100, 51400, '상승', plusIcon);
 
 const useStyles = makeStyles({
   root: {

@@ -14,8 +14,9 @@ const NameCode = styled.div`
 `;
 
 const ChartWarpper = styled.div`
-margin-top: 3rem
-display: center`;
+  display: center
+  margin-top: 3rem;
+  `;
 
 const DetailInfoWrapper = styled.div`
   margin-top: 2rem;
@@ -23,7 +24,7 @@ const DetailInfoWrapper = styled.div`
 
 function DetaillHeader() {
   const name = '삼성전자';
-  const code = '000065';
+  const code = '005930';
   const currentprice = 50400;
   const country = 'south korea';
   const url = 'stockdetail';
