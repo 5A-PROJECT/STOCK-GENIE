@@ -6,5 +6,5 @@ class StockInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = StockInfo
         fields = [
-            'id', 'name', 'code', 'open', 'close', 'rate', 'predict'
+            'id', 'name', 'code', 'open', 'close', 'rate', 'predictpoint'
         ]
