@@ -23,4 +23,5 @@ urlpatterns = [
     path('portfolio/', include('portfolio.urls')),
     path('predict/', include('predict.urls')),
     path('stock/', include('stock.urls')),
+    path('news/', include('news.urls')),
 ]
