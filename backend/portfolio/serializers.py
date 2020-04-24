@@ -45,6 +45,8 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
     profit = serializers.SerializerMethodField()
 
     def get_profit(self, obj):
+        share, other = 0, 0
+        usd, krw = 0, 0
         first, now = 0, 0
         for stock in obj.stocks.all():
             sg = 1
@@ -52,6 +54,14 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
                 sg = get_currency_cross_recent_data(
                     f'{stock.currency}/KRW'
                 ).iloc[-2, 3]
+                usd += 1
+            else:
+                krw += 1
+
+            if stock.category == 'stock':
+                share += 1
+            else:
+                other += 1
 
             first += stock.buy_price * stock.count * sg
             now += stock.current_price * stock.count * sg
@@ -64,7 +74,16 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
 
         data = {
             'totalBuyingPrice': first, 'totalCurrentPrice': now,
-            'totalProfit': diff, 'totalRatio': ratio
+            'totalProfit': diff, 'totalRatio': ratio,
+            'exchangeRate': sg,
+            'currencyRate': {
+                'USD': int(usd * 100 / (usd + krw)),
+                'KRW': int(krw * 100 / (usd + krw))
+            },
+            'categoryRate': {
+                'STOCK': int(share * 100 / (share + other)),
+                'DERIVATIVES': int(other * 100 / (share + other)),
+            }
         }
         return data
 
