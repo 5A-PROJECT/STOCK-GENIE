@@ -74,3 +74,16 @@ def stock_table(request):
 def test(request):
     get_stock_data("kospi", "south korea", "KOSPI")
     return HttpResponse(status=200)
+
+
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+@api_view(['GET'])
+def stock_detail(request):
+    if request.method == 'GET':
+        stock = request.GET.get("stock")
+        country = request.GET.get("country")
+        data = invest.get_stock_detail(stock, country)
+        return Response(data)
+    else:
+        return HttpResponse(status=405)
