@@ -11,6 +11,24 @@ import TableRow from '@material-ui/core/TableRow';
 import { IconButton } from '@material-ui/core';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import { Link } from 'react-router-dom';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import styled from 'styled-components';
+
+const UpIcon = styled(ArrowDropUpIcon)`
+  color: red;
+  font-size: ${(props) => props.size};
+`;
+
+const DownIcon = styled(ArrowDropDownIcon)`
+  color: blue;
+  font-size: ${(props) => props.size};
+`;
+const StableIcon = styled(ArrowRightIcon)`
+  color: grey;
+  font-size: ${(props) => props.size};
+`;
 
 const columns = [
   { id: 'name', label: '회사명', minWidth: 170 },

@@ -7,21 +7,25 @@ const chartList = [
     displayName: '금',
     name: 'Gold',
     url: 'commodities',
+    currency: 'USD',
   },
   {
     displayName: '유가',
     name: 'Brent Oil',
     url: 'commodities',
+    currency: 'KRW',
   },
   {
     displayName: '구리',
     name: 'Copper',
     url: 'commodities',
+    currency: 'KRW',
   },
   {
     displayName: '달러/원 환율',
     name: 'USD/KRW',
     url: 'currencycross',
+    currency: 'KRW',
   },
 ];
 
@@ -42,7 +46,7 @@ const ChartWrapper = styled.div`
 function HeadCharts() {
   return (
     <HeadChartsWrapper>
-      {chartList.map(({ url, name, displayName }, idx) => (
+      {chartList.map(({ url, name, displayName, currency }, idx) => (
         <ChartWrapper key={idx}>
           <Chart
             width="200"
@@ -50,6 +54,7 @@ function HeadCharts() {
             url={url}
             params={{ name }}
             displayName={displayName}
+            currency={currency}
           />
         </ChartWrapper>
       ))}

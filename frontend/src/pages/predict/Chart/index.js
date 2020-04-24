@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 
-function Chart({ width, height, url, params, displayName }) {
+function Chart({ width, height, url, params, displayName, currency }) {
   const [lineSeries, setLineSeries] = useState(null);
   const { totalPast, totalToday } = getTotalDays();
   const chartdiv = useRef(null);
@@ -49,7 +49,11 @@ function Chart({ width, height, url, params, displayName }) {
 
   return (
     <div>
-      {displayName && <h2>{displayName}</h2>}
+      {displayName && (
+        <h2>
+          {displayName}({currency})
+        </h2>
+      )}
       <div ref={chartdiv} />
     </div>
   );
