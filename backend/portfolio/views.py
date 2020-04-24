@@ -26,15 +26,28 @@ def portfolio(request):
         return HttpResponse(status=405)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PATCH', 'DELETE'])
 @permission_classes([IsAuthenticated, ])
 @authentication_classes([JSONWebTokenAuthentication, ])
 def portfolio_detail(request, pf_id):
     pf = get_object_or_404(Portfolio, id=pf_id)
     if pf.user != request.user:
         return HttpResponse(status=401)
-    serializer = PortfolioDetailSerializer(pf)
-    return JsonResponse(serializer.data)
+
+    if request.method == 'GET':
+        serializer = PortfolioDetailSerializer(pf)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PATCH':
+        name = request.data.get('name')
+        pf.name = name
+        pf.save()
+        return JsonResponse({'id': pf.id})
+    elif request.method == 'DELETE':
+        pf_id = pf.id
+        pf.delete()
+        return JsonResponse({'id': pf_id})
+
+    return HttpResponse(status=405)
 
 
 @api_view(['POST'])
