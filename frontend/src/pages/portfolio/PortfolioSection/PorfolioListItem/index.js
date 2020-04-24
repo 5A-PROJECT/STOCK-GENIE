@@ -30,7 +30,7 @@ const TagWrapper = styled.div`
 `;
 
 function PortfolioListItem(props) {
-  const { id, name, created_at, tags, profits } = props.portfolio;
+  const { id, name, created_at, tags, total_ratio } = props.portfolio;
   const { history } = props;
   const goToPortfolio = () => {
     history.push(`portfolio/${id}`);
@@ -45,22 +45,13 @@ function PortfolioListItem(props) {
       <ItemWrapper onClick={goToPortfolio}>
         <div>
           <h2 className="name">{name}</h2>
-          <TagList tags={tags} slice={true} />
+          {tags && <TagList tags={tags} slice={true} />}
         </div>
-        {/* TODO: 수익률 받아오는 방법 고민좀 하고, 수정해야함 */}
-        {profits && profits.length > 0 ? (
-          <>
-            <div>
-              <h4>총 수익률 </h4>
-              <ReturnRatio ratio={0} />
-            </div>
-            <div>
-              <h4>전일 대비 </h4>
-              <ReturnRatio ratio={0} />
-            </div>
-          </>
-        ) : (
-          <div>종목을 추가해주세요</div>
+        {total_ratio && (
+          <div>
+            <h4>총 수익률 </h4>
+            <ReturnRatio ratio={total_ratio.toFixed(2)} />
+          </div>
         )}
         <div className="date">{formatedCreatedAt}</div>
       </ItemWrapper>
