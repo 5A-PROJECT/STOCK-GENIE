@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     # CORS header
     'corsheaders',
+    # cron
+    'django_crontab',
+    # basic
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,3 +158,8 @@ JWT_AUTH = {
 
 # need for CORS
 CORS_ORIGIN_ALLOW_ALL = True
+
+# need for crontab
+CRONJOBS = [
+    ('*/2 * * * 1,2,3,4,5', 'portfolio.cron.add_profit'),
+]

@@ -21,3 +21,13 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profit(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    money = models.FloatField()
+    portfolio = models.ForeignKey(
+        Portfolio, on_delete=models.CASCADE, related_name='profits')
+
+    def __str__(self):
+        return (self.date, self.portfolio.name)
