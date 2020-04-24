@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from . import invest
 from .models import StockInfo
 from .serializers import StockInfoSerializer
+from .collectstock import get_stock_data
 
 # Create your views here.
 
@@ -68,3 +69,8 @@ def stock_table(request):
         return Response(serializer.data)
     else:
         return HttpResponse(status=405)
+
+
+def test(request):
+    get_stock_data("kospi", "south korea", "KOSPI")
+    return HttpResponse(status=200)
