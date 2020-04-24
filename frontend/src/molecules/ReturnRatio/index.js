@@ -39,7 +39,9 @@ function ReturnRatio({ ratio, fontSize = '1.5rem', iconSize = '1.5rem' }) {
       <StylesProvider injectFirst>
         {ratio > 0 && <UpIcon size={iconSize} title="up" />}
         {ratio < 0 && <DownIcon size={iconSize} title="down" />}
-        {parseInt(ratio) === 0 && <StableIcon size={iconSize} title="stable" />}
+        {parseFloat(ratio) === 0 && (
+          <StableIcon size={iconSize} title="stable" />
+        )}
       </StylesProvider>
       <Ratio fontSize={fontSize}>{ratio}%</Ratio>
     </ReturnRatioWrapper>
