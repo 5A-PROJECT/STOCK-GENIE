@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class AuthRepository {
-  URL = 'http://localhost:8000/auth';
+  URL = 'http://52.78.142.77:8000/auth';
 
   constructor(url) {
     this.URL = url || this.URL;

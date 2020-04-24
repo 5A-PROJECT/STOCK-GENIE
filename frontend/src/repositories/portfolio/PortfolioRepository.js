@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class PortfolioRepository {
-  URL = 'http://localhost:8000/portfolio';
+  URL = 'http://52.78.142.77:8000/portfolio';
   constructor(url) {
     this.URL = url || this.URL;
   }
