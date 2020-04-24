@@ -5,5 +5,6 @@ urlpatterns = [
     path('commodities/', views.commodities),
     path('indices/', views.indices),
     path('currencycross/', views.currency_cross),
-    path('stocktable/', views.stock_table)
+    path('stocktable/', views.stock_table),
+    path('test/', views.test)
 ]
