@@ -41,9 +41,8 @@ def portfolio_detail(request, pf_id):
         name = request.data.get('name')
         pf.name = name
         pf.save()
-        return JsonResponse({'id': pf.id})
+        return JsonResponse({'id': pf_id})
     elif request.method == 'DELETE':
-        pf_id = pf.id
         pf.delete()
         return JsonResponse({'id': pf_id})
 
