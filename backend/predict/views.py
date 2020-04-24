@@ -81,9 +81,11 @@ def test(request):
 @api_view(['GET'])
 def stock_detail(request):
     if request.method == 'GET':
-        stock = request.GET.get("stock")
+        code = request.GET.get("code")
         country = request.GET.get("country")
-        data = invest.get_stock_detail(stock, country)
-        return Response(data)
+        data = invest.get_stock_detail(code, country)
+        result = {}
+        result["base"] = data
+        return Response(result)
     else:
         return HttpResponse(status=405)
