@@ -1,7 +1,6 @@
 import pandas as pd
 import investpy
 from .models import StockInfo
-import tensorflow as tf
 from .dateutils import DateUtil
 import os
 import numpy as np
@@ -9,6 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 def prediction(stock, indices, df):
+    import tensorflow as tf
     print(df.columns)
     print(stock + "======================predict=========================")
     scaler = MinMaxScaler()
