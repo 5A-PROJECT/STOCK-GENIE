@@ -13,8 +13,8 @@ function DetailInfo({ code, country, url }) {
       .then((res) => {
         console.log(res);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
