@@ -22,7 +22,7 @@ class PortfolioSerializer(serializers.ModelSerializer):
                 sg = gccrd(f'{stock.currency}/KRW').iloc[-1, 3]
             first += stock.count * stock.buy_price * sg
             now += stock.count * stock.current_price * sg
-        return 0 if first + now == 0 else (now - first / first) * 100
+        return 0 if first == 0 else (now - first) * 100 / first
 
     class Meta:
         model = Portfolio
@@ -51,7 +51,7 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
             first += stock.buy_price * stock.count * sg
             now += stock.current_price * stock.count * sg
 
-        ratio = 0 if first == 0 else (now - first / first) * 100
+        ratio = 0 if first == 0 else (now - first) * 100 / first
         share_ratio = 0 if s + o == 0 else s * 100 / (s + o)
         other_ratio = 0 if s + o == 0 else o * 100 / (s + o)
         usd_ratio = 0 if usd + krw == 0 else usd * 100 / (usd + krw)
