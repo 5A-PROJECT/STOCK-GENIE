@@ -72,7 +72,7 @@ def stock_table(request):
 
 
 def test(request):
-    get_stock_data("kospi", "south korea", "KOSPI")
+    get_stock_data("nasdaq", "united states", "NASDAQ")
     return HttpResponse(status=200)
 
 
