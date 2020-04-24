@@ -16,7 +16,7 @@ function DetailInfo({ code, country, url }) {
       .catch((e) => {
         console.log(e);
       });
-  });
+  }, []);
 
   return <h1>hi</h1>;
 }
