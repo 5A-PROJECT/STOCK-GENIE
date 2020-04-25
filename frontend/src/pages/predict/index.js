@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
-import CompanyTable from '../predict/CompanyTable/index';
+import PaginationTable from './CompanyTable/index';
 import HeadCharts from './HeadCharts';
 import MainChart from './MainChart';
-import Table from '../predict/Table/index';
 
 const PredictPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -18,8 +17,7 @@ function PredictPage(props) {
       <PredictPageWrapper>
         <HeadCharts />
         <MainChart />
-        {/* <CompanyTable /> */}
-        <Table />
+        <PaginationTable />
       </PredictPageWrapper>
     </AccessProtection>
   );
