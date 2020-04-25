@@ -84,8 +84,12 @@ def stock_detail(request):
         code = request.GET.get("code")
         country = request.GET.get("country")
         data = invest.get_stock_detail(code, country)
+        stockinfo = get_object_or_404(StockInfo, code=code)
+        print(stockinfo)
+        serializer = StockInfoSerializer(stockinfo)
         result = {}
         result["base"] = data
+        result["predict"] = serializer.data
         return Response(result)
     else:
         return HttpResponse(status=405)
