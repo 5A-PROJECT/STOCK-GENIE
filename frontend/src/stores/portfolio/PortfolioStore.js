@@ -1,4 +1,4 @@
-import { decorate, observable, action } from 'mobx';
+import { decorate, observable, action, computed } from 'mobx';
 import PortfolioRepository from '../../repositories/portfolio/PortfolioRepository';
 
 export default class PortfolioStore {
@@ -17,6 +17,28 @@ export default class PortfolioStore {
     addStock: false,
   };
   selectedPortfolio = null;
+
+  /**
+   * computed
+   */
+  get stocks() {
+    if (this.selectedPortfolio) {
+      return this.selectedPortfolio.stocks.filter(
+        (stock) => stock.category === 'STOCK',
+      );
+    } else {
+      return null;
+    }
+  }
+  get derivatives() {
+    if (this.selectedPortfolio) {
+      return this.selectedPortfolio.stocks.filter(
+        (stock) => stock.category === 'DERIVATIVES',
+      );
+    } else {
+      return null;
+    }
+  }
 
   /**
    * 현재 선택된 포폴 정리
@@ -88,8 +110,10 @@ export default class PortfolioStore {
     return isPortfolioExist;
   };
 
-  addStock = async (portfolioId, stock, token) => {
+  addStock = async (stock) => {
     this.loading['addStock'] = true;
+    const { token } = this.root.authStore;
+    const { id: portfolioId } = this.selectedPortfolio;
     let isAdded = true;
     try {
       const res = await PortfolioRepository.createStock(
@@ -99,18 +123,37 @@ export default class PortfolioStore {
       );
       // 리턴받은 아이디 받아서 넣기
       const { id } = res.data;
-
       // 추가
       this.selectedPortfolio.stocks.push({
         id,
         ...stock,
       });
+
+      // TODO : 요청 다시 받으면 해당 정보로 profit 교체
+      const res2 = await PortfolioRepository.updateCalcFields(
+        portfolioId,
+        token,
+      );
+
+      console.log(res2);
     } catch (e) {
       isAdded = false;
       alert(e);
     }
     this.loading['addStock'] = false;
     return isAdded;
+  };
+
+  addTag = async (tag) => {
+    const { token } = this.root.authStore;
+    const { id: portfolioId } = this.selectedPortfolio;
+    try {
+      const res = await PortfolioRepository.createTag(portfolioId, tag, token);
+      const { id: tagId } = res.data;
+      this.selectedPortfolio.tags.push({ id: tagId, name: tag.name });
+    } catch (e) {
+      alert(e);
+    }
   };
 }
 
@@ -119,9 +162,12 @@ decorate(PortfolioStore, {
   count: observable,
   loading: observable,
   selectedPortfolio: observable,
+  stocks: computed,
+  derivatives: computed,
   create: action,
   clearSelectedPortfolio: action,
   getMyPortfolios: action,
   getPortfolioById: action,
   addStock: action,
+  addTag: action,
 });

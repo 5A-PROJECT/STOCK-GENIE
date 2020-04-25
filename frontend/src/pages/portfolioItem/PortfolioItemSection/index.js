@@ -5,32 +5,23 @@ import styled from 'styled-components';
 import StockProfits from '../StockProfits';
 import TagList from '../../../organisms/TagList';
 import RateCharts from '../RateCharts';
+import { observer, inject } from 'mobx-react';
 
 const PortfolioItemSectionWrapper = styled.article``;
 
-function PortfolioItemSection({ portfolio }) {
-  const { name, created_at, stocks, tags, profit } = portfolio;
-  console.log(portfolio);
-  const STOCKS = useMemo(
-    () => stocks.filter((stock) => stock.category === 'STOCK'),
-    [stocks],
-  );
-
-  const DERIVATIVES = useMemo(
-    () => stocks.filter((stock) => stock.category === 'DERIVATIVES'),
-    [stocks],
-  );
-
+function PortfolioItemSection({ portfolioStore }) {
+  const { stocks, derivatives } = portfolioStore;
+  const { name, created_at, tags, profit } = portfolioStore.selectedPortfolio;
   return (
     <PortfolioItemSectionWrapper>
-      <TagList tags={tags} />
+      <TagList tags={tags} add={true} />
       <PortfolioItemHeader name={name} created_at={created_at} />
       <StockProfits profit={profit} />
       <RateCharts profit={profit} />
-      <StockList stocks={STOCKS}>증권 STOCKS</StockList>
-      <StockList stocks={DERIVATIVES}>파생상품 DERIVATIVES</StockList>
+      <StockList stocks={stocks}>증권 STOCKS</StockList>
+      <StockList stocks={derivatives}>파생상품 DERIVATIVES</StockList>
     </PortfolioItemSectionWrapper>
   );
 }
 
-export default PortfolioItemSection;
+export default inject('portfolioStore')(observer(PortfolioItemSection));

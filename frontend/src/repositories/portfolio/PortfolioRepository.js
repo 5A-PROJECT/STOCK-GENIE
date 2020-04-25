@@ -59,6 +59,22 @@ class PortfolioRepository {
       },
     });
   }
+
+  createTag(portfolioId, tag, token) {
+    return axios.post(`${this.URL}/${portfolioId}/tag/`, tag, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
+
+  updateCalcFields(portfolioId, token) {
+    return axios.get(`${this.URL}/${portfolioId}/prices/`, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
 }
 
 export default new PortfolioRepository();
