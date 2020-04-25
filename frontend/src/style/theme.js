@@ -27,6 +27,10 @@ const theme = {
       count: MAIN_COLOR[800],
       code: colors.grey[600],
       currency: colors.grey[600],
+      currency_badge: {
+        krw: colors.amber[700],
+        usd: colors.green[600],
+      },
     },
   },
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MaterialButton from '../../../../atoms/Button/MaterialButton';
+import { inject, observer } from 'mobx-react';
 
 const DetailWrapper = styled.div`
   width: 100%;
@@ -26,25 +27,61 @@ const ButtonWrapper = styled.div`
   margin-top: 1rem;
 `;
 
-function DetailContent({ stock, totalBuyingPrice, totalCurrentPrice }) {
+function DetailContent({
+  stock,
+  totalBuyingPrice,
+  totalCurrentPrice,
+  portfolioStore,
+}) {
   const { buy_price, currency } = stock;
+  const { exchangeRate } = portfolioStore.selectedPortfolio.profit;
   return (
     <DetailWrapper>
       <PriceWrapper>
         <div>
           <div className="label">매수 평균가</div>
-          <span className="profit">{buy_price.toLocaleString()}</span>
-          <span className="currency">{currency}</span>
+          <div>
+            <span className="profit">{buy_price.toLocaleString()}</span>
+            <span className="currency">{currency}</span>
+          </div>
+          {currency === 'USD' && (
+            <div>
+              <span className="profit">
+                {Math.floor(buy_price * exchangeRate).toLocaleString()}
+              </span>
+              <span className="currency">KRW</span>
+            </div>
+          )}
         </div>
         <div>
           <div className="label">매수금액</div>
-          <span className="profit">{totalBuyingPrice.toLocaleString()}</span>
-          <span className="currency">{currency}</span>
+          <div>
+            <span className="profit">{totalBuyingPrice.toLocaleString()}</span>
+            <span className="currency">{currency}</span>
+          </div>
+          {currency === 'USD' && (
+            <div>
+              <span className="profit">
+                {Math.floor(totalBuyingPrice * exchangeRate).toLocaleString()}
+              </span>
+              <span className="currency">KRW</span>
+            </div>
+          )}
         </div>
         <div>
           <div className="label">평가금액</div>
-          <span className="profit">{totalCurrentPrice.toLocaleString()}</span>
-          <span className="currency">{currency}</span>
+          <div>
+            <span className="profit">{totalCurrentPrice.toLocaleString()}</span>
+            <span className="currency">{currency}</span>
+          </div>
+          {currency === 'USD' && (
+            <div>
+              <span className="profit">
+                {Math.floor(totalCurrentPrice * exchangeRate).toLocaleString()}
+              </span>
+              <span className="currency">KRW</span>
+            </div>
+          )}
         </div>
       </PriceWrapper>
       <ButtonWrapper>
@@ -55,4 +92,4 @@ function DetailContent({ stock, totalBuyingPrice, totalCurrentPrice }) {
   );
 }
 
-export default DetailContent;
+export default inject('portfolioStore')(observer(DetailContent));

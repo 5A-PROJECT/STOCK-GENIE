@@ -12,6 +12,7 @@ const PortfolioItemSectionWrapper = styled.article``;
 function PortfolioItemSection({ portfolioStore }) {
   const { stocks, derivatives } = portfolioStore;
   const { name, created_at, tags, profit } = portfolioStore.selectedPortfolio;
+
   return (
     <PortfolioItemSectionWrapper>
       <TagList tags={tags} add={true} />
