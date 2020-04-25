@@ -10,6 +10,7 @@ class StockInfo(models.Model):
     code = models.CharField(max_length=20)
     open = models.FloatField()
     close = models.FloatField()
+    index = models.CharField(max_length=20, blank=True)
     prevpredict = models.FloatField(blank=True)
     predict = models.FloatField(blank=True)
 
