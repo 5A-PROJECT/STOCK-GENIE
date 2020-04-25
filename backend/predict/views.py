@@ -67,6 +67,7 @@ def stock_table(request):
         # data = paginator.get_page(page)
         index = request.GET.get("index")
         filter_stocks = StockInfo.objects.filter(index=index)
+        print(len(filter_stocks))
         serializer = StockInfoSerializer(filter_stocks, many=True)
         return Response(serializer.data)
     else:
