@@ -5,6 +5,40 @@ from .dateutils import DateUtil
 import os
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+from .models import StockInfo
+
+
+def refresh_predict():
+    stocks = StockInfo.objects.all()
+    error = []
+    for stock_data in stocks:
+        stock = stock_data.code
+        indices = stock_data.index
+        country = stock_data.country
+        prevpredict = stock_data.predict
+        date = DateUtil(-40)
+        from_date = date.from_date
+        to_date = date.to_date
+        commodities_df = get_commodities(from_date, to_date)
+        try:
+            data = investpy.stocks.get_stock_information(
+                stock=stock, country=country, as_json=True)
+            stock_df = investpy.stocks.get_stock_historical_data(
+                stock, country, from_date, to_date)
+        except:
+            print("error : " + stock)
+            continue
+        stock_df["date"] = stock_df.index.map(lambda x: str(x).split(" ")[0])
+        testData = pd.merge(stock_df, commodities_df, on="date")[-28:]
+        testData = testData.drop(['Currency', 'date'], axis=1)
+        predict = prediction(stock, indices, testData)
+        prev = data["Prev. Close"]
+        open_price = data["Open"]
+        stock_data.close = prev
+        stock_data.prevpredict = prevpredict
+        stock_data.open = open_price
+        stock_data.predict = predict
+        stock_data.save()
 
 
 def prediction(stock, indices, df):
