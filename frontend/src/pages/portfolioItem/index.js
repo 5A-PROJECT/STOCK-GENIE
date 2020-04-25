@@ -30,13 +30,15 @@ function PortfolioItemPage({ match, history, portfolioStore }) {
   }, [id, history, portfolioStore, clearSelectedPortfolio]);
 
   return (
-    <PortfolioItemPageWrapper>
+    <>
       {!loading['getPortfolioById'] && selectedPortfolio ? (
-        <PortfolioItemSection portfolio={selectedPortfolio} />
+        <PortfolioItemPageWrapper>
+          <PortfolioItemSection portfolio={selectedPortfolio} />
+        </PortfolioItemPageWrapper>
       ) : (
         <Spinner />
       )}
-    </PortfolioItemPageWrapper>
+    </>
   );
 }
 

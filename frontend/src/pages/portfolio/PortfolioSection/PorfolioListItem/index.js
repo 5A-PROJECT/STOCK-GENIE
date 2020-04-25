@@ -3,30 +3,49 @@ import PortfolioCard from '../PortfolioCard';
 import styled from 'styled-components';
 import { colors } from '@material-ui/core';
 import ReturnRatio from '../../../../molecules/ReturnRatio';
-import MaterialChip from '../../../../atoms/Chip/MaterialChip';
 import { withRouter } from 'react-router-dom';
 import { useMemo } from 'react';
 import TagList from '../../../../organisms/TagList';
+import DescriptionIcon from '@material-ui/icons/Description';
 
-const ItemWrapper = styled.div`
-  padding: 1rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  h2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .date {
-    align-self: flex-end;
-    color: ${colors.grey[400]};
-    font-size: 0.7rem;
-  }
+const DocumentIcon = styled(DescriptionIcon)`
+  color: ${colors.cyan[800]};
+  font-size: 2rem;
+  margin-right: 1rem;
 `;
 
-const TagWrapper = styled.div`
-  display: flex;
+const ItemWrapper = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  .info-containter {
+    display: flex;
+    align-items: center;
+
+    .info {
+      .name-tags {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .name {
+          font-size: 2rem;
+          margin-right: 0.5rem;
+        }
+
+        .date {
+          margin-top: 0.3rem;
+          color: ${colors.grey[400]};
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+
+  .profit-containter {
+    justify-self: flex-end;
+    align-self: center;
+  }
 `;
 
 function PortfolioListItem(props) {
@@ -43,17 +62,25 @@ function PortfolioListItem(props) {
   return (
     <PortfolioCard>
       <ItemWrapper onClick={goToPortfolio}>
-        <div>
-          <h2 className="name">{name}</h2>
-          {tags && <TagList tags={tags} slice={true} />}
-        </div>
-        {total_ratio && (
-          <div>
-            <h4>총 수익률 </h4>
-            <ReturnRatio ratio={total_ratio.toFixed(2)} />
+        <div className="info-containter">
+          <DocumentIcon />
+          <div className="info">
+            <div className="name-tags">
+              <span className="name">{name}</span>
+              {tags && <TagList tags={tags} slice={true} />}
+            </div>
+            <div className="date">생성일 : {formatedCreatedAt}</div>
           </div>
-        )}
-        <div className="date">{formatedCreatedAt}</div>
+        </div>
+        <div className="profit-containter">
+          {total_ratio !== undefined && (
+            <ReturnRatio
+              ratio={total_ratio.toFixed(2)}
+              iconSize="2rem"
+              fontSize="2rem"
+            />
+          )}
+        </div>
       </ItemWrapper>
     </PortfolioCard>
   );

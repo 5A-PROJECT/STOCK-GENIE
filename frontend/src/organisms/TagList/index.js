@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import MaterialChip from '../../atoms/Chip/MaterialChip';
 
-const TagListWrapper = styled.div`
+const TagListWrapper = styled.span`
   display: flex;
 `;
 
