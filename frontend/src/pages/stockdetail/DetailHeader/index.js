@@ -22,20 +22,15 @@ const DetailInfoWrapper = styled.div`
   margin-top: 2rem;
 `;
 
-function DetaillHeader() {
-  const name = '삼성전자';
-  const code = '005930';
-  const currentprice = 50400;
-  const country = 'south korea';
-  const url = 'stockdetail';
+function DetaillHeader({ info }) {
   return (
     <DetailHeaderWrapper>
       <CompanyBasicWrapper>
         <NameCode>
-          <h1>{name}</h1>
-          <h3>({code})</h3>
+          <h1>{info.state.name}</h1>
+          <h3>({info.state.code})</h3>
         </NameCode>
-        <h1>{currentprice}</h1>
+        <h1>{info.state.currentprice}</h1>
       </CompanyBasicWrapper>
       <hr></hr>
       <ChartWarpper>
@@ -44,13 +39,17 @@ function DetaillHeader() {
           height="300"
           url="indices"
           params={{
-            country: 'south korea',
-            name: 'KOSPI',
+            country: info.state.country,
+            name: info.state.index,
           }}
         />
       </ChartWarpper>
       <DetailInfoWrapper>
-        <DetailInfo code={code} country={country} url={url} />
+        <DetailInfo
+          code={info.state.code}
+          country={info.state.country}
+          url={info.pathname}
+        />
       </DetailInfoWrapper>
     </DetailHeaderWrapper>
   );
