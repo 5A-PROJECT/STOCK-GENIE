@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Chart from '../../predict/Chart/index';
 import DetailInfo from '../DetailInfo/index';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+
 const DetailHeaderWrapper = styled.div``;
 
 const CompanyBasicWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const NameCode = styled.div`
@@ -30,12 +34,20 @@ function DetaillHeader({ info }) {
           <h1>{info.state.name}</h1>
           <h3>({info.state.code})</h3>
         </NameCode>
-        <h1>{info.state.currentprice}</h1>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<CreateNewFolderIcon />}
+        >
+          포트폴리오에 추가하기
+        </Button>
       </CompanyBasicWrapper>
+      <h3>금일 시가 : {info.state.currentprice}</h3>
       <hr></hr>
+
       <ChartWarpper>
         <Chart
-          width="800"
+          width="1000"
           height="300"
           url="indices"
           params={{
