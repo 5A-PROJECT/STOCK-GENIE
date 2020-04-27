@@ -22,7 +22,9 @@ export default class AuthStore {
     this.root = root;
 
     if (this.token) {
-      this.check(this.token);
+      // TODO : 나중에수정하셈
+      // this.check(this.token);
+      this.isLoggedIn = true;
     }
 
     reaction(
