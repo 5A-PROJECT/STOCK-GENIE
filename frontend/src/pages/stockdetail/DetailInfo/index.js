@@ -3,11 +3,15 @@ import axios from 'axios';
 
 function DetailInfo({ code, country, url }) {
   useEffect(() => {
+    const token = sessionStorage.getItem('access_token');
     axios
       .get(`http://localhost:8000/predict/${url}/`, {
         params: {
           code: code,
           country: country,
+        },
+        headers: {
+          Authorization: `JWT ${token}`,
         },
       })
       .then((res) => {

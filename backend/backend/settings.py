@@ -27,7 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '52.78.142.77', '127.0.0.1']
 
 
 # Application definition
@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     # CORS header
     'corsheaders',
+    # cron
+    'django_crontab',
+    # basic
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,3 +158,8 @@ JWT_AUTH = {
 
 # need for CORS
 CORS_ORIGIN_ALLOW_ALL = True
+
+# need for crontab
+CRONJOBS = [
+    ('*/2 * * * 1,2,3,4,5', 'portfolio.cron.add_profit'),
+]
