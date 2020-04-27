@@ -11,16 +11,17 @@ from .models import StockInfo
 def refresh_predict():
     stocks = StockInfo.objects.all()
     error = []
+    date = DateUtil(-40)
+    from_date = date.from_date
+    to_date = date.to_date
+    commodities_df = get_commodities(from_date, to_date)
     for stock_data in stocks:
         print(stock_data.name)
         stock = stock_data.code
         indices = stock_data.index
         country = stock_data.country
         prevpredict = stock_data.predict
-        date = DateUtil(-40)
-        from_date = date.from_date
-        to_date = date.to_date
-        commodities_df = get_commodities(from_date, to_date)
+
         try:
             data = investpy.stocks.get_stock_information(
                 stock=stock, country=country, as_json=True)
