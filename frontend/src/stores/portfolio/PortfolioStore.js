@@ -130,12 +130,14 @@ export default class PortfolioStore {
       });
 
       // TODO : 요청 다시 받으면 해당 정보로 profit 교체
-      const res2 = await PortfolioRepository.updateCalcFields(
+      const calcRes = await PortfolioRepository.updateCalcFields(
         portfolioId,
         token,
       );
 
-      console.log(res2);
+      const { data } = calcRes;
+
+      this.selectedPortfolio.profit = data;
     } catch (e) {
       isAdded = false;
       console.log(e);
