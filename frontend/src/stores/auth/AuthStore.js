@@ -22,9 +22,7 @@ export default class AuthStore {
     this.root = root;
 
     if (this.token) {
-      // const res = this.check(this.token)
-      this.isLoggedIn = true;
-      console.log('로그인되어있음');
+      this.check();
     }
 
     reaction(
@@ -50,6 +48,7 @@ export default class AuthStore {
       const res = await AuthRepository.login(authForm);
       const { token, id } = res.data;
       sessionStorage.setItem('access_token', token);
+      this.token = token;
       this.isLoggedIn = true;
       this.loggedInUser = {
         id,
