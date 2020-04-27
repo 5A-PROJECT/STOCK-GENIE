@@ -166,14 +166,7 @@ CRONJOBS = [
     ('0 9 * * 1,2,3,4,5', 'predict.collectstock.refresh_predict',
      '>> /home/ubuntu/s02p23c101/backend/refresh_predict.log')
 ]
-def get_parent_path():
-    os.getcwd()
-    os.chdir('..')
-    result = os.getcwd()
-    os.chdir('backend')
-    return result
-
     
-STATICFILES_DIRS = [
-    os.path.join(get_parent_path(), 'frontend', 'build', 'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'frontend', 'build', 'static')
+# ]
