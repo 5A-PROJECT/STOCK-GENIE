@@ -56,49 +56,60 @@ def evaluate(request):
             'description'
         ).replace('<b>', '').replace('</b>', ''))
 
-    from konlpy.tag import Okt
-
-    tokenizer = Okt()
-
-    words = {}
-    if 'words.pkl' in os.listdir('.\\news\\models\\'):
-        pass
-
-    for title in row_X:
-        title = re.sub(
-            r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…]', '', title)
-        title = re.sub(r'[ ]+', '', title)
-        tokens = tokenizer.morphs(title)
-        for token in tokens:
-            words[token] = 1 if token not in words else words[token] + 1
-
-    word_to_idx = {}
-    for key, val in sorted(words.items(), key=lambda x: -x[1]):
-        word_to_idx[key] = len(word_to_idx) + 1
-        if len(word_to_idx) >= 5000:
-            break
-
-    X = []
-    for title in row_X:
-        title = re.sub(
-            r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…]', '', title)
-        title = re.sub(r'[ ]+', '', title)
-        tokens = tokenizer.morphs(title)
-        raw = []
-        for token in tokens:
-            num = word_to_idx[token] if token in word_to_idx else 0
-            raw.append(num)
-        if len(raw) < 30:
-            raw += [0] * (30 - len(raw))
-        X.append(raw)
-    X = np.array(X)
-
     from tensorflow.keras.models import load_model
 
     if lang == 'ko':
+        from konlpy.tag import Okt
+
+        tokenizer = Okt()
+
+        words = {}
+        if 'words.pkl' in os.listdir('.\\news\\models\\'):
+            pass
+
+        for title in row_X:
+            title = re.sub(
+                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…]', '', title)
+            title = re.sub(r'[ ]+', '', title)
+            tokens = tokenizer.morphs(title)
+            for token in tokens:
+                words[token] = 1 if token not in words else words[token] + 1
+
+        word_to_idx = {}
+        for key, val in sorted(words.items(), key=lambda x: -x[1]):
+            word_to_idx[key] = len(word_to_idx) + 1
+            if len(word_to_idx) >= 5000:
+                break
+
+        X = []
+        for title in row_X:
+            title = re.sub(
+                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…]', '', title)
+            title = re.sub(r'[ ]+', '', title)
+            tokens = tokenizer.morphs(title)
+            raw = []
+            for token in tokens:
+                num = word_to_idx[token] if token in word_to_idx else 0
+                raw.append(num)
+            if len(raw) < 30:
+                raw += [0] * (30 - len(raw))
+            X.append(raw)
+        X = np.array(X)
+
         model = load_model('.\\news\\models\\best_model_ko.h5')
+        words = word_to_idx
     else:
+        from tensorflow.keras.preprocessing.sequence import pad_sequences
+        from tensorflow.keras.preprocessing.text import Tokenizer
+
+        tokenizer = Tokenizer(num_words=5000, oov_token='<unk>')
+        tokenizer.fit_on_texts(row_X)
+
+        X = tokenizer.texts_to_sequences(row_X)
+        X = pad_sequences(X, maxlen=50, padding='post')
+
         model = load_model('.\\news\\models\\best_model_us.h5')
+        words = tokenizer.word_index
 
     predicts = model.predict(X)
     y = []
@@ -109,5 +120,7 @@ def evaluate(request):
     return JsonResponse({
         'news': row_X, 'links': links,
         'descriptions': descriptions,
-        'results': y
+        'results': y, 'words': words,
+        'good': int(y.count(1) * 100 / len(y)),
+        'bad': int(y.count(0) * 100 / len(y))
     })
