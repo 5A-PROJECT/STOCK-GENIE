@@ -6,6 +6,7 @@ const CustomChip = styled(Chip)`
   border-radius: 7px;
   & + & {
     margin-left: 0.3rem;
+    margin-bottom: 0.3rem;
   }
 `;
 

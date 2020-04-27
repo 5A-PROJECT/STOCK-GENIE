@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 
 const TagListWrapper = styled.span`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 function TagList({ tags, slice = false, add = false }) {

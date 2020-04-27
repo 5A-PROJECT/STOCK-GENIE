@@ -10,7 +10,9 @@ const CardLoadingWrapper = styled.div`
   align-items: center;
 `;
 
-const CustomSpinner = styled(CircularProgress)``;
+const CustomSpinner = styled(CircularProgress)`
+  color: ${({ theme }) => theme.color.loading.spinner};
+`;
 
 function Spinner(props) {
   return (

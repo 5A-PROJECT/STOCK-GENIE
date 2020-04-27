@@ -2,18 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { inject } from 'mobx-react';
-import { colors } from '@material-ui/core';
 
 const StyledButton = styled.button`
   border: none;
-  background-color: ${colors.indigo[200]};
+  background-color: ${({ theme }) => theme.color.tag.input[200]};
   border-radius: 5px;
   margin-left: 0.5rem;
+  margin-bottom: 0.3rem;
   color: white;
   font-weight: bold;
   cursor: pointer;
   :hover {
-    background-color: ${colors.indigo[300]};
+    background-color: ${({ theme }) => theme.color.tag.input[300]};
     transition-duration: 0.5s;
   }
 `;

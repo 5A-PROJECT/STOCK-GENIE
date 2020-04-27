@@ -22,7 +22,6 @@ function AppBarContainer(props) {
   const { authStore } = props;
   const { isLoggedIn } = props.authStore;
   useEffect(() => {
-    console.log('AppBar render');
     const token = sessionStorage.getItem('access_token');
     if (!authStore.isLoggedin && token) {
       console.log('토큰 유효 확인 요청');
