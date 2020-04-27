@@ -5,16 +5,23 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import HideOnScroll from './HideOnScroll';
 import AppBarTemplate from './AppBarTemplate';
+import styled from 'styled-components';
+
+const StyledWrapper = styled.div`
+  .MuiToolbar-regular {
+    min-height: 48px;
+  }
+`;
 
 function ScrollWrapper(props) {
   return (
-    <>
+    <StyledWrapper>
       <CssBaseline />
       <HideOnScroll {...props}>
         <AppBar>{props.children}</AppBar>
       </HideOnScroll>
       <Toolbar />
-    </>
+    </StyledWrapper>
   );
 }
 

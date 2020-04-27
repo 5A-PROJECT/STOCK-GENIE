@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoutButton from '../../molecules/LogoutButton';
-import { colors } from '@material-ui/core';
 
 const AppBarWrapper = styled.nav`
   padding: 0 1rem;
   display: flex;
   justify-content: space-between;
-  background-color: ${colors.teal['A700']};
+  background-color: ${({ theme }) => theme.color.main.appbar};
   align-items: center;
   ul {
     padding: 0;

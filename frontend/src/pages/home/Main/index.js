@@ -1,15 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import SearchInput from './SearchInput';
 
 const MainPageWrapper = styled.div`
-  max-width: ${({ theme }) => theme.width.page};
-  margin: 0 auto;
+  height: 100%;
+  background-image: url(${`${process.env.PUBLIC_URL}/main_background.jpg`});
+  background-position: center;
+  background-size: cover;
+`;
+
+const Contents = styled.div`
+  padding: 2rem;
 `;
 
 function MainPage() {
   return (
     <MainPageWrapper>
-      <section>메인페이지</section>
+      <Contents>
+        <div>5A</div>
+        <SearchInput />
+      </Contents>
     </MainPageWrapper>
   );
 }

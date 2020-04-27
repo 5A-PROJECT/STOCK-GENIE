@@ -7,7 +7,7 @@ import { observer, inject } from 'mobx-react';
 
 const PortFolioPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
-  padding: 0 1rem;
+  padding: 1rem;
   margin: 0 auto;
 `;
 
