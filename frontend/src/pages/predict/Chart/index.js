@@ -2,6 +2,7 @@ import { createChart } from 'lightweight-charts';
 import React, { useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import { BASE_URL } from '../../../constants';
 
 function Chart({ width, height, url, params, displayName, currency }) {
   const [lineSeries, setLineSeries] = useState(null);
@@ -26,7 +27,7 @@ function Chart({ width, height, url, params, displayName, currency }) {
     if (lineSeries && params.name) {
       const token = sessionStorage.getItem('access_token');
       axios
-        .get(`http://localhost:8000/predict/${url}/`, {
+        .get(`${BASE_URL}/predict/${url}/`, {
           params: {
             ...params,
             from_date: totalPast,

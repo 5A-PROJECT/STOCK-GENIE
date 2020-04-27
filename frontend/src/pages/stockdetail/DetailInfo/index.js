@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { BASE_URL } from '../../../constants';
 
 const DetailInfoWrapper = styled.div``;
 
@@ -23,7 +24,7 @@ function DetailInfo({ code, country, url }) {
   const token = sessionStorage.getItem('access_token');
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/predict${url}/`, {
+      .get(`${BASE_URL}/predict${url}/`, {
         params: {
           code: code,
           country: country,

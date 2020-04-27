@@ -16,6 +16,7 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { BASE_URL } from '../../../constants';
 
 // 예측에서 보여주는 화살표
 const UpIcon = styled(ArrowDropUpIcon)`
@@ -60,7 +61,7 @@ export default function PaginationTable({ params }) {
       // console.log('////');
       // console.log(props.params.index);
       const result = await axios
-        .get('http://localhost:8000/predict/stocktable', {
+        .get(`${BASE_URL}/predict/stocktable`, {
           params: {
             index: params.index.toUpperCase(),
           },
