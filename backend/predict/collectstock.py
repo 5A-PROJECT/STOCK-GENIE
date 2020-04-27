@@ -12,6 +12,7 @@ def refresh_predict():
     stocks = StockInfo.objects.all()
     error = []
     for stock_data in stocks:
+        print(stock_data.name)
         stock = stock_data.code
         indices = stock_data.index
         country = stock_data.country
