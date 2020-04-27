@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReactWordCloud from 'react-wordcloud';
 import words from './words';
 import axios from 'axios';
+import { inject, observer } from 'mobx-react';
+import { BASE_URL } from '../../../constants';
 
 const options = {
   enableTooltip: true,
@@ -17,7 +19,9 @@ const options = {
   transitionDuration: 1000,
 };
 
-function Wordcloud(props) {
+function Wordcloud(newsStore) {
+  // const { words } = newsStore[words];
+
   return (
     <div>
       <ReactWordCloud options={options} words={words} />
@@ -25,4 +29,4 @@ function Wordcloud(props) {
   );
 }
 
-export default Wordcloud;
+export default inject('newsStore')(observer(Wordcloud));

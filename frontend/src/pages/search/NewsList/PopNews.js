@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Pagination from '../Utils/Pagination';
 import ShowAllNews from './ShowAllNews';
 import axios from 'axios';
+import { BASE_URL } from '../../../constants';
 
 const NewsWrapper = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const PageWrapper = styled.ul`
 function PopNewsList(props) {
   const [popnews, setPopNews] = useState([]);
   useEffect(() => {
-    const url = 'http://localhost:8000/news';
+    const url = `${BASE_URL}/news/`;
     const token = sessionStorage.getItem('access_token');
     axios
       .get(url, {

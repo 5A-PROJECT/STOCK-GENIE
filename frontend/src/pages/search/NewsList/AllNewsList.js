@@ -5,6 +5,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Pagination from '../Utils/Pagination';
 import axios from 'axios';
 import ShowAllNews from './ShowAllNews';
+import { BASE_URL } from '../../../constants';
 
 const TitleWrapper = styled.div`
   margin-left: 20%;
@@ -28,7 +29,7 @@ const PageList = styled.ul`
 function AllNewsList() {
   const [news, setNews] = useState([]);
   useEffect(() => {
-    const serverUrl = 'http://localhost:8000/news';
+    const serverUrl = `${BASE_URL}/news/`;
     const token = sessionStorage.getItem('access_token');
     axios
       .get(serverUrl, {
