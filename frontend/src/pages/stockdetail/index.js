@@ -7,10 +7,10 @@ const StockDetailWrapper = styled.div`
   margin: 2rem auto;
   padding: 0 1rem;
 `;
-function detail() {
+function detail({ location }) {
   return (
     <StockDetailWrapper>
-      <DetailHeader />
+      <DetailHeader info={location} />
     </StockDetailWrapper>
   );
 }
