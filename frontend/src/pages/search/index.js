@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
 import WordCloud from './WordCloud';
-import { TextField, Grid } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import PieGraph from './Graph/PieGraph';
 import PopNewsList from './NewsList/PopNews';
 import AllNewsList from './NewsList/AllNewsList';
+import { inject, observer } from 'mobx-react';
+import { useEffect } from 'react';
+import Spinner from '../../atoms/Spinner';
 
 const SearchPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -20,19 +21,35 @@ const ContainWrapper = styled.div`
   grid-template-rows: auto;
 `;
 
-function SearchPage(props) {
+function SearchPage({ newsStore }) {
+  const { loading, newsData, formatedNewsData } = newsStore;
+  useEffect(() => {
+    newsStore.getNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log(loading['getNews']);
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
-      <SearchPageWrapper>
-        <ContainWrapper>
-          <WordCloud />
-          <PopNewsList />
-          <AllNewsList />
-          <PieGraph />
-        </ContainWrapper>
-      </SearchPageWrapper>
+      {loading['getNews'] ? (
+        <Spinner />
+      ) : (
+        <>
+          {newsData ? (
+            <SearchPageWrapper>
+              <ContainWrapper>
+                <WordCloud words={newsData.words} />
+                <PopNewsList news={formatedNewsData} />
+                <AllNewsList news={formatedNewsData} />
+                <PieGraph />
+              </ContainWrapper>
+            </SearchPageWrapper>
+          ) : (
+            <div>뉴스 데이터 없음</div>
+          )}
+        </>
+      )}
     </AccessProtection>
   );
 }
 
-export default SearchPage;
+export default inject('newsStore')(observer(SearchPage));

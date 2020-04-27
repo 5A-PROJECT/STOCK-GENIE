@@ -26,40 +26,11 @@ const PageList = styled.ul`
   display: flex;
 `;
 
-function AllNewsList() {
-  const [news, setNews] = useState([]);
-  useEffect(() => {
-    const serverUrl = `${BASE_URL}/news/`;
-    const token = sessionStorage.getItem('access_token');
-    axios
-      .get(serverUrl, {
-        params: {
-          query: '삼성',
-        },
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      })
-      .then((res) => {
-        let news_data = [];
-        for (let i = 0; i < res.data.news.length; i++) {
-          news_data.push({
-            news: res.data.news[i],
-            links: res.data.links[i],
-            results: res.data.results[i],
-          });
-        }
-        setNews(news_data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  const recentButton = () => {};
+function AllNewsList({ news }) {
   // const recentButton = () => {};
-  const goodNewsButton = () => {};
-  const badNewsButton = () => {};
+  // const recentButton = () => {};
+  // const goodNewsButton = () => {};
+  // const badNewsButton = () => {};
   return (
     <>
       <div>

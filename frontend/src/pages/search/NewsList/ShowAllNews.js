@@ -15,11 +15,11 @@ const ItemWrapper = styled.a`
 `;
 
 function ShowNewsList(props) {
-  const { news, links } = props.news;
+  const { news, link } = props.news;
   console.log('show');
   // console.log(props);
   const openNewTab = () => {
-    window.open(links);
+    window.open(link);
   };
 
   return (
