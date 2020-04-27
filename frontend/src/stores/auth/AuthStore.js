@@ -22,7 +22,7 @@ export default class AuthStore {
     this.root = root;
 
     if (this.token) {
-      this.check();
+      this.check(this.token);
     }
 
     reaction(
@@ -66,7 +66,7 @@ export default class AuthStore {
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
       const res = await AuthRepository.register(authForm);
-      const { token, id } = res.data;
+      const { token } = res.data;
       sessionStorage.setItem('access_token', token);
       this.isLoggedIn = true;
     } catch (e) {
@@ -88,6 +88,7 @@ export default class AuthStore {
       };
     } catch (e) {
       console.log(e);
+      this.logout();
     }
     this.loading = false;
   };

@@ -59,7 +59,7 @@ export default class PortfolioStore {
       this.portfolios = data;
       this.count = count;
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
     this.loading['getMyPortfolios'] = false;
   };
@@ -80,7 +80,7 @@ export default class PortfolioStore {
         ...portfolio,
       });
     } catch (e) {
-      alert(e);
+      console.log(e);
       isAdded = false;
     }
     this.loading['addPortfolilo'] = false;
@@ -103,7 +103,7 @@ export default class PortfolioStore {
       // TODO: 받은 응답의 포폴로 교체하기.
       this.selectedPortfolio = res.data;
     } catch (e) {
-      alert(e);
+      console.log(e);
       isPortfolioExist = false;
     }
     this.loading['getPortfolioById'] = false;
@@ -138,7 +138,7 @@ export default class PortfolioStore {
       console.log(res2);
     } catch (e) {
       isAdded = false;
-      alert(e);
+      console.log(e);
     }
     this.loading['addStock'] = false;
     return isAdded;
@@ -152,7 +152,7 @@ export default class PortfolioStore {
       const { id: tagId } = res.data;
       this.selectedPortfolio.tags.push({ id: tagId, name: tag.name });
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   };
 }
