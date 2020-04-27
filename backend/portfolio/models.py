@@ -30,4 +30,4 @@ class Profit(models.Model):
         Portfolio, on_delete=models.CASCADE, related_name='profits')
 
     def __str__(self):
-        return (self.date, self.portfolio.name)
+        return f'{self.date} + {self.portfolio.name}'

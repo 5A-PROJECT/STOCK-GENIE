@@ -15,4 +15,3 @@ def add_profits():
             now += stock.count * stock.current_price * sg
             sg = t
         Profit.objects.create(money=now, portfolio=pf)
-    print(f'===== ADD PROFITS AT {datetime.now()} =====')
