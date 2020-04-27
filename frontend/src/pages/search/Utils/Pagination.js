@@ -16,15 +16,13 @@ const PageButton = styled.button`
   border: none;
 `;
 function Pagination(props) {
-  const { pageSize, totalItems } = props;
+  const { pageNum, start, end } = props;
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalItems / pageSize); i++) {
+  for (let i = start; i <= end; i++) {
     pageNumbers.push(i);
   }
-  // console.log('pagenation');
-  // console.log(props.totalItems);
-  // console.log(pageNumbers);
+
   return (
     <Wrapper>
       {pageNumbers.map((number) => (
