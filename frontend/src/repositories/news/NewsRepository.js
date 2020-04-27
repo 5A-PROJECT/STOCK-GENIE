@@ -11,8 +11,7 @@ class NewsRepository {
   getNews(token, keyword) {
     return axios.get(`${this.URL}/news/`, {
       params: {
-        query: '삼성',
-        // query: keyword
+        query: keyword,
       },
       headers: {
         Authorization: `JWT ${token}`,
