@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { BASE_URL } from '../../constants';
 
 class PortfolioRepository {
-  URL = 'http://52.78.142.77:8000/portfolio';
+  URL = `${BASE_URL}/portfolio`;
   constructor(url) {
     this.URL = url || this.URL;
   }
