@@ -161,5 +161,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # need for crontab
 CRONJOBS = [
-    ('* * * * 1,2,3,4,5', 'portfolio.cron.add_profits'),
+    ('* * * * 1,2,3,4,5', 'portfolio.cron.add_profits',
+     '>>/home/ubuntu/s02p23c101/backend/cron.log'),
 ]
