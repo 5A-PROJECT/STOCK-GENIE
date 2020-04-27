@@ -39,7 +39,7 @@ function DetaillHeader({ info }) {
           color="primary"
           startIcon={<CreateNewFolderIcon />}
         >
-          포트폴리오에 추가하기
+          내 포트폴리오에 추가하기
         </Button>
       </CompanyBasicWrapper>
       <h3>금일 시가 : {info.state.currentprice}</h3>
