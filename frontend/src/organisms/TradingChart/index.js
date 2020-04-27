@@ -2,33 +2,26 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const ChartContainer = styled.div`
-  height: 100%;
+  height: 300px;
 `;
 
-function TradingChart(props) {
-  const Trading = React.createRef(null);
-
+function TradingChart({ chart_id, symbol }) {
   useEffect(() => {
-    const Widget = new window.TradingView.widget({
+    new window.TradingView.widget({
       autosize: true,
-      symbol: 'NASDAQ:DBX',
+      symbol,
       interval: 'D',
       timezone: 'Asia/Seoul',
-      theme: 'dark',
+      theme: 'light',
       style: '1',
       locale: 'kr',
       toolbar_bg: '#f1f3f6',
       enable_publishing: false,
       allow_symbol_change: true,
-      container_id: 'tradingview_85feb',
+      container_id: chart_id,
     });
-    Trading.current = Widget;
-  }, []);
-  return (
-    <div class="tradingview-widget-container">
-      <ChartContainer id="tradingview_85feb" />
-    </div>
-  );
+  }, [chart_id, symbol]);
+  return <ChartContainer id={chart_id} />;
 }
 
 export default TradingChart;

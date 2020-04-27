@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Chart from '../../predict/Chart/index';
 import DetailInfo from '../DetailInfo/index';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
+// import Icon from '@material-ui/core/Icon';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 
 const DetailHeaderWrapper = styled.div``;
@@ -18,9 +18,9 @@ const NameCode = styled.div`
 `;
 
 const ChartWarpper = styled.div`
-  display: center
+  display: center;
   margin-top: 3rem;
-  `;
+`;
 
 const DetailInfoWrapper = styled.div`
   margin-top: 2rem;

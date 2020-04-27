@@ -1,22 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
-import HeadCharts from './HeadCharts';
-import MainChart from './MainChart';
+import FullWidthTabs from './Tab';
 
-const PredictPageWrapper = styled.div`
-  max-width: ${({ theme }) => theme.width.page};
-  margin: 0 auto;
-  padding: 0 1rem;
-`;
-
-function PredictPage(props) {
+function PredictPage() {
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
-      <PredictPageWrapper>
-        <HeadCharts />
-        <MainChart />
-      </PredictPageWrapper>
+      <FullWidthTabs />
     </AccessProtection>
   );
 }
