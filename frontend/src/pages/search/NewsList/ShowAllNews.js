@@ -15,19 +15,17 @@ const ItemWrapper = styled.a`
 `;
 
 function ShowNewsList(props) {
-  const { title, url } = props.news;
-
+  const { news, links } = props.news;
+  console.log('show');
   // console.log(props);
   const openNewTab = () => {
-    window.open(url);
+    window.open(links);
   };
 
   return (
-    <div>
-      <ItemWrapper href="#" onClick={openNewTab}>
-        {title}
-      </ItemWrapper>
-    </div>
+    <ItemWrapper href="#" onClick={openNewTab}>
+      {news}
+    </ItemWrapper>
   );
 }
 

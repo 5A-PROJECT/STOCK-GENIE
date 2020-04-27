@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Pagination from '../Utils/Pagination';
 import ShowAllNews from './ShowAllNews';
+import axios from 'axios';
 
 const NewsWrapper = styled.div`
   display: flex;
@@ -10,44 +11,53 @@ const NewsWrapper = styled.div`
   padding: 1rem 1rem;
 `;
 
-const PageList = styled.ul`
+const PageWrapper = styled.ul`
   display: flex;
 `;
 
 function PopNewsList(props) {
   const [popnews, setPopNews] = useState([]);
   useEffect(() => {
-    // const url = '백앤드 주소';
-    // axios
-    //   .get(url)
-    //   .then((res) => {
-    //     console.log(res);
-    //     setNews(res);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
-    let news_data = [];
-    for (let i = 1; i <= 10; i++) {
-      news_data.push({
-        id: i,
-        title: '美사망자 4만 돌파하자 중국 "우린 용납할 수 없는 숫자"',
-        url:
-          'https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=104&oid=421&aid=0004596928',
+    const url = 'http://localhost:8000/news';
+    const token = sessionStorage.getItem('access_token');
+    axios
+      .get(url, {
+        params: {
+          query: '삼성',
+        },
+        headers: {
+          Authorization: `JWT ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+
+        let news_data = [];
+        for (let i = 0; i < res.data.news.length; i++) {
+          news_data.push({
+            news: res.data.news[i],
+            links: res.data.links[i],
+            results: res.data.results[i],
+          });
+        }
+        setPopNews(news_data);
+      })
+      .catch((e) => {
+        console.log(e);
       });
-    }
-    setPopNews(news_data);
-    console.log(news_data.length);
   }, []);
+
+  const PageList = () => {};
 
   return (
     <NewsWrapper>
-      {popnews.map((popnews) => (
-        <ShowAllNews key={popnews.id} news={popnews} />
+      {popnews.map((popnews, index) => (
+        <ShowAllNews key={index} news={popnews} />
       ))}
-      <PageList>
-        <Pagination pageSize={10} totalItems={100} />
-      </PageList>
+      <PageWrapper>
+        {PageList}
+        <Pagination pageNum={105} start={101} end={111} />
+      </PageWrapper>
     </NewsWrapper>
   );
 }
