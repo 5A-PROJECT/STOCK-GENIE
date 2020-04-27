@@ -161,5 +161,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # need for crontab
 CRONJOBS = [
-    ('*/2 * * * 1,2,3,4,5', 'portfolio.cron.add_profit'),
+    ('* * * * 1,2,3,4,5', 'portfolio.cron.add_profits'),
 ]
