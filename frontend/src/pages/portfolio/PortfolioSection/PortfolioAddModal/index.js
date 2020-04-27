@@ -34,7 +34,7 @@ function PortfolioAddModal(props) {
   };
 
   return (
-    <PorfolioCard color={colors.indigo}>
+    <PorfolioCard color={colors.grey}>
       <ModalWrapper onClick={handleOpen}>
         <StylesProvider injectFirst>
           <AddIcon />
