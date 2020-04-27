@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, StylesProvider, Button } from '@material-ui/core';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const CustomInput = styled(TextField)`
   display: block;
@@ -38,7 +39,7 @@ const CustomButton = styled(Button)`
   }
 `;
 
-const Form = styled.form`
+const StyledForm = styled.form`
   width: 100%;
   display: flex;
 `;
@@ -52,27 +53,22 @@ function SearchInput(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(query);
+    props.history.push(`/search/${query}`);
   };
 
   return (
-    <>
-      <StylesProvider injectFirst>
-        <Form onSubmit={onSubmit}>
-          <CustomInput
-            {...props}
-            variant="outlined"
-            fullWidth
-            value={query}
-            onChange={onInputChange}
-          />
-          <CustomButton {...props} variant="contained">
-            검색
-          </CustomButton>
-        </Form>
-      </StylesProvider>
-    </>
+    <StylesProvider injectFirst>
+      <StyledForm onSubmit={onSubmit}>
+        <CustomInput
+          variant="outlined"
+          fullWidth
+          value={query}
+          onChange={onInputChange}
+        />
+        <CustomButton variant="contained">검색</CustomButton>
+      </StyledForm>
+    </StylesProvider>
   );
 }
 
-export default SearchInput;
+export default withRouter(SearchInput);
