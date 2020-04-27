@@ -2,14 +2,14 @@ import axios from 'axios';
 import { BASE_URL } from '../../constants';
 
 class NewsRepository {
-  URL = `${BASE_URL}/news`;
+  URL = `${BASE_URL}`;
   constructor(url) {
     this.URL = url || this.URL;
   }
 
-  // 로그인
   getNews(token, keyword) {
-    return axios.get(`${this.URL}/news/`, {
+    console.log(`${this.URL}/news`);
+    return axios.get(`${this.URL}/news`, {
       params: {
         query: keyword,
       },
