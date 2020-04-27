@@ -17,8 +17,11 @@ export default class NewsStore {
     const { token } = this.root.authStore;
 
     try {
+      console.log('store start');
       const res = await NewsRepository.getNews(token, keyword);
+      console.log('store middle');
       this.newsData = res.data;
+      console.log(this.newsData);
     } catch (e) {
       console.log(e);
     }

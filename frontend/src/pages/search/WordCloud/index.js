@@ -19,12 +19,21 @@ const options = {
   transitionDuration: 1000,
 };
 
-function Wordcloud(newsStore) {
-  // const { words } = newsStore[words];
-
+function Wordcloud(props) {
+  const { getNews } = props.newsStore;
+  console.log(getNews);
+  const { words } = getNews.words;
+  console.log(words);
+  let wordList = [];
+  for (let i = 0; i < words.length; i++) {
+    wordList.push({
+      text: words.keys()[i],
+      value: words[words.keys()[i]],
+    });
+  }
   return (
     <div>
-      <ReactWordCloud options={options} words={words} />
+      <ReactWordCloud options={options} words={wordList} />
     </div>
   );
 }
