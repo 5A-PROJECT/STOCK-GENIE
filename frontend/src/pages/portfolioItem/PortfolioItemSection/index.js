@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PortfolioItemHeader from '../PortfolioItemHeader';
 import StockList from '../StockList';
 import styled from 'styled-components';

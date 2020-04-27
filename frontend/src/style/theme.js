@@ -16,6 +16,7 @@ const theme = {
       logo: MAIN_COLOR[800],
       background: colors.grey[100],
       footer: colors.grey[300],
+      appbar: MAIN_COLOR['A700'],
     },
     materialInput: {
       border: '',
