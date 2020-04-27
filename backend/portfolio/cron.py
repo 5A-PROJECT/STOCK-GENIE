@@ -1,10 +1,6 @@
 from investpy.currency_crosses import get_currency_cross_recent_data as gccrd
-from .models import Portfolio, Profit, Currency
+from .models import Portfolio, Profit
 from datetime import datetime
-
-
-def set_currency_rate():
-    currency = Currency.objects.get(id=1)
 
 
 def add_profits():
