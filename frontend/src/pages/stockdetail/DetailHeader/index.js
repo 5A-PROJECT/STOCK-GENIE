@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Chart from '../../predict/Chart/index';
 import DetailInfo from '../DetailInfo/index';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+
 const DetailHeaderWrapper = styled.div``;
 
 const CompanyBasicWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const NameCode = styled.div`
@@ -22,35 +26,42 @@ const DetailInfoWrapper = styled.div`
   margin-top: 2rem;
 `;
 
-function DetaillHeader() {
-  const name = '삼성전자';
-  const code = '005930';
-  const currentprice = 50400;
-  const country = 'south korea';
-  const url = 'stockdetail';
+function DetaillHeader({ info }) {
   return (
     <DetailHeaderWrapper>
       <CompanyBasicWrapper>
         <NameCode>
-          <h1>{name}</h1>
-          <h3>({code})</h3>
+          <h1>{info.state.name}</h1>
+          <h3>({info.state.code})</h3>
         </NameCode>
-        <h1>{currentprice}</h1>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<CreateNewFolderIcon />}
+        >
+          내 포트폴리오에 추가하기
+        </Button>
       </CompanyBasicWrapper>
+      <h3>금일 시가 : {info.state.currentprice}</h3>
       <hr></hr>
+
       <ChartWarpper>
         <Chart
-          width="800"
+          width="1000"
           height="300"
           url="indices"
           params={{
-            country: 'south korea',
-            name: 'KOSPI',
+            country: info.state.country,
+            name: info.state.index,
           }}
         />
       </ChartWarpper>
       <DetailInfoWrapper>
-        <DetailInfo code={code} country={country} url={url} />
+        <DetailInfo
+          code={info.state.code}
+          country={info.state.country}
+          url={info.pathname}
+        />
       </DetailInfoWrapper>
     </DetailHeaderWrapper>
   );

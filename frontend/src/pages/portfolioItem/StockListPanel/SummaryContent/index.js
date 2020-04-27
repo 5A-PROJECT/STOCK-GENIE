@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import ReturnRatio from '../../../../molecules/ReturnRatio';
+import { observer, inject } from 'mobx-react';
 
 const SummaryWrapper = styled.div`
   display: flex;
@@ -33,6 +34,18 @@ const StockInfo = styled.div`
   }
 `;
 
+const CurrencyBadge = styled.div`
+  background-color: ${({ theme, type }) =>
+    type === 'USD'
+      ? theme.color.portfolio.currency_badge.usd
+      : theme.color.portfolio.currency_badge.krw};
+  color: white;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.3rem;
+  border-radius: 3px;
+  margin-right: 0.3rem;
+`;
+
 const PriceInfo = styled.div`
   display: flex;
   align-items: center;
@@ -45,9 +58,14 @@ const PriceInfo = styled.div`
   }
 `;
 
-function SummaryContent({ stock, totalBuyingPrice, totalCurrentPrice }) {
+function SummaryContent({
+  stock,
+  totalBuyingPrice,
+  totalCurrentPrice,
+  portfolioStore,
+}) {
   const { count, name, code, currency, current_price, buy_price } = stock;
-
+  const { exchangeRate } = portfolioStore.selectedPortfolio.profit;
   const profit = useMemo(() => {
     return totalCurrentPrice - totalBuyingPrice;
   }, [totalCurrentPrice, totalBuyingPrice]);
@@ -59,13 +77,25 @@ function SummaryContent({ stock, totalBuyingPrice, totalCurrentPrice }) {
   return (
     <SummaryWrapper>
       <StockInfo>
+        <CurrencyBadge type={currency}>{currency}</CurrencyBadge>
         <div className="count">{count}주 보유</div>
         <div className="name">{name}</div>
         <div className="code">{code} </div>
       </StockInfo>
       <PriceInfo>
-        <span className="profit">{profit.toLocaleString()}</span>
-        <span className="currency">{currency}</span>
+        {currency === 'USD' ? (
+          <>
+            <span className="profit">
+              {Math.floor(profit * exchangeRate).toLocaleString()}
+            </span>
+            <span className="currency">원</span>
+          </>
+        ) : (
+          <>
+            <span className="profit">{profit.toLocaleString()}</span>
+            <span className="currency">원</span>
+          </>
+        )}
         <div className="ratio">
           <ReturnRatio ratio={getRatio} iconSize="1rem" fontSize="1rem" />
         </div>
@@ -74,4 +104,4 @@ function SummaryContent({ stock, totalBuyingPrice, totalCurrentPrice }) {
   );
 }
 
-export default SummaryContent;
+export default inject('portfolioStore')(observer(SummaryContent));

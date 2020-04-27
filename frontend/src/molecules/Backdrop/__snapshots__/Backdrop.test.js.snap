@@ -3,30 +3,34 @@
 exports[`<Backdrop /> 스냅샷과 일치해야 합니다. 1`] = `
 <div>
   <div
-    class="sc-AxirZ edOWWa"
+    class="sc-AxiKw cXiqAS"
     data-testid="backdrop"
   >
     <span
-      class="sc-AxiKw iicLom"
+      class="sc-AxhCb iFQXpm"
     >
       <div
-        class="MuiCircularProgress-root sc-AxjAm StDqN MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-        role="progressbar"
-        style="width: 40px; height: 40px;"
+        class="sc-AxjAm kSkoow"
       >
-        <svg
-          class="MuiCircularProgress-svg"
-          viewBox="22 22 44 44"
+        <div
+          class="MuiCircularProgress-root sc-AxirZ ktnnZK MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
         >
-          <circle
-            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-            cx="44"
-            cy="44"
-            fill="none"
-            r="20.2"
-            stroke-width="3.6"
-          />
-        </svg>
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
+        </div>
       </div>
     </span>
   </div>

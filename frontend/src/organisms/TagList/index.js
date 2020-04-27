@@ -1,12 +1,15 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import MaterialChip from '../../atoms/Chip/MaterialChip';
+import TagAddInput from './TagAddInput';
+import { observer } from 'mobx-react';
 
-const TagListWrapper = styled.div`
+const TagListWrapper = styled.span`
   display: flex;
+  flex-wrap: wrap;
 `;
 
-function TagList({ tags, slice = false }) {
+function TagList({ tags, slice = false, add = false }) {
   // slice = true면 최대 두개까지만 보여줌
   const sliceTags = useMemo(() => {
     if (slice) {
@@ -33,8 +36,9 @@ function TagList({ tags, slice = false }) {
           variant="outlined"
         />
       )}
+      {add && <TagAddInput />}
     </TagListWrapper>
   );
 }
 
-export default TagList;
+export default observer(TagList);

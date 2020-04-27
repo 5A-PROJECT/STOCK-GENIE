@@ -7,7 +7,7 @@ import Spinner from '../../atoms/Spinner';
 const PortfolioItemPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 1rem;
 `;
 
 function PortfolioItemPage({ match, history, portfolioStore }) {
@@ -30,13 +30,15 @@ function PortfolioItemPage({ match, history, portfolioStore }) {
   }, [id, history, portfolioStore, clearSelectedPortfolio]);
 
   return (
-    <PortfolioItemPageWrapper>
+    <>
       {!loading['getPortfolioById'] && selectedPortfolio ? (
-        <PortfolioItemSection portfolio={selectedPortfolio} />
+        <PortfolioItemPageWrapper>
+          <PortfolioItemSection portfolio={selectedPortfolio} />
+        </PortfolioItemPageWrapper>
       ) : (
         <Spinner />
       )}
-    </PortfolioItemPageWrapper>
+    </>
   );
 }
 

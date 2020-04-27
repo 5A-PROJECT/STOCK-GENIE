@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 const LogoutWrapper = styled.span`
   cursor: pointer;
+  font-weight: bold;
 `;
 
 function LogoutButton({ authStore, history }) {

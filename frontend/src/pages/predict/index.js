@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
-import PaginationTable from './CompanyTable/index';
 import HeadCharts from './HeadCharts';
 import MainChart from './MainChart';
 
@@ -17,7 +16,6 @@ function PredictPage(props) {
       <PredictPageWrapper>
         <HeadCharts />
         <MainChart />
-        <PaginationTable />
       </PredictPageWrapper>
     </AccessProtection>
   );

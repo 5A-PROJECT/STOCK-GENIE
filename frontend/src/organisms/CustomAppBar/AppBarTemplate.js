@@ -7,21 +7,29 @@ const AppBarWrapper = styled.nav`
   padding: 0 1rem;
   display: flex;
   justify-content: space-between;
+  background-color: ${({ theme }) => theme.color.main.appbar};
   align-items: center;
   ul {
     padding: 0;
     list-style-type: none;
     display: flex;
+    width: 100%;
     li {
       & + li {
         margin-left: 1rem;
       }
+    }
+    .logout-button {
+      flex-grow: 1;
+      text-align: end;
     }
   }
 `;
 
 const NavLink = styled(Link)`
   color: white;
+  font-weight: bold;
+  text-decoration: none;
 `;
 
 function AppBarTemplate({ isLoggedIn }) {
@@ -29,7 +37,7 @@ function AppBarTemplate({ isLoggedIn }) {
     <AppBarWrapper>
       <ul>
         <li>
-          <NavLink to="/">홈</NavLink>
+          <NavLink to="/">5A(로고)</NavLink>
         </li>
         {isLoggedIn ? (
           <>
@@ -43,7 +51,7 @@ function AppBarTemplate({ isLoggedIn }) {
             <li>
               <NavLink to="/search">검색</NavLink>
             </li>
-            <li>
+            <li className="logout-button">
               <LogoutButton />
             </li>
           </>

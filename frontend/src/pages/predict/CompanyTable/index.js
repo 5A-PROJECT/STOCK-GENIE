@@ -48,7 +48,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PaginationTable() {
+export default function PaginationTable({ params }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [data, setData] = useState([]);
@@ -57,10 +57,12 @@ export default function PaginationTable() {
   useEffect(() => {
     const token = sessionStorage.getItem('access_token');
     const getData = async () => {
+      // console.log('////');
+      // console.log(props.params.index);
       const result = await axios
         .get('http://localhost:8000/predict/stocktable', {
           params: {
-            page: 1,
+            index: params.index.toUpperCase(),
           },
           headers: {
             Authorization: `JWT ${token}`,
@@ -70,9 +72,11 @@ export default function PaginationTable() {
           setData(res.data);
         });
     };
-    getData();
+    if (params.index) {
+      getData();
+    }
     console.log(data);
-  }, []);
+  }, [params.index]);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -119,7 +123,18 @@ export default function PaginationTable() {
                       )}
                     </TableCell>
                     <TableCell align="center">
-                      <Link to="/stockdetail">
+                      <Link
+                        to={{
+                          pathname: 'stockdetail',
+                          state: {
+                            name: row.name,
+                            code: row.code,
+                            country: row.country,
+                            currentprice: row.open,
+                            index: params.index.toUpperCase(),
+                          },
+                        }}
+                      >
                         <ZoomIcon size={'1.5rem'} title="detail" />
                       </Link>
                     </TableCell>
