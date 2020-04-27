@@ -40,10 +40,7 @@ function ModalContents({ open, onClose, portfolioStore }) {
   };
 
   const addStock = () => {
-    const token = sessionStorage.getItem('access_token');
-    const { id: portfolioId } = portfolioStore.selectedPortfolio;
-    portfolioStore.addStock(portfolioId, stockForm, token);
-    portfolioStore.getPortfolioById(portfolioId, token);
+    portfolioStore.addStock(stockForm);
     onClose();
   };
   return (

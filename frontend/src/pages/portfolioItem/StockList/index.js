@@ -17,7 +17,7 @@ const TableTitle = styled.span`
   border-bottom: 1px solid black;
 `;
 
-function StockList({ stocks, children, category }) {
+function StockList({ stocks, children }) {
   return (
     <StockListWrapper>
       <TableTitle>{children}</TableTitle>

@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { BASE_URL } from '../../constants';
 
 class PortfolioRepository {
-  URL = 'http://localhost:8000/portfolio';
+  URL = `${BASE_URL}/portfolio`;
   constructor(url) {
     this.URL = url || this.URL;
   }
@@ -54,6 +55,22 @@ class PortfolioRepository {
    */
   createStock(portfolioId, stock, token) {
     return axios.post(`${this.URL}/${portfolioId}/stock/`, stock, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
+
+  createTag(portfolioId, tag, token) {
+    return axios.post(`${this.URL}/${portfolioId}/tag/`, tag, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
+
+  updateCalcFields(portfolioId, token) {
+    return axios.get(`${this.URL}/${portfolioId}/prices/`, {
       headers: {
         Authorization: `JWT ${token}`,
       },

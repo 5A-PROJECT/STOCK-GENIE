@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { BASE_URL } from '../../constants';
 
 class AuthRepository {
-  URL = 'http://localhost:8000/auth';
-
+  URL = `${BASE_URL}/auth`;
   constructor(url) {
     this.URL = url || this.URL;
   }

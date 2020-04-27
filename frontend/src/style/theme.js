@@ -1,11 +1,15 @@
 import { colors } from '@material-ui/core';
 
-const MAIN_COLOR = colors.lightBlue;
+const MAIN_COLOR = colors.teal;
 
 const theme = {
   width: {
     page: '1024px',
     authForm: '300px',
+  },
+  font: {
+    main: 'Eoe_Zno_L',
+    gmarket: 'GmarketSansLight',
   },
   color: {
     main: {
@@ -24,9 +28,19 @@ const theme = {
       hoverBackground: MAIN_COLOR[500],
     },
     portfolio: {
-      count: MAIN_COLOR[800],
+      count: colors.lightBlue[800],
       code: colors.grey[600],
       currency: colors.grey[600],
+      currency_badge: {
+        krw: colors.amber[700],
+        usd: colors.green[600],
+      },
+    },
+    tag: {
+      input: MAIN_COLOR,
+    },
+    loading: {
+      spinner: MAIN_COLOR[600],
     },
   },
 };
