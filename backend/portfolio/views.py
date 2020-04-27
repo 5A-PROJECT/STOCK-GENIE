@@ -76,3 +76,14 @@ def add_tag(request, pf_id):
     tag = Tag.objects.get_or_create(name=name)[0]
     pf.tags.add(tag)
     return JsonResponse({'id': tag.id})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+def update_portfolio(request, pf_id):
+    pf = get_object_or_404(Portfolio, id=pf_id)
+    if pf.user != request.user:
+        return HttpResponse(status=401)
+    serializer = PortfolioDetailSerializer(pf)
+    return JsonResponse(serializer.data.get('profit'))
