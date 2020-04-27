@@ -16,7 +16,6 @@ def refresh_predict():
     to_date = date.to_date
     commodities_df = get_commodities(from_date, to_date)
     for stock_data in stocks:
-        print(stock_data.name)
         stock = stock_data.code
         indices = stock_data.index
         country = stock_data.country
@@ -28,7 +27,6 @@ def refresh_predict():
             stock_df = investpy.stocks.get_stock_historical_data(
                 stock, country, from_date, to_date)
         except:
-            print("error : " + stock)
             continue
         stock_df["date"] = stock_df.index.map(lambda x: str(x).split(" ")[0])
         testData = pd.merge(stock_df, commodities_df, on="date")[-28:]
@@ -45,23 +43,18 @@ def refresh_predict():
 
 def prediction(stock, indices, df):
     import tensorflow as tf
-    print(df.columns)
-    print(stock + "======================predict=========================")
     scaler = MinMaxScaler()
     scaler.fit(df)
     data_ = scaler.transform(df)
     data = np.array([data_])
     model_path = f"predict/checkpoint/{indices}/{stock}_model.h5"
     model = tf.keras.models.load_model(model_path)
-    # x, scaler = preprocessing_data(df)
-    print(data.shape)
     np.nan_to_num(data, copy=False)
     y = model.predict(data)
     close = np.asarray(df.iloc[:, 3:4])
     close_scaler = MinMaxScaler()
     close_scaler.fit(close)
     y = close_scaler.inverse_transform(y)
-    print(y)
     return y
 
 
@@ -122,14 +115,12 @@ def get_stock_data(path, country, indices):
         if path != "nasdaq":
             stock = str(stock)
             stock = "0" * (6-len(stock)) + stock
-        print(stock + "======================start=========================")
         try:
             data = investpy.stocks.get_stock_information(
                 stock=stock, country=country, as_json=True)
             stock_df = investpy.stocks.get_stock_historical_data(
                 stock, country, from_date, to_date)
         except:
-            print("error : " + stock)
             continue
         stock_df["date"] = stock_df.index.map(lambda x: str(x).split(" ")[0])
         testData = pd.merge(stock_df, commodities_df, on="date")[-28:]

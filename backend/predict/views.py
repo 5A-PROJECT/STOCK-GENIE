@@ -67,7 +67,6 @@ def stock_table(request):
         # data = paginator.get_page(page)
         index = request.GET.get("index")
         filter_stocks = StockInfo.objects.filter(index=index)
-        print(len(filter_stocks))
         serializer = StockInfoSerializer(filter_stocks, many=True)
         return Response(serializer.data)
     else:
@@ -115,7 +114,6 @@ def stock_detail(request):
         country = request.GET.get("country")
         data = invest.get_stock_detail(code, country)
         stockinfo = get_object_or_404(StockInfo, code=code)
-        print(stockinfo)
         serializer = StockInfoSerializer(stockinfo)
         result = {}
         result["base"] = data
