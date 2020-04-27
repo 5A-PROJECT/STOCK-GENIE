@@ -70,7 +70,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['../frontend/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -165,4 +165,15 @@ CRONJOBS = [
      '>> /home/ubuntu/s02p23c101/backend/add_profits.log'),
     ('0 9 * * 1,2,3,4,5', 'predict.collectstock.refresh_predict',
      '>> /home/ubuntu/s02p23c101/backend/refresh_predict.log')
+]
+def get_parent_path():
+    os.getcwd()
+    os.chdir('..')
+    result = os.getcwd()
+    os.chdir('backend')
+    return result
+
+    
+STATICFILES_DIRS = [
+    os.path.join(get_parent_path(), 'frontend', 'build', 'static')
 ]
