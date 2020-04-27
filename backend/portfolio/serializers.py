@@ -15,10 +15,10 @@ class PortfolioSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
 
     def get_total(self, obj):
-        first, now, sg = 0, 0, gccrd(f'USD/KRW').iloc[-1, 3]
+        first, now, sg = 0, 0, gccrd('USD/KRW').iloc[-1, 3]
         for stock in obj.stocks.all():
             t = sg
-            if stock.currency != 'KRW':
+            if stock.currency == 'KRW':
                 sg = 1
             first += stock.count * stock.buy_price * sg
             now += stock.count * stock.current_price * sg
@@ -37,18 +37,18 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
 
     def get_profit(self, obj):
         s, o, usd, krw = 0, 0, 0, 0
-        first, now, sg = 0, 0, gccrd(f'USD/KRW').iloc[-1, 3]
+        first, now, sg = 0, 0, gccrd('USD/KRW').iloc[-1, 3]
         for stock in obj.stocks.all():
             t = sg
             if stock.currency != 'KRW':
-                usd += 1
+                usd += stock.current_price * sg
             else:
                 sg = 1
-                krw += 1
+                krw += stock.current_price * sg
             if stock.category == 'STOCK':
-                s += 1
+                s += stock.current_price * sg
             else:
-                o += 1
+                o += stock.current_price * sg
             first += stock.buy_price * stock.count * sg
             now += stock.current_price * stock.count * sg
             sg = t
