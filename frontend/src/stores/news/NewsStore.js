@@ -11,6 +11,7 @@ export default class NewsStore {
   };
 
   newsData = null;
+  wordData = null;
 
   get formatedNewsData() {
     if (this.newsData) {
@@ -28,24 +29,20 @@ export default class NewsStore {
     const { token } = this.root.authStore;
     try {
       const res = await NewsRepository.getNews(token, keyword);
-      //   console.log(res);
       let tmpData = [];
       const news = res.data.news;
       const link = res.data.links;
       const result = res.data.results;
 
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < res.data.news.length; i++) {
         tmpData.push({
           news: news[i],
           link: link[i],
           result: result[i],
         });
       }
-
-      //   console.log(tmpData);
       this.newsData = tmpData;
-
-      //   console.log(this.newsData);
+      this.wordData = res.data.words;
     } catch (e) {
       console.log(e);
     }
