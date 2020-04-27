@@ -11,7 +11,7 @@ const NewsWrapper = styled.div`
   padding: 1rem 1rem;
 `;
 
-const PageList = styled.ul`
+const PageWrapper = styled.ul`
   display: flex;
 `;
 
@@ -47,14 +47,17 @@ function PopNewsList(props) {
       });
   }, []);
 
+  const PageList = () => {};
+
   return (
     <NewsWrapper>
       {popnews.map((popnews, index) => (
         <ShowAllNews key={index} news={popnews} />
       ))}
-      <PageList>
+      <PageWrapper>
+        {PageList}
         <Pagination pageNum={105} start={101} end={111} />
-      </PageList>
+      </PageWrapper>
     </NewsWrapper>
   );
 }
