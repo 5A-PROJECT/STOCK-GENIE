@@ -40,7 +40,7 @@ const StockWrapper = styled.div`
   border-radius: 5px;
 `;
 
-function PaginationTable({ index }) {
+function IndexList({ index }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -96,4 +96,4 @@ function PaginationTable({ index }) {
   );
 }
 
-export default PaginationTable;
+export default IndexList;

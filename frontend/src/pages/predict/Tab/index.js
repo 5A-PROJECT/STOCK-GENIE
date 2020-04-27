@@ -90,13 +90,13 @@ export default function FullWidthTabs() {
           <TradingCharts />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <MainChart country="south korea" name="KOSPI" />
+          <MainChart name="KOSPI" />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <MainChart country="south korea" name="KOSDAQ" />
+          <MainChart name="KOSDAQ" />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <MainChart country="united states" name="Nasdaq" />
+          <MainChart name="Nasdaq" />
         </TabPanel>
       </SwipeableViews>
     </div>
