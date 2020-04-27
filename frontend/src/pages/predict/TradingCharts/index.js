@@ -44,7 +44,11 @@ function TradingCharts() {
   return (
     <TradingChartsWrapper>
       {chartList.map((chart, idx) => (
-        <TradingChart chart_id={`chart-${idx}`} symbol={chart.symbol} />
+        <TradingChart
+          key={idx}
+          chart_id={`chart-${idx}`}
+          symbol={chart.symbol}
+        />
       ))}
     </TradingChartsWrapper>
   );
