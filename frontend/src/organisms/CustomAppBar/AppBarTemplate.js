@@ -6,23 +6,17 @@ import LogoutButton from '../../molecules/LogoutButton';
 const AppBarWrapper = styled.nav`
   padding: 0 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background-color: ${({ theme }) => theme.color.main.appbar};
   align-items: center;
   ul {
+    width: 100%;
+    max-width: 1024px;
     padding: 0;
     list-style-type: none;
-    display: flex;
-    width: 100%;
-    li {
-      & + li {
-        margin-left: 1rem;
-      }
-    }
-    .logout-button {
-      flex-grow: 1;
-      text-align: end;
-    }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
   }
 `;
 
@@ -43,15 +37,12 @@ function AppBarTemplate({ isLoggedIn }) {
           <>
             {/* 로그인 시 보이는 Nav */}
             <li>
-              <NavLink to="/predict">주가예측</NavLink>
+              <NavLink to="/predict">예측리포트</NavLink>
             </li>
             <li>
               <NavLink to="/dashboard">대시보드</NavLink>
             </li>
             <li>
-              <NavLink to="/search">검색</NavLink>
-            </li>
-            <li className="logout-button">
               <LogoutButton />
             </li>
           </>
