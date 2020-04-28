@@ -1,21 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
-import HeadCharts from './HeadCharts';
-import MainChart from './MainChart';
+import IndexListHeader from './MainChart/IndexListHeader';
+import styled from 'styled-components';
+import IndexListSection from './IndexListSection';
 
 const PredictPageWrapper = styled.div`
-  max-width: ${({ theme }) => theme.width.page};
+  max-width: 1024px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 1rem;
 `;
 
-function PredictPage(props) {
+function PredictPage() {
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       <PredictPageWrapper>
-        <HeadCharts />
-        <MainChart />
+        <IndexListHeader />
+        <IndexListSection />
       </PredictPageWrapper>
     </AccessProtection>
   );

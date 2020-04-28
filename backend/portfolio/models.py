@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# Create your models here.
-
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
@@ -30,4 +28,4 @@ class Profit(models.Model):
         Portfolio, on_delete=models.CASCADE, related_name='profits')
 
     def __str__(self):
-        return (self.date, self.portfolio.name)
+        return self.portfolio.name

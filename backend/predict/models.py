@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# Create your models here.
-
 
 class StockInfo(models.Model):
     country = models.CharField(max_length=20)
@@ -16,7 +14,7 @@ class StockInfo(models.Model):
 
     @property
     def rate(self):
-        return round(((self.close - self.open)/self.open) * 100, 2)
+        return round(((self.open - self.close)/self.close) * 100, 2)
 
     @property
     def predictpoint(self):

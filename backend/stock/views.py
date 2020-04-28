@@ -5,8 +5,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from .models import Stock
 
-# Create your views here.
-
 
 @api_view(['PATCH', 'DELETE'])
 @permission_classes([IsAuthenticated, ])
@@ -20,7 +18,8 @@ def stock(request, sc_id):
         sc.count = sc.count or request.data.get('count')
         sc.buy_price = sc.buy_price or request.data.get('buy_price')
         sc.current_price = sc.current_price or request.data.get(
-            'current_price')
+            'current_price'
+        )
         sc.currency = sc.currency or request.data.get('currency')
         sc.category = sc.category or request.data.get('category')
         return JsonResponse({'id': sc_id})

@@ -70,7 +70,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['../frontend/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,7 +147,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-# need for restframework JWT: change some settings will be needed
+# need for restframework JWT
 JWT_AUTH = {
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_ALGORITHM': 'HS256',
@@ -161,5 +161,14 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # need for crontab
 CRONJOBS = [
-    ('* * * * 1,2,3,4,5', 'portfolio.cron.add_profits'),
+    ('0 8 * * 1,2,3,4,5', 'portfolio.cron.add_profits',
+     '>> /home/ubuntu/s02p23c101/backend/add_profits.log'),
+    ('30 8 * * 1,2,3,4,5', 'portfolio.cron.set_currency',
+     '>> /home/ubuntu/s02p23c101/backend/set_currency.log'),
+    ('0 9 * * 1,2,3,4,5', 'predict.collectstock.refresh_predict',
+     '>> /home/ubuntu/s02p23c101/backend/refresh_predict.log')
 ]
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'frontend', 'build', 'static')
+# ]
