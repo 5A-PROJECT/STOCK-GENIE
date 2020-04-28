@@ -46,11 +46,11 @@ def evaluate(request):
     ).json()
     articles = naver_newses.get('items')
 
-    row_X, links, descriptions = [], [], []
+    titles, links, descriptions = [], [], []
     for article in articles:
-        row_X.append(article.get(
+        titles.append(article.get(
             'title'
-        ).replace('<b>', '').replace('</b>', ''))
+        ).replace('<b>', '').replace('</b>', '').replace('&quot', ''))
         links.append(article.get('originallink') or article.get('link'))
         descriptions.append(article.get(
             'description'
@@ -64,14 +64,10 @@ def evaluate(request):
         tokenizer = Okt()
 
         words = {}
-        if 'words.pkl' in os.listdir('.\\news\\models\\'):
-            pass
-
-        for title in row_X:
-            title = re.sub(
-                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…]', '', title)
-            title = re.sub(r'[ ]+', '', title)
-            tokens = tokenizer.morphs(title)
+        for description in descriptions:
+            description = re.sub(
+                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…●‘’“”]', '', description)
+            tokens = tokenizer.morphs(description)
             for token in tokens:
                 words[token] = 1 if token not in words else words[token] + 1
 
@@ -82,11 +78,7 @@ def evaluate(request):
                 break
 
         X = []
-        for title in row_X:
-            title = re.sub(
-                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…]', '', title)
-            title = re.sub(r'[ ]+', '', title)
-            tokens = tokenizer.morphs(title)
+        for _ in titles:
             raw = []
             for token in tokens:
                 num = word_to_idx[token] if token in word_to_idx else 0
@@ -103,9 +95,9 @@ def evaluate(request):
         from tensorflow.keras.preprocessing.text import Tokenizer
 
         tokenizer = Tokenizer(num_words=5000, oov_token='<unk>')
-        tokenizer.fit_on_texts(row_X)
+        tokenizer.fit_on_texts(descriptions)
 
-        X = tokenizer.texts_to_sequences(row_X)
+        X = tokenizer.texts_to_sequences(descriptions)
         X = pad_sequences(X, maxlen=50, padding='post')
 
         model = load_model('.\\news\\models\\best_model_us.h5')
@@ -118,7 +110,7 @@ def evaluate(request):
         y.append(res)
 
     return JsonResponse({
-        'news': row_X, 'links': links,
+        'news': titles, 'links': links,
         'descriptions': descriptions,
         'results': y, 'words': words,
         'good': int(y.count(1) * 100 / len(y)),
