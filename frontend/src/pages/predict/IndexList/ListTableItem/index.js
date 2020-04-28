@@ -1,99 +1,107 @@
 import React from 'react';
 import styled from 'styled-components';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import { colors } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import ReturnRatio from '../../../../molecules/ReturnRatio';
 
-// 예측에서 보여주는 화살표
-const UpIcon = styled(ArrowDropUpIcon)`
-  color: red;
-  font-size: ${(props) => props.size};
-`;
-
-const DownIcon = styled(ArrowDropDownIcon)`
-  color: blue;
-  font-size: ${(props) => props.size};
-`;
-
-// 상세보기 버튼
-const ZoomIcon = styled(ZoomInIcon)`
-  color: ${colors.grey[600]};
-  font-size: ${(props) => props.size};
-`;
-
-const StockWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid ${colors.grey[300]};
-  padding: 1rem;
-  border-radius: 5px;
+const StockWrapper = styled(Link)`
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
-  font-size: 1rem;
+  text-decoration: none;
+  color: black;
+  padding: 1rem;
+  border: 1px solid ${colors.grey[300]};
+  border-radius: 5px;
   box-shadow: 2px 2px 1px 1px ${colors.grey[300]};
-
   cursor: pointer;
   :hover {
     transition-duration: 0.3s;
     background-color: ${colors.grey[200]};
-    transform: scale(1.03);
+    transform: scale(1.01);
   }
 
-  .name {
-    flex-wrap: wrap;
-    font-weight: bold;
-  }
-  .close {
-    width: 20%;
-  }
-  .open {
-    width: 20%;
-  }
-  .rate {
-    width: 20%;
-  }
-  .pagemovebtn {
-    justify-self: flex-end;
-    align-self: center;
-    width: 10%;
-    text-align: end;
+  .info {
+    justify-self: center;
   }
 `;
-const Div = styled.div`
+
+const NameWrapper = styled.div`
   display: flex;
-  width: 30%;
+  flex-wrap: wrap;
+  align-items: center;
+  .name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 0.3rem;
+  }
+  .code {
+    font-size: 0.6rem;
+    color: grey;
+  }
 `;
+
+const ColoredBadge = styled.span`
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+  padding: 0.1rem 0.2rem;
+  background-color: ${({ color }) => color};
+  border-radius: 3px;
+  margin-right: 0.3rem;
+`;
+
+const StyledCurrency = styled.span`
+  margin-left: 0.3rem;
+  color: grey;
+`;
+
+const Currency = ({ index }) => {
+  return (
+    <>
+      {index === 'KOSPI' || index === 'KOSDAQ' ? (
+        <StyledCurrency>KRW</StyledCurrency>
+      ) : (
+        <StyledCurrency>USD</StyledCurrency>
+      )}
+    </>
+  );
+};
 
 function ListTableItem({ data, index }) {
   const { name, close, open, rate, predictpoint, code, country } = data;
   return (
-    <StockWrapper>
-      <Div>
-        <div className="icon">
-          {predictpoint === 1 ? <UpIcon /> : <DownIcon />}
-        </div>
-        <div className="name">{name}</div>
-        {/* <div className="code">({d.code})</div> */}
-      </Div>
-      <div className="close">{close.toLocaleString()}</div>
-      <div className="open">{open.toLocaleString()}</div>
-      <div className="rate">{rate}</div>
-      <div className="pagemovebtn">
-        <Link
-          to={{
-            pathname: 'stockdetail',
-            state: {
-              name,
-              code,
-              country,
-              currentprice: open,
-              index: index.toUpperCase(),
-            },
-          }}
-        >
-          <ZoomIcon size={'1.5rem'} title="detail" />
-        </Link>
+    <StockWrapper
+      to={{
+        pathname: 'stockdetail',
+        state: {
+          name,
+          code,
+          country,
+          currentprice: open,
+          index: index.toUpperCase(),
+        },
+      }}
+    >
+      <NameWrapper>
+        {predictpoint === 1 ? (
+          <ColoredBadge color={colors.red[400]}>상승예측</ColoredBadge>
+        ) : (
+          <ColoredBadge color={colors.indigo[400]}>하락예측</ColoredBadge>
+        )}
+        <span className="name">{name}</span>
+        <span className="code">{code}</span>
+      </NameWrapper>
+      <div className="info">
+        {close.toLocaleString()}
+        <Currency index={index} />
+      </div>
+      <div className="info">
+        {open.toLocaleString()}
+        <Currency index={index} />
+      </div>
+      <div className="info">
+        <ReturnRatio ratio={rate} iconSize="1rem" fontSize="1rem" />
       </div>
     </StockWrapper>
   );
