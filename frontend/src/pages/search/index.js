@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
 import WordCloud from './WordCloud';
 import PieGraph from './Graph/PieGraph';
-import PopNewsList from './NewsList/PopNews';
 import AllNewsList from './NewsList/AllNewsList';
 import { inject, observer } from 'mobx-react';
 import { useEffect } from 'react';
@@ -14,7 +13,14 @@ const SearchPageWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const ContainWrapper = styled.div`
+const WordWrapper = styled.div`
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+`;
+
+const NewsWrapper = styled.div`
   margin-top: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -28,8 +34,6 @@ function SearchPage({ newsStore }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(loading['getNews']);
-  console.log(newsData);
-  console.log('index');
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       {loading['getNews'] ? (
@@ -38,12 +42,13 @@ function SearchPage({ newsStore }) {
         <>
           {newsData ? (
             <SearchPageWrapper>
-              <ContainWrapper>
+              <WordWrapper>
                 <WordCloud words={newsData.words} />
-                <PopNewsList news={formatedNewsData} />
+              </WordWrapper>
+              <NewsWrapper>
                 <AllNewsList news={formatedNewsData} />
                 <PieGraph />
-              </ContainWrapper>
+              </NewsWrapper>
             </SearchPageWrapper>
           ) : (
             <div>뉴스 데이터 없음</div>

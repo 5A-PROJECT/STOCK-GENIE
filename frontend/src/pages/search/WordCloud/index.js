@@ -18,10 +18,7 @@ const options = {
 
 function Wordcloud(props) {
   const { wordData } = props.newsStore;
-  console.log('wordcloud');
-  console.log(wordData);
   const keys = Object.keys(wordData);
-  console.log(keys);
 
   let wordList = [];
   for (let i = 0; i < keys.length; i++) {
@@ -30,7 +27,6 @@ function Wordcloud(props) {
       value: wordData[keys[i]],
     });
   }
-  console.log(wordList);
   return (
     <div>
       <ReactWordCloud options={options} words={wordList} />

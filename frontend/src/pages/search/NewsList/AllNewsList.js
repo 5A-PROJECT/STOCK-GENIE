@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Pagination from '../Utils/Pagination';
-import axios from 'axios';
+import Paging from '../Utils/Paging';
 import ShowAllNews from './ShowAllNews';
-import { BASE_URL } from '../../../constants';
 
 const TitleWrapper = styled.div`
   margin-left: 20%;
@@ -27,27 +25,27 @@ const PageList = styled.ul`
 `;
 
 function AllNewsList({ news }) {
-  // const recentButton = () => {};
-  // const recentButton = () => {};
-  // const goodNewsButton = () => {};
-  // const badNewsButton = () => {};
+  let pageItem = [];
+  for (let i = 0; i < 10; i++) {
+    pageItem.push(news[i]);
+  }
+  console.log('pageItem');
+  console.log(pageItem);
   return (
     <>
       <div>
         <TitleWrapper>
           <ButtonGroup variant="text">
-            <Button>최근순</Button>
-            <Button>조회수</Button>
             <Button>Good News</Button>
             <Button>Bad News</Button>
           </ButtonGroup>
         </TitleWrapper>
         <NewsWrapper>
-          {news.map((news, index) => (
-            <ShowAllNews key={index} news={news} />
+          {pageItem.map((data, index) => (
+            <ShowAllNews key={index} news={data} />
           ))}
           <PageList>
-            <Pagination pageNum={105} start={101} end={111} />
+            <Paging pageSize={news.length} />
           </PageList>
         </NewsWrapper>
       </div>
