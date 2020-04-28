@@ -5,6 +5,8 @@ import pandas as pd
 import numpy as np
 import investpy
 import os
+from datetime import datetime, timedelta
+import pickle
 
 
 def refresh_predict():
@@ -20,6 +22,7 @@ def refresh_predict():
         indices = stock_data.index
         country = stock_data.country
         prevpredict = stock_data.predict
+        file_path = f'predict/dataset/{indices}/{stock}.pickle'
         try:
             data = investpy.stocks.get_stock_information(
                 stock=stock, country=country, as_json=True
@@ -40,10 +43,16 @@ def refresh_predict():
         stock_data.open = open_price
         stock_data.predict = predict
         stock_data.save()
+        with open(file_path, 'rb') as fr:
+            graph_data = pickle.load(fr)
+        now = datetime.now()
+        now = str(now).split()[0]
+        graph_data.append({'time': now, 'value': predict})
+        with open(file_path, 'rb') as fw:
+            pickle.dump(graph_data, fw)
 
 
 def prediction(stock, indices, df):
-    import tensorflow as tf
     scaler = MinMaxScaler()
     scaler.fit(df)
     data_ = scaler.transform(df)
@@ -56,6 +65,36 @@ def prediction(stock, indices, df):
     close_scaler = MinMaxScaler()
     close_scaler.fit(close)
     y = close_scaler.inverse_transform(y)
+    return y
+
+
+def prediction_range(stock, indices, df, dateData):
+    import tensorflow as tf
+    file_path = f'predict/dataset/{indices}/{stock}.pickle'
+    scaler = MinMaxScaler()
+    scaler.fit(df)
+    data_ = scaler.transform(df)
+    data = []
+    for i in range(len(data_)-28):
+        data.append(data_[i:i+28])
+    data = np.array(data)
+    print(data.shape)
+    model_path = f'predict/checkpoint/{indices}/{stock}_model.h5'
+    model = tf.keras.models.load_model(model_path)
+    np.nan_to_num(data, copy=False)
+    y = model.predict(data)
+    close = np.asarray(df.iloc[:, 3:4])
+    close_scaler = MinMaxScaler()
+    close_scaler.fit(close)
+    y = close_scaler.inverse_transform(y)
+    result = []
+    for i in range(len(y)-1, -1, -1):
+        temp = {}
+        temp["time"] = dateData[len(dateData) - (len(y)-1-i) - 1]
+        temp["value"] = y[i][0]
+        result.append(temp)
+    with open(file_path, 'wb') as fw:
+        pickle.dump(result, fw)
     return y
 
 
@@ -147,3 +186,31 @@ def get_stock_data(path, country, indices):
         stockinfo.open = open_price
         stockinfo.predict = predict
         stockinfo.save()
+
+
+def get_company_data(path, country, indices):
+    stocks = get_stocks_list(path)
+    date = DateUtil(-90)
+    from_date = date.from_date
+    to_date = date.to_date
+    commodities_df = get_commodities(from_date, to_date)
+    for stock, name in stocks:
+        if path != 'nasdaq':
+            stock = str(stock)
+            stock = '0' * (6 - len(stock)) + stock
+        try:
+            data = investpy.stocks.get_stock_information(
+                stock=stock, country=country, as_json=True
+            )
+            stock_df = investpy.stocks.get_stock_historical_data(
+                stock, country, from_date, to_date
+            )
+        except:
+            print(stock)
+            continue
+        print(stock)
+        stock_df['date'] = stock_df.index.map(lambda x: str(x).split(' ')[0])
+        testData = pd.merge(stock_df, commodities_df, on='date')
+        dateData = testData['date']
+        testData = testData.drop(['Currency', 'date'], axis=1)
+        predict_ = prediction_range(stock, indices, testData, dateData)
