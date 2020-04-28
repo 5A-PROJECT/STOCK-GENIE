@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Chart from '../../predict/Chart/index';
-import DetailInfo from '../DetailInfo/index';
-import DetailInfo2 from '../DetailInfo2/index';
 import Button from '@material-ui/core/Button';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+import { observer, inject } from 'mobx-react';
 
 const DetailHeaderWrapper = styled.div``;
 
@@ -18,22 +16,13 @@ const NameCode = styled.div`
   display: flex;
 `;
 
-const ChartWarpper = styled.div`
-  display: center;
-  margin-top: 3rem;
-`;
-
-const DetailInfoWrapper = styled.div`
-  margin-top: 2rem;
-`;
-
-function DetaillHeader({ info }) {
+function DetaillHeader({ stock }) {
   return (
     <DetailHeaderWrapper>
       <CompanyBasicWrapper>
         <NameCode>
-          <h1>{info.state.name}</h1>
-          <h3>({info.state.code})</h3>
+          <h1>{stock.name}</h1>
+          <h3>({stock.code})</h3>
         </NameCode>
         <NameCode>
           <Button
@@ -52,33 +41,8 @@ function DetaillHeader({ info }) {
           </Button>
         </NameCode>
       </CompanyBasicWrapper>
-      <h3>금일 시가 : {info.state.currentprice.toLocaleString()}</h3>
-      <hr></hr>
-
-      <ChartWarpper>
-        <Chart
-          width="1000"
-          height="300"
-          url="indices"
-          params={{
-            country: info.state.country,
-            name: info.state.index,
-          }}
-        />
-      </ChartWarpper>
-      <DetailInfoWrapper>
-        {/* <DetailInfo
-          code={info.state.code}
-          country={info.state.country}
-          url={info.pathname}
-        /> */}
-        <DetailInfo2
-          code={info.state.code}
-          country={info.state.country}
-          url={info.pathname}
-        />
-      </DetailInfoWrapper>
+      <h3>금일 시가 : {stock.currentprice.toLocaleString()}</h3>
     </DetailHeaderWrapper>
   );
 }
-export default DetaillHeader;
+export default inject('predictStore')(observer(DetaillHeader));

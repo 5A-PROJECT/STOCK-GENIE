@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import ReturnRatio from '../../../../molecules/ReturnRatio';
+import { inject } from 'mobx-react';
 
-const StockWrapper = styled(Link)`
+const StockWrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   align-items: center;
-  text-decoration: none;
-  color: black;
   padding: 1rem;
   border: 1px solid ${colors.grey[300]};
   border-radius: 5px;
@@ -68,21 +67,23 @@ const Currency = ({ index }) => {
   );
 };
 
-function ListTableItem({ data, index }) {
+function ListTableItem({ data, selectedIndex, predictStore, history }) {
   const { name, close, open, rate, predictpoint, code, country } = data;
+  const { setSelectedStock } = predictStore;
+
+  const goToStockDetail = () => {
+    setSelectedStock({
+      name,
+      code,
+      country,
+      currentprice: open,
+      index: selectedIndex,
+    });
+    history.push('/stockdetail');
+  };
+
   return (
-    <StockWrapper
-      to={{
-        pathname: 'stockdetail',
-        state: {
-          name,
-          code,
-          country,
-          currentprice: open,
-          index: index.toUpperCase(),
-        },
-      }}
-    >
+    <StockWrapper onClick={goToStockDetail}>
       <NameWrapper>
         {predictpoint === 1 ? (
           <ColoredBadge color={colors.red[400]}>상승예측</ColoredBadge>
@@ -94,11 +95,11 @@ function ListTableItem({ data, index }) {
       </NameWrapper>
       <div className="info">
         {close.toLocaleString()}
-        <Currency index={index} />
+        <Currency index={selectedIndex} />
       </div>
       <div className="info">
         {open.toLocaleString()}
-        <Currency index={index} />
+        <Currency index={selectedIndex} />
       </div>
       <div className="info">
         <ReturnRatio ratio={rate} iconSize="1rem" fontSize="1rem" />
@@ -107,4 +108,4 @@ function ListTableItem({ data, index }) {
   );
 }
 
-export default ListTableItem;
+export default inject('predictStore')(withRouter(ListTableItem));
