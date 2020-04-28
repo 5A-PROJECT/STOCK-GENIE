@@ -14,7 +14,7 @@ class StockInfo(models.Model):
 
     @property
     def rate(self):
-        return round(((self.close - self.open)/self.open) * 100, 2)
+        return round(((self.open - self.close)/self.close) * 100, 2)
 
     @property
     def predictpoint(self):

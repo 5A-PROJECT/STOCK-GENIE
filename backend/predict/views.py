@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from . import invest
 from .models import StockInfo
 from .serializers import StockInfoSerializer
+import pickle
+import json
 
 
 @permission_classes([IsAuthenticated, ])
@@ -78,6 +80,28 @@ def stock_detail(request):
         result = {}
         result['base'] = data
         result['predict'] = serializer.data
+        return Response(result)
+    else:
+        return HttpResponse(status=405)
+
+
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+@api_view(['GET'])
+def get_stock(request):
+    if request.method == 'GET':
+        code = request.GET.get('code')
+        country = request.GET.get('country')
+        index = request.GET.get('index')
+        data = invest.get_stock(code, country)
+        file_path = f'predict/dataset/{index}/{code}.pickle'
+        with open(file_path, "rb") as fr:
+            predict_data = pickle.load(fr)
+        for dt in predict_data:
+            dt['value'] = float(dt['value'])
+        result = {}
+        result['real'] = data['data']
+        result['predict'] = predict_data
         return Response(result)
     else:
         return HttpResponse(status=405)

@@ -59,3 +59,14 @@ def get_stock_detail(stock, country):
         stock=stock, country=country, as_json=True
     )
     return data
+
+
+def get_stock(stock, country):
+    data = investpy.stocks.get_stock_recent_data(
+        stock=stock, country=country)
+    data = data.drop(['Open', 'High', 'Low', 'Volume', 'Currency'], axis=1)
+    data.rename(columns={'Close': 'value'}, inplace=True)
+    data['time'] = data.index.map(lambda x: str(x).split(' ')[0])
+    result = {}
+    result['data'] = data.to_dict('records')
+    return result
