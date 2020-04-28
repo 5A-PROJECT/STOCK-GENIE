@@ -14,6 +14,12 @@ const StockDetailWrapper = styled.div`
   height: 100%;
 `;
 
+const Title = styled.div`
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+`;
+
 function StockDetailPage({ predictStore, history }) {
   const { selectedStock, clearSelectedStock } = predictStore;
 
@@ -32,6 +38,12 @@ function StockDetailPage({ predictStore, history }) {
   return (
     <AccessProtection authed={true} redirectPath="/">
       <StockDetailWrapper>
+        <Title>
+          <span role="img" aria-label="">
+            🔎
+          </span>
+          주식 상세보기
+        </Title>
         {selectedStock !== null && (
           <>
             <DetailHeader stock={selectedStock} />
