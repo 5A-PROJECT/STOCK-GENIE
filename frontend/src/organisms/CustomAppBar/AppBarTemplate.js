@@ -46,7 +46,7 @@ function AppBarTemplate({ isLoggedIn }) {
               <NavLink to="/predict">주가예측</NavLink>
             </li>
             <li>
-              <NavLink to="/portfolio">포트폴리오</NavLink>
+              <NavLink to="/dashboard">대시보드</NavLink>
             </li>
             <li>
               <NavLink to="/search">검색</NavLink>

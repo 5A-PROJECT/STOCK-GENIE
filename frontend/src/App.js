@@ -46,7 +46,7 @@ function App({ authStore }) {
               render={(props) => <AuthPage type="register" {...props} />}
             />
             <Route path="/predict" component={PredictPage} exact />
-            <Route path="/portfolio" component={PortFolioPage} exact />
+            <Route path="/dashboard" component={PortFolioPage} exact />
             <Route path="/portfolio/:id" component={PortfolioItem} />
             <Route path="/search" component={SearchPage} exact />
             <Route path="/search/:query" component={SearchResultPage} />

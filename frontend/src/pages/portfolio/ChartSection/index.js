@@ -21,7 +21,7 @@ const indexes = [
   },
 ];
 
-const ChartSectionWrapper = styled.article`
+const ChartSectionWrapper = styled.section`
   margin-bottom: 2rem;
 `;
 
