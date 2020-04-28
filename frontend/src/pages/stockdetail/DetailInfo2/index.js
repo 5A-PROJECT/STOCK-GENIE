@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { colors } from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 import Spinner from '../../../atoms/Spinner';
+import LineChart from '../LineChart';
+import BarChart from '../BarChart';
 
 const DetailInfoWrapper = styled.div`
   border: 2px solid ${colors.grey[300]};
@@ -20,6 +22,11 @@ const GridWapper = styled.div`
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
+`;
+
+const ChartWrapper = styled.div`
+  height: 400px;
 `;
 
 const InfoWrapper = styled.div`
@@ -44,7 +51,15 @@ const InfoWrapper = styled.div`
 `;
 
 function DetailInfo({ predictStore }) {
-  const { getPredictData, predictData, loading } = predictStore;
+  const {
+    getPredictData,
+    predictData,
+    loading,
+    salesFormatedData,
+    tradeAmountFormatedData,
+    fluctuationFormatedData
+  } = predictStore;
+  console.log(predictData);
   useEffect(() => {
     getPredictData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,9 +95,15 @@ function DetailInfo({ predictStore }) {
                 </InfoWrapper>
               </div>
 
-              <div>평균 시총 및 매출 그래프</div>
+              <ChartWrapper>
+                <h1>평균 시가총액, 매출 비교</h1>
+                <BarChart data={salesFormatedData} />
+              </ChartWrapper>
 
-              <div>변동폭 비교 그래프</div>
+              <ChartWrapper>
+                <h1>변동폭 비교 그래프</h1>
+                <LineChart data={fluctuationFormatedData} />
+              </ChartWrapper>
 
               <div>
                 <InfoWrapper>
@@ -120,8 +141,14 @@ function DetailInfo({ predictStore }) {
                   </div>
                 </InfoWrapper>
               </div>
-              <div>거래량 비교 그래프</div>
-              <div>??뭐든 괜찮은 그래프</div>
+              <ChartWrapper>
+                <h1>거래량 비교 그래프</h1>
+                <BarChart scheme="dark2" data={tradeAmountFormatedData} />
+              </ChartWrapper>
+              <ChartWrapper>
+                <h1>???뭐든 그래프</h1>
+                <LineChart data={fluctuationFormatedData} />
+              </ChartWrapper>
               <div>
                 <InfoWrapper>
                   <div className="title">주당순이익(EPS)</div>

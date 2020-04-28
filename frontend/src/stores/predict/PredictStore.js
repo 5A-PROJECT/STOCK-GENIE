@@ -1,4 +1,4 @@
-import { decorate, action, observable } from 'mobx';
+import { decorate, action, observable, computed } from 'mobx';
 import PredictRepository from '../../repositories/predict/PredictRepository';
 
 export default class PredictStore {
@@ -14,6 +14,74 @@ export default class PredictStore {
     getTableData: false,
     getPredictData: false,
   };
+
+  get salesFormatedData() {
+    if (this.predictData) {
+      return [
+        {
+          name: '시가총액',
+          시가총액: this.predictData.base['Market Cap'] / 1000,
+        },
+        {
+          name: '매출',
+          매출: this.predictData.base['Revenue'] / 1000,
+        },
+      ];
+    } else return null;
+  }
+
+  get tradeAmountFormatedData() {
+    if (this.predictData) {
+      return [
+        {
+          name: '거래량',
+          거래량: this.predictData.base['Volume'],
+        },
+        {
+          name: '평균거래량',
+          평균거래량: this.predictData.base['Average Vol. (3m)'],
+        },
+      ];
+    } else return null;
+  }
+
+  get fluctuationFormatedData() {
+    if (this.predictData) {
+      console.log(this.predictData, '??');
+      const today = this.predictData.base['Todays Range'];
+      const [past, now] = today.split('-');
+      const week = this.predictData.base['52 wk Range'];
+
+      return [
+        {
+          id: '52주 변동폭',
+          data: [
+            {
+              x: '과거',
+              y: 130,
+            },
+            {
+              x: '최근',
+              y: 213,
+            },
+          ],
+        },
+        {
+          id: '금일 변동폭',
+          data: [
+            {
+              x: '과거',
+              y: parseInt(past),
+            },
+            {
+              x: '최근',
+              y: parseInt(now),
+            },
+          ],
+        },
+      ];
+    } else return null;
+  }
 
   getTableData = async (index) => {
     const { token } = this.root.authStore;
@@ -63,6 +131,9 @@ decorate(PredictStore, {
   predictData: observable,
   selectedStock: observable,
   loading: observable,
+  salesFormatedData: computed,
+  tradeAmountFormatedData: computed,
+  fluctuationFormatedData: computed,
   getTableData: action,
   setSelectedIndex: action,
   setSelectedStock: action,

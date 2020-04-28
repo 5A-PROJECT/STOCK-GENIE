@@ -40,7 +40,7 @@ function StockDetailPage({ predictStore, history }) {
       <StockDetailWrapper>
         <Title>
           <span role="img" aria-label="">
-            🔎
+            🔎{' '}
           </span>
           주식 상세보기
         </Title>
