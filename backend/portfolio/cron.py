@@ -16,14 +16,11 @@ def set_currency():
 
 
 def add_profits():
-    sg = gccrd('USD/KRW').iloc[-1, 3]
+    sg = Currency.objects.get(name='USD/KRW').ratio
     pfs = Portfolio.objects.all()
     for pf in pfs:
         now, stocks = 0, pf.stocks.all()
         for stock in stocks:
-            t = sg
-            if stock.currency == 'KRW':
-                sg = 1
-            now += stock.count * stock.current_price * sg
-            sg = t
+            exchange = 1 if stock.currency == 'KRW' else sg.ratio
+            now += stock.count * stock.current_price * exchange
         Profit.objects.create(money=now, portfolio=pf)
