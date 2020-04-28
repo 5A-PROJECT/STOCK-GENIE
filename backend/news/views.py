@@ -43,6 +43,8 @@ def evaluate(request):
         params={'query': '"' + query + '"', 'display': display, 'sort': 'sim'}
     ).json()
     articles = naver_newses.get('items')
+    if len(articles) == 0:
+        return HttpResponse(status=400)
 
     titles, links, descriptions = [], [], []
     for article in articles:
@@ -62,10 +64,10 @@ def evaluate(request):
         tokenizer = Okt()
 
         words = {}
-        for description in descriptions:
-            description = re.sub(
-                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…●‘’“”]', '', description)
-            tokens = tokenizer.morphs(description)
+        for title in titles:
+            title = re.sub(
+                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…●‘’“”]', '', title)
+            tokens = tokenizer.morphs(title)
             for token in tokens:
                 words[token] = 1 if token not in words else words[token] + 1
 
@@ -81,8 +83,10 @@ def evaluate(request):
             for token in tokens:
                 num = word_to_idx[token] if token in word_to_idx else 0
                 raw.append(num)
-            if len(raw) < 30:
-                raw += [0] * (30 - len(raw))
+            if len(raw) < 50:
+                raw += [0] * (50 - len(raw))
+            else:
+                raw = raw[:50]
             X.append(raw)
         X = np.array(X)
 
@@ -93,9 +97,9 @@ def evaluate(request):
         from tensorflow.keras.preprocessing.text import Tokenizer
 
         tokenizer = Tokenizer(num_words=5000, oov_token='<unk>')
-        tokenizer.fit_on_texts(descriptions)
+        tokenizer.fit_on_texts(titles)
 
-        X = tokenizer.texts_to_sequences(descriptions)
+        X = tokenizer.texts_to_sequences(titles)
         X = pad_sequences(X, maxlen=50, padding='post')
 
         model = load_model('./news/models/best_model_us.h5')
