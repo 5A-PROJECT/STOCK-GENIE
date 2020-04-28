@@ -13,6 +13,7 @@ const theme = {
   },
   color: {
     main: {
+      color: MAIN_COLOR,
       logo: MAIN_COLOR[800],
       background: colors.grey[100],
       footer: 'black',
