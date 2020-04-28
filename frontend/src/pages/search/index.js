@@ -2,58 +2,60 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessProtection from '../../molecules/AccessProtection';
 import WordCloud from './WordCloud';
-import { TextField, Grid } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import PieGraph from './Graph/PieGraph';
-import PopNewsList from './NewsList/PopNews';
 import AllNewsList from './NewsList/AllNewsList';
+import { inject, observer } from 'mobx-react';
+import { useEffect } from 'react';
+import Spinner from '../../atoms/Spinner';
 
 const SearchPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
   margin: 0 auto;
 `;
 
-function SearchBar() {
-  return (
-    <>
-      <Grid align="center">
-        <TextField
-          size="small"
-          variant="outlined"
-          id="keyword"
-          type="text"
-          className="input_text"
-          placeholder=""
-          // style={{ width: '100%', backgroundColor: 'white' }}
-        />
+const WordWrapper = styled.div`
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+`;
 
-        <SearchIcon />
-      </Grid>
-    </>
-  );
-}
-
-const ContainWrapper = styled.div`
+const NewsWrapper = styled.div`
   margin-top: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
 `;
 
-function SearchPage(props) {
+function SearchPage({ newsStore }) {
+  const { loading, newsData, formatedNewsData } = newsStore;
+  useEffect(() => {
+    newsStore.getNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
-      <SearchPageWrapper>
-        <SearchBar />
-        <ContainWrapper>
-          <WordCloud />
-          <PopNewsList />
-          <AllNewsList />
-          <PieGraph />
-        </ContainWrapper>
-      </SearchPageWrapper>
+      {loading['getNews'] ? (
+        <Spinner />
+      ) : (
+        <>
+          {newsData ? (
+            <SearchPageWrapper>
+              <WordWrapper>
+                <WordCloud words={newsData.words} />
+              </WordWrapper>
+              <NewsWrapper>
+                <AllNewsList news={formatedNewsData} />
+                <PieGraph />
+              </NewsWrapper>
+            </SearchPageWrapper>
+          ) : (
+            <div>뉴스 데이터 없음</div>
+          )}
+        </>
+      )}
     </AccessProtection>
   );
 }
 
-export default SearchPage;
+export default inject('newsStore')(observer(SearchPage));

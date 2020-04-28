@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactWordCloud from 'react-wordcloud';
-import words from './words';
-import axios from 'axios';
+import { inject, observer } from 'mobx-react';
 
 const options = {
   enableTooltip: true,
@@ -18,11 +17,21 @@ const options = {
 };
 
 function Wordcloud(props) {
+  const { wordData } = props.newsStore;
+  const keys = Object.keys(wordData);
+
+  let wordList = [];
+  for (let i = 0; i < keys.length; i++) {
+    wordList.push({
+      text: keys[i],
+      value: wordData[keys[i]],
+    });
+  }
   return (
     <div>
-      <ReactWordCloud options={options} words={words} />
+      <ReactWordCloud options={options} words={wordList} />
     </div>
   );
 }
 
-export default Wordcloud;
+export default inject('newsStore')(observer(Wordcloud));

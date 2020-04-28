@@ -15,11 +15,9 @@ const ItemWrapper = styled.a`
 `;
 
 function ShowNewsList(props) {
-  const { news, links } = props.news;
-  console.log('show');
-  // console.log(props);
+  const { news, link } = props.news;
   const openNewTab = () => {
-    window.open(links);
+    window.open(link);
   };
 
   return (

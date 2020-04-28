@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import _ from 'lodash';
 
 const Wrapper = styled.li`
   display: flex;
@@ -15,11 +16,12 @@ const PageButton = styled.button`
   padding: 0;
   border: none;
 `;
-function Pagination(props) {
-  const { pageNum, start, end } = props;
+function Paging(props) {
+  const { pageSize } = props;
+
   const pageNumbers = [];
 
-  for (let i = start; i <= end; i++) {
+  for (let i = 1; i <= 10; i++) {
     pageNumbers.push(i);
   }
 
@@ -33,4 +35,4 @@ function Pagination(props) {
     </Wrapper>
   );
 }
-export default Pagination;
+export default Paging;

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Pagination from '../Utils/Pagination';
-import axios from 'axios';
+import Paging from '../Utils/Paging';
 import ShowAllNews from './ShowAllNews';
 
 const TitleWrapper = styled.div`
@@ -25,57 +24,26 @@ const PageList = styled.ul`
   display: flex;
 `;
 
-function AllNewsList() {
-  const [news, setNews] = useState([]);
-  useEffect(() => {
-    const serverUrl = 'http://localhost:8000/news';
-    const token = sessionStorage.getItem('access_token');
-    axios
-      .get(serverUrl, {
-        params: {
-          query: '삼성',
-        },
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      })
-      .then((res) => {
-        let news_data = [];
-        for (let i = 0; i < res.data.news.length; i++) {
-          news_data.push({
-            news: res.data.news[i],
-            links: res.data.links[i],
-            results: res.data.results[i],
-          });
-        }
-        setNews(news_data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  const recentButton = () => {};
-  // const recentButton = () => {};
-  const goodNewsButton = () => {};
-  const badNewsButton = () => {};
+function AllNewsList({ news }) {
+  let pageItem = [];
+  for (let i = 0; i < 10; i++) {
+    pageItem.push(news[i]);
+  }
   return (
     <>
       <div>
         <TitleWrapper>
           <ButtonGroup variant="text">
-            <Button>최근순</Button>
-            <Button>조회수</Button>
             <Button>Good News</Button>
             <Button>Bad News</Button>
           </ButtonGroup>
         </TitleWrapper>
         <NewsWrapper>
-          {news.map((news, index) => (
-            <ShowAllNews key={index} news={news} />
+          {pageItem.map((data, index) => (
+            <ShowAllNews key={index} news={data} />
           ))}
           <PageList>
-            <Pagination pageNum={105} start={101} end={111} />
+            <Paging pageSize={news.length} />
           </PageList>
         </NewsWrapper>
       </div>
