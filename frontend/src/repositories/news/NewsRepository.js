@@ -8,7 +8,6 @@ class NewsRepository {
   }
 
   getNews(token, keyword) {
-    console.log(`${this.URL}/news`);
     return axios.get(`${this.URL}/news`, {
       params: {
         query: keyword,

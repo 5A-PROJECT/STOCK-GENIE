@@ -33,7 +33,6 @@ function SearchPage({ newsStore }) {
     newsStore.getNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(loading['getNews']);
   return (
     <AccessProtection authed={true} redirectPath={'/login'}>
       {loading['getNews'] ? (

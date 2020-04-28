@@ -53,6 +53,7 @@ export default class NewsStore {
 
 decorate(NewsStore, {
   newsData: observable,
+  wordData: observable,
   loading: observable,
   formatedNewsData: computed,
   getNews: action,

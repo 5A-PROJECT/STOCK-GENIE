@@ -29,8 +29,6 @@ function AllNewsList({ news }) {
   for (let i = 0; i < 10; i++) {
     pageItem.push(news[i]);
   }
-  console.log('pageItem');
-  console.log(pageItem);
   return (
     <>
       <div>
