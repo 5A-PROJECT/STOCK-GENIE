@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Chart from '../../predict/Chart/index';
 import DetailInfo from '../DetailInfo/index';
+import DetailInfo2 from '../DetailInfo2/index';
 import Button from '@material-ui/core/Button';
-// import Icon from '@material-ui/core/Icon';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 
 const DetailHeaderWrapper = styled.div``;
@@ -34,15 +35,24 @@ function DetaillHeader({ info }) {
           <h1>{info.state.name}</h1>
           <h3>({info.state.code})</h3>
         </NameCode>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<CreateNewFolderIcon />}
-        >
-          내 포트폴리오에 추가하기
-        </Button>
+        <NameCode>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<CreateNewFolderIcon />}
+          >
+            내 포트폴리오에 추가하기
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<FindInPageIcon />}
+          >
+            관련 기사 검색하기
+          </Button>
+        </NameCode>
       </CompanyBasicWrapper>
-      <h3>금일 시가 : {info.state.currentprice}</h3>
+      <h3>금일 시가 : {info.state.currentprice.toLocaleString()}</h3>
       <hr></hr>
 
       <ChartWarpper>
@@ -57,7 +67,12 @@ function DetaillHeader({ info }) {
         />
       </ChartWarpper>
       <DetailInfoWrapper>
-        <DetailInfo
+        {/* <DetailInfo
+          code={info.state.code}
+          country={info.state.country}
+          url={info.pathname}
+        /> */}
+        <DetailInfo2
           code={info.state.code}
           country={info.state.country}
           url={info.pathname}
