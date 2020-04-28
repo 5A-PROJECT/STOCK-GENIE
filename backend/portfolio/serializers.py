@@ -15,14 +15,12 @@ class PortfolioSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
 
     def get_total(self, obj):
+        sg = Currency.objects.get(name='USD/KRW').ratio
         buy, now = 0, 0
         for stock in obj.stocks.all():
-            if stock.currency == 'KRW':
-                sg = 1
-            elif stock.currency == 'USD':
-                sg = Currency.objects.get(name='USD/KRW')
-            buy += stock.count * stock.buy_price * sg
-            now += stock.count * stock.current_price * sg
+            exchange = 1 if stock.currency == 'KRW' else sg.ratio
+            buy += stock.count * stock.buy_price * exchange
+            now += stock.count * stock.current_price * exchange
         return 0 if buy == 0 else (now - buy) * 100 / buy
 
     class Meta:
@@ -37,22 +35,23 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
 
     def get_profit(self, obj):
         s, o, us, kr, buy, now = 0, 0, 0, 0, 0, 0
+        sg = Currency.objects.get(name='USD/KRW').ratio
 
         for stock in obj.stocks.all():
             if stock.currency == 'KRW':
-                sg = 1
-                kr += stock.current_price * sg
+                exchange = 1
+                kr += stock.current_price * exchange
             elif stock.currency == 'USD':
-                sg = Currency.objects.get(name='USD/KRW')
-                us += stock.current_price * sg
+                exchange = sg
+                us += stock.current_price * exchange
 
             if stock.category == 'STOCK':
-                s += stock.current_price * sg
+                s += stock.current_price * exchange
             else:
-                o += stock.current_price * sg
+                o += stock.current_price * exchange
 
-            buy += stock.count * stock.buy_price * sg
-            now += stock.count * stock.current_price * sg
+            buy += stock.count * stock.buy_price * exchange
+            now += stock.count * stock.current_price * exchange
 
         ratio = 0 if buy == 0 else (now - buy) * 100 / buy
         share_ratio = 0 if s + o == 0 else s * 100 / (s + o)
