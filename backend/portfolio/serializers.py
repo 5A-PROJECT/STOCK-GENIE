@@ -1,7 +1,7 @@
 from rest_framework import serializers
+from stock.models import Currency
 from .models import Tag, Portfolio
 from stock.serializers import StockSerializer
-from investpy.currency_crosses import get_currency_cross_recent_data as gccrd
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -15,15 +15,15 @@ class PortfolioSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
 
     def get_total(self, obj):
-        first, now, sg = 0, 0, gccrd('USD/KRW').iloc[-1, 3]
+        buy, now = 0, 0
         for stock in obj.stocks.all():
-            t = sg
             if stock.currency == 'KRW':
                 sg = 1
-            first += stock.count * stock.buy_price * sg
+            elif stock.currency == 'USD':
+                sg = Currency.objects.get(name='USD/KRW')
+            buy += stock.count * stock.buy_price * sg
             now += stock.count * stock.current_price * sg
-            sg = t
-        return 0 if first == 0 else (now - first) * 100 / first
+        return 0 if buy == 0 else (now - buy) * 100 / buy
 
     class Meta:
         model = Portfolio
@@ -36,32 +36,33 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
     profit = serializers.SerializerMethodField()
 
     def get_profit(self, obj):
-        s, o, usd, krw = 0, 0, 0, 0
-        first, now, sg = 0, 0, gccrd('USD/KRW').iloc[-1, 3]
+        s, o, us, kr, buy, now = 0, 0, 0, 0, 0, 0
+
         for stock in obj.stocks.all():
-            t = sg
-            if stock.currency != 'KRW':
-                usd += stock.current_price * sg
-            else:
+            if stock.currency == 'KRW':
                 sg = 1
-                krw += stock.current_price * sg
+                kr += stock.current_price * sg
+            elif stock.currency == 'USD':
+                sg = Currency.objects.get(name='USD/KRW')
+                us += stock.current_price * sg
+
             if stock.category == 'STOCK':
                 s += stock.current_price * sg
             else:
                 o += stock.current_price * sg
-            first += stock.buy_price * stock.count * sg
-            now += stock.current_price * stock.count * sg
-            sg = t
 
-        ratio = 0 if first == 0 else (now - first) * 100 / first
+            buy += stock.count * stock.buy_price * sg
+            now += stock.count * stock.current_price * sg
+
+        ratio = 0 if buy == 0 else (now - buy) * 100 / buy
         share_ratio = 0 if s + o == 0 else s * 100 / (s + o)
         other_ratio = 0 if s + o == 0 else o * 100 / (s + o)
-        usd_ratio = 0 if usd + krw == 0 else usd * 100 / (usd + krw)
-        krw_ratio = 0 if usd + krw == 0 else krw * 100 / (usd + krw)
+        usd_ratio = 0 if us + kr == 0 else us * 100 / (us + kr)
+        krw_ratio = 0 if us + kr == 0 else kr * 100 / (us + kr)
 
         data = {
-            'totalBuyingPrice': first, 'totalCurrentPrice': now,
-            'totalProfit': now - first, 'totalRatio': ratio,
+            'totalBuyingPrice': buy, 'totalCurrentPrice': now,
+            'totalProfit': now - buy, 'totalRatio': ratio,
             'exchangeRate': sg,
             'currencyRate': {'USD': int(usd_ratio), 'KRW': int(krw_ratio)},
             'categoryRate': {'STOCK': int(share_ratio), 'DERIVATIVES': int(other_ratio)}

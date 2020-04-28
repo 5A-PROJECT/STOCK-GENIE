@@ -9,8 +9,6 @@ import requests
 import re
 import os
 
-# Create your views here.
-
 naver_url = 'https://openapi.naver.com/v1/search/news.json'
 naver_headers = {
     'X-Naver-Client-Id': config('NAVER_ID'),
