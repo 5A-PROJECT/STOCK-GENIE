@@ -34,29 +34,31 @@ const ButtonContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-bottom: 0.5rem;
-  button {
-    border: none;
-    background-color: ${({ theme }) => theme.color.main.color[500]};
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 0.5rem;
-    :focus {
-      outline: none;
-    }
-    :hover {
-      background-color: ${({ theme }) => theme.color.main.color[700]};
-      transition-duration: 0.5s;
-    }
-    :first-child {
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-    }
-    :last-child {
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
+`;
+
+const SelectedButton = styled.button`
+  border: none;
+  background-color: ${({ active, theme }) =>
+    active ? theme.color.main.color[700] : theme.color.main.color[500]};
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  :focus {
+    outline: none;
+  }
+  :hover {
+    background-color: ${({ theme }) => theme.color.main.color[700]};
+    transition-duration: 0.5s;
+  }
+  :first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  :last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 `;
 
@@ -69,8 +71,14 @@ function ChartSection() {
     <ChartSectionWrapper>
       <Title>주요 지표</Title>
       <ButtonContainer>
-        {indexes.map(({ symbol, name }) => (
-          <button onClick={() => onChangeChartSymbol(symbol)}>{name}</button>
+        {indexes.map(({ symbol: sym, name }) => (
+          <SelectedButton
+            key={sym}
+            onClick={() => onChangeChartSymbol(sym)}
+            active={symbol === sym}
+          >
+            {name}
+          </SelectedButton>
         ))}
       </ButtonContainer>
       <TradingChart chart_id="trading-chart" symbol={symbol} />

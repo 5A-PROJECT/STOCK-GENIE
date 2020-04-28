@@ -4,7 +4,6 @@ import AccessProtection from '../../molecules/AccessProtection';
 import PortfolioHeader from './PortfolioHeader';
 import PortfolioSection from './PortfolioSection';
 import { observer, inject } from 'mobx-react';
-import TradingChart from '../../organisms/TradingChart';
 import ChartSection from './ChartSection';
 
 const PortFolioPageWrapper = styled.div`
