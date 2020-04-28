@@ -14,15 +14,46 @@ const MainPageWrapper = styled.div`
     left: 0;
     top: 0;
     z-index: -1;
-    opacity: 0.3;
-    background-image: url(${`${process.env.PUBLIC_URL}/main_background.jpg`});
+    opacity: 0.6;
+    /* background-image: url(${`${process.env.PUBLIC_URL}/main_background.jpg`}); */
+    background-image:url('https://images.unsplash.com/photo-1470790376778-a9fbc86d70e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1549&q=80');
     background-position: center;
     background-size: cover;
   }
 `;
 
-const Logo = styled.div`
-  font-size: 6rem;
+const Logo = styled.span`
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: ${({ theme }) => theme.font.gmarket};
+  @media (max-width: 900px) {
+    font-size: 1.4rem;
+  }
+`;
+
+const TextContents = styled.div`
+  font-weight: bold;
+  .main {
+    font-size: 4rem;
+    @media (max-width: 900px) {
+      font-size: 2rem;
+    }
+  }
+  .sub {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    @media (max-width: 900px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  .accent {
+    color: ${({ theme }) => theme.color.main.logo};
+  }
+
+  margin-bottom: 2rem;
 `;
 
 const Contents = styled.div`
@@ -31,8 +62,8 @@ const Contents = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  height: 100%;
   max-width: 1024px;
+  height: 100%;
   margin: 0 auto;
 `;
 
@@ -40,7 +71,21 @@ function MainPage() {
   return (
     <MainPageWrapper>
       <Contents>
-        <Logo>로고 플리즈</Logo>
+        <TextContents>
+          <div className="main">
+            복잡한 <span className="accent">투자</span>,
+          </div>
+          <div className="main">
+            여러분은 관심 끄세요.{' '}
+            <span role="img" aria-label="">
+              🤫
+            </span>
+          </div>
+          <div className="sub">
+            <Logo>5A</Logo>
+            <span>가 대신 관리하고 찾아드릴께요.</span>
+          </div>
+        </TextContents>
         <SearchInput />
       </Contents>
     </MainPageWrapper>
