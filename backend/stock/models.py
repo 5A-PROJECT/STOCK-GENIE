@@ -5,6 +5,10 @@ from portfolio.models import Portfolio
 # Create your models here.
 
 
+class Currency(models.Model):
+    ratio = models.FloatField()
+
+
 class Stock(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=20)
