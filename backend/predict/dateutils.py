@@ -9,7 +9,7 @@ class DateUtil():
         self.from_date = self.change_dateform(self.calc_day)
 
     def change_dateform(self, date):
-        date = str(date).split(" ")[0].split("-")
+        date = str(date).split(' ')[0].split('-')
         date.reverse()
-        date = "/".join(date)
+        date = '/'.join(date)
         return date
