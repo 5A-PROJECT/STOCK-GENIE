@@ -15,8 +15,7 @@ const MainPageWrapper = styled.div`
     top: 0;
     z-index: -1;
     opacity: 0.6;
-    /* background-image: url(${`${process.env.PUBLIC_URL}/main_background.jpg`}); */
-    background-image:url('https://images.unsplash.com/photo-1470790376778-a9fbc86d70e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1549&q=80');
+    background-image: url(${`${process.env.PUBLIC_URL}/main_background.jpeg`});
     background-position: center;
     background-size: cover;
   }
