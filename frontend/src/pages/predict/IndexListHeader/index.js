@@ -1,49 +1,58 @@
 import React from 'react';
 import styled from 'styled-components';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-const ExplainWrapper = styled.div`
-  margin-left: 1.8rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  .content {
-    font-size: larger;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+const Title = styled.div`
+  font-weight: bold;
+  .title {
+    font-size: 2rem;
+  }
+  .category {
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+    color: grey;
   }
 `;
 
-const UpIcon = styled(ArrowDropUpIcon)`
-  color: red;
-  font-size: initial;
-  display: inline-block;
-`;
-
-const DownIcon = styled(ArrowDropDownIcon)`
-  color: blue;
-  font-size: initial;
-  display: inline-block;
+const Description = styled.ul`
+  li {
+    font-size: 1rem;
+    font-weight: bold;
+    & + li {
+      margin-top: 0.5rem;
+    }
+  }
 `;
 
 function IndexListHeader() {
   return (
-    <ExplainWrapper>
-      <div className="content">
-        - 기업의 시가, 종가, 거래량 등의 데이터를 기반으로 합니다.
-      </div>
-      <div className="content">
-        - Gold, Oil,Cupper 등의 데이터도 활용합니다.
-      </div>
-      <div className="content">
-        - 제시된 데이터를 기반으로 해당 종목의 상승, 하락(
-        <UpIcon />, <DownIcon />
-        )을 예측합니다.
-      </div>
-      <div className="content">
-        - 종목별 상세보기를 통해서 예측 그래프를 확인할 수 있습니다.
-      </div>
-    </ExplainWrapper>
+    <>
+      <Title>
+        <span className="title">
+          <span role="img" aria-label="emoji">
+            🧠
+          </span>{' '}
+          예측 리포트
+        </span>
+        <span className="category">TOP 30</span>
+      </Title>
+
+      <Description>
+        <li>기업의 시가, 종가, 거래량 등의 데이터를 기반으로 합니다.</li>
+        <li>금, 유가, 구리, 환율 등의 데이터를 반영합니다.</li>
+        <li>
+          제시된 데이터를 기반으로 해당 종목의 상승{' '}
+          <span role="img" aria-label="emoji">
+            📈
+          </span>
+          및 하락{' '}
+          <span role="img" aria-label="emoji">
+            📉
+          </span>
+          을 예측합니다.
+        </li>
+        <li>종목별 상세보기를 통해서 예측 그래프를 확인할 수 있습니다.</li>
+      </Description>
+    </>
   );
 }
 
