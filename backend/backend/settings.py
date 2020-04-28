@@ -161,9 +161,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # need for crontab
 CRONJOBS = [
-    ('* * * * 1,2,3,4,5', 'portfolio.cron.add_profits',
+    ('0 8 * * 1,2,3,4,5', 'portfolio.cron.add_profits',
      '>> /home/ubuntu/s02p23c101/backend/add_profits.log'),
-    ('* * * * 1,2,3,4,5', 'portfolio.cron.set_currency',
+    ('30 8 * * 1,2,3,4,5', 'portfolio.cron.set_currency',
      '>> /home/ubuntu/s02p23c101/backend/set_currency.log'),
     ('0 9 * * 1,2,3,4,5', 'predict.collectstock.refresh_predict',
      '>> /home/ubuntu/s02p23c101/backend/refresh_predict.log')
