@@ -26,7 +26,7 @@ export default class NewsStore {
     return null;
   }
 
-  getNews = async (keyword = '삼성') => {
+  getNews = async (keyword = 'LG') => {
     this.loading['getNews'] = true;
     const { token } = this.root.authStore;
     try {
