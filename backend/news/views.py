@@ -16,15 +16,24 @@ naver_headers = {
 }
 
 
-def check_lang(query):
+def check_lang(titles):
+    from tensorflow.keras.preprocessing.text import Tokenizer
+
+    tokenizer = Tokenizer(
+        num_words=5000, oov_token='<unk>',
+        filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n\'’…‘“”'
+    )
+    tokenizer.fit_on_texts(titles)
+
     ko, en = 0, 0
-    for q in query:
-        if ord('가') <= ord(q) <= ord('힣'):
-            ko += 1
-        elif ord('a') <= ord(q) <= ord('z'):
-            en += 1
-        elif ord('A') <= ord(q) <= ord('Z'):
-            en += 1
+    for key in tokenizer.word_index:
+        for char in key:
+            if ord('가') <= ord(char) <= ord('힣'):
+                ko += 1
+            elif ord('a') <= ord(char) <= ord('z'):
+                en += 1
+            elif ord('A') <= ord(char) <= ord('Z'):
+                en += 1
     return 'ko' if ko >= en else 'en'
 
 
@@ -36,7 +45,6 @@ def evaluate(request):
     if query == None:
         return HttpResponse(status=400)
     display = request.query_params.get('display', 100)
-    lang = check_lang(query)
 
     naver_newses = requests.get(
         naver_url, headers=naver_headers,
@@ -56,54 +64,26 @@ def evaluate(request):
             'description'
         ).replace('<b>', '').replace('</b>', ''))
 
+    lang = check_lang(titles)
     from tensorflow.keras.models import load_model
+    from tensorflow.keras.preprocessing.sequence import pad_sequences
+    from tensorflow.keras.preprocessing.text import Tokenizer
 
     if lang == 'ko':
-        from konlpy.tag import Okt
-
-        tokenizer = Okt()
-
-        words = {}
-        for title in titles:
-            title = re.sub(
-                r'[!"#$%&()*+.,-/:;=?@[\]^_`{|}~\'0-9a-zA-Z·…●‘’“”]', '', title)
-            tokens = tokenizer.morphs(title)
-            for token in tokens:
-                words[token] = 1 if token not in words else words[token] + 1
-
-        word_to_idx = {}
-        for key, val in sorted(words.items(), key=lambda x: -x[1]):
-            word_to_idx[key] = len(word_to_idx) + 1
-            if len(word_to_idx) >= 5000:
-                break
-
-        X = []
-        for _ in titles:
-            raw = []
-            for token in tokens:
-                num = word_to_idx[token] if token in word_to_idx else 0
-                raw.append(num)
-            if len(raw) < 50:
-                raw += [0] * (50 - len(raw))
-            else:
-                raw = raw[:50]
-            X.append(raw)
-        X = np.array(X)
-
+        tokenizer = Tokenizer(
+            num_words=5000, oov_token='<unk>',
+            filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n\'’…‘“”'
+        )
         model = load_model('./news/models/best_model_ko.h5')
-        words = word_to_idx
     else:
-        from tensorflow.keras.preprocessing.sequence import pad_sequences
-        from tensorflow.keras.preprocessing.text import Tokenizer
-
         tokenizer = Tokenizer(num_words=5000, oov_token='<unk>')
-        tokenizer.fit_on_texts(titles)
-
-        X = tokenizer.texts_to_sequences(titles)
-        X = pad_sequences(X, maxlen=50, padding='post')
-
         model = load_model('./news/models/best_model_us.h5')
-        words = tokenizer.word_index
+
+    tokenizer.fit_on_texts(titles)
+
+    X = tokenizer.texts_to_sequences(titles)
+    X = pad_sequences(X, maxlen=50, padding='post')
+    words = tokenizer.word_index
 
     predicts = model.predict(X)
     y = []
