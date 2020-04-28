@@ -18,7 +18,7 @@ class PortfolioSerializer(serializers.ModelSerializer):
         sg = Currency.objects.get(name='USD/KRW').ratio
         buy, now = 0, 0
         for stock in obj.stocks.all():
-            exchange = 1 if stock.currency == 'KRW' else sg.ratio
+            exchange = 1 if stock.currency == 'KRW' else sg
             buy += stock.count * stock.buy_price * exchange
             now += stock.count * stock.current_price * exchange
         return 0 if buy == 0 else (now - buy) * 100 / buy

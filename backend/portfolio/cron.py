@@ -21,6 +21,6 @@ def add_profits():
     for pf in pfs:
         now, stocks = 0, pf.stocks.all()
         for stock in stocks:
-            exchange = 1 if stock.currency == 'KRW' else sg.ratio
+            exchange = 1 if stock.currency == 'KRW' else sg
             now += stock.count * stock.current_price * exchange
         Profit.objects.create(money=now, portfolio=pf)
