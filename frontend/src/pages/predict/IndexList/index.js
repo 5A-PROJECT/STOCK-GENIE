@@ -139,7 +139,7 @@ function IndexList({ index }) {
   return (
     <TableWrapper>
       <Header>
-        <div className="start">이름(코드)</div>
+        <div className="start">이름</div>
         <div className="title">전일종가</div>
         <div className="title">시가</div>
         <div className="title">등략율</div>
