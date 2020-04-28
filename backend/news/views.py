@@ -86,7 +86,7 @@ def evaluate(request):
             X.append(raw)
         X = np.array(X)
 
-        model = load_model('.\\news\\models\\best_model_ko.h5')
+        model = load_model('.\\models\\best_model_ko.h5')
         words = word_to_idx
     else:
         from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -98,7 +98,7 @@ def evaluate(request):
         X = tokenizer.texts_to_sequences(descriptions)
         X = pad_sequences(X, maxlen=50, padding='post')
 
-        model = load_model('.\\news\\models\\best_model_us.h5')
+        model = load_model('.\\models\\best_model_us.h5')
         words = tokenizer.word_index
 
     predicts = model.predict(X)
