@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { ResponsivePie } from '@nivo/pie';
+import { inject, observer } from 'mobx-react';
 
 const MyResponsivePie = ({ data /* see data tab */ }) => (
   <ResponsivePie
     data={data}
-    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+    margin={{ top: 10, right: 60, bottom: 80, left: 80 }}
+    radialLabelsTextColor="#333333"
+    radialLabelsLinkStrokeWidth={2}
+    radialLabelsLinkColor={{ from: 'color' }}
+    slicesLabelsSkipAngle={10}
+    slicesLabelsTextColor="#333333"
     startAngle={-48}
-    // innerRadius={0.5}
+    innerRadius={0.4}
     padAngle={0.7}
     cornerRadius={3}
     colors={{ scheme: 'nivo' }}
@@ -29,7 +35,7 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
           {
             on: 'hover',
             style: {
-              itemTextColor: '#000',
+              itemTextColor: '#999',
             },
           },
         ],
@@ -38,25 +44,19 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
   />
 );
 
-function PieGraph() {
-  const [data, setData] = useState([
+function PieGraph(news) {
+  const [data] = useState([
     {
       id: 'good',
       label: '호재',
-      value: 164,
-      color: 'hsl(320, 70%, 50%)',
+      value: news.news[0].good,
+      color: 'hsl(99, 70%, 50%)',
     },
     {
       id: 'bad',
       label: '악재',
-      value: 275,
+      value: news.news[0].bad,
       color: 'hsl(323, 70%, 50%)',
-    },
-    {
-      id: 'mid',
-      label: '중립',
-      value: 582,
-      color: 'hsl(223, 70%, 50%)',
     },
   ]);
   return (

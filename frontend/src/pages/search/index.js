@@ -23,7 +23,7 @@ const WordWrapper = styled.div`
 const NewsWrapper = styled.div`
   margin-top: 5%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   grid-template-rows: auto;
 `;
 
@@ -46,7 +46,7 @@ function SearchPage({ newsStore }) {
               </WordWrapper>
               <NewsWrapper>
                 <AllNewsList news={formatedNewsData} />
-                <PieGraph />
+                <PieGraph news={formatedNewsData} />
               </NewsWrapper>
             </SearchPageWrapper>
           ) : (

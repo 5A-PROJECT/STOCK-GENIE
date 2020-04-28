@@ -8,6 +8,7 @@ import ShowAllNews from './ShowAllNews';
 const TitleWrapper = styled.div`
   margin-left: 20%;
   margin-top: 5%;
+  align-items: center;
   .Button {
     size: large;
   }
@@ -16,7 +17,7 @@ const TitleWrapper = styled.div`
 const NewsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   padding: 1rem 1rem;
 `;
 
