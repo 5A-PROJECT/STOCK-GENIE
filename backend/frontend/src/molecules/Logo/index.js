@@ -10,13 +10,16 @@ const LogoWrapper = styled.div`
   a {
     color: ${({ theme }) => theme.color.main.logo};
     text-decoration: none;
+    font-family: 'GmarketSansLight';
+    font-weight: bold;
   }
+  margin-bottom: 0.5rem;
 `;
 
 function Logo(props) {
   return (
     <LogoWrapper>
-      <Link to="/">스톡지니</Link>
+      <Link to="/">STOCK GENIE</Link>
     </LogoWrapper>
   );
 }

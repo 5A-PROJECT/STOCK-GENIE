@@ -3,12 +3,19 @@ import MaterialInput from '../../../atoms/Input/MaterialInput';
 import MaterialButton from '../../../atoms/Button/MaterialButton';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { colors } from '@material-ui/core';
 
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 1rem;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${colors.indigo[700]};
+  font-weight: bold;
+  text-decoration: none;
 `;
 
 function AuthFormTemplate({
@@ -43,7 +50,7 @@ function AuthFormTemplate({
       {type === 'login' && (
         <ButtonWrapper>
           <MaterialButton type="submit">로그인</MaterialButton>
-          <Link to="/register">회원가입 전환</Link>
+          <StyledLink to="/register">회원가입 전환</StyledLink>
         </ButtonWrapper>
       )}
       {type === 'register' && (
@@ -59,7 +66,7 @@ function AuthFormTemplate({
           />
           <ButtonWrapper>
             <MaterialButton type="submit">회원가입</MaterialButton>
-            <Link to="/login">로그인 전환</Link>
+            <StyledLink to="/login">로그인 전환</StyledLink>
           </ButtonWrapper>
         </>
       )}

@@ -67,6 +67,7 @@ export default class AuthStore {
     this.loading = true;
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
+      if (!this.authformValidation()) return;
       const res = await AuthRepository.register(authForm);
       const { token } = res.data;
       sessionStorage.setItem('access_token', token);
@@ -102,6 +103,15 @@ export default class AuthStore {
       id: null,
       username: null,
     };
+  };
+
+  authformValidation = () => {
+    const { email, password, username } = this.authForm;
+    if (email === '') return false;
+    if (password === '') return false;
+    if (username === '') return false;
+    if (!email.includes('@')) return false;
+    return true;
   };
 }
 
