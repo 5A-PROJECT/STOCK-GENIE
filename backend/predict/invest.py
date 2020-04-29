@@ -1,5 +1,7 @@
 import investpy
 import json
+from .dateutils import DateUtil
+import numpy
 
 KOREA = 'south korea'
 US = 'united states'
@@ -62,11 +64,20 @@ def get_stock_detail(stock, country):
 
 
 def get_stock(stock, country):
-    data = investpy.stocks.get_stock_recent_data(
-        stock=stock, country=country)
+    date = DateUtil(-50)
+    # data = investpy.stocks.get_stock_recent_data(
+    #     stock=stock, country=country)
+    data = investpy.stocks.get_stock_historical_data(
+        stock, country, date.from_date, date.to_date)
+    temp = []
+    for i in range(len(data.index)):
+        if data.index[i].weekday() == 6:
+            temp.append(data.index[i])
+
     data = data.drop(['Open', 'High', 'Low', 'Volume', 'Currency'], axis=1)
     data.rename(columns={'Close': 'value'}, inplace=True)
     data['time'] = data.index.map(lambda x: str(x).split(' ')[0])
+    data = data.drop(temp, axis=0)
     result = {}
     result['data'] = data.to_dict('records')
     return result

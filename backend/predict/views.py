@@ -100,9 +100,13 @@ def get_stock(request):
             predict_data = pickle.load(fr)
         for dt in predict_data:
             dt['value'] = float(dt['value'])
+        n = len(data['data'])
+        for i in range(n):
+            print(data['data'][i], predict_data[len(predict_data)-n:][i])
+
         result = {}
         result['real'] = data['data']
-        result['predict'] = predict_data
+        result['predict'] = predict_data[len(predict_data)-n:]
         return Response(result)
     else:
         return HttpResponse(status=405)
