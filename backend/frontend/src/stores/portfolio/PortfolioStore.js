@@ -21,6 +21,7 @@ export default class PortfolioStore {
   /**
    * computed
    */
+
   get stocks() {
     if (this.selectedPortfolio) {
       return this.selectedPortfolio.stocks.filter(
@@ -110,14 +111,25 @@ export default class PortfolioStore {
     return isPortfolioExist;
   };
 
+  stockValidation = (stock) => {
+    if (stock.name === '') return false;
+    if (stock.count <= 0) return false;
+    if (stock.buy_price <= 0) return false;
+    if (stock.current_price <= 0) return false;
+
+    return true;
+  };
+
   addStock = async (stock) => {
     this.loading['addStock'] = true;
     const { token } = this.root.authStore;
-    const { id: portfolioId } = this.selectedPortfolio;
     let isAdded = true;
     try {
+      if (!this.stockValidation(stock)) {
+        throw new Error('올바르지 않은 주식 형태');
+      }
       const res = await PortfolioRepository.createStock(
-        portfolioId,
+        this.selectedPortfolio.id,
         stock,
         token,
       );
@@ -129,15 +141,8 @@ export default class PortfolioStore {
         ...stock,
       });
 
-      // TODO : 요청 다시 받으면 해당 정보로 profit 교체
-      const calcRes = await PortfolioRepository.updateCalcFields(
-        portfolioId,
-        token,
-      );
-
-      const { data } = calcRes;
-
-      this.selectedPortfolio.profit = data;
+      // 계산된 필드 업데이트
+      this.updateCalcFields();
     } catch (e) {
       isAdded = false;
       console.log(e);
@@ -148,11 +153,43 @@ export default class PortfolioStore {
 
   addTag = async (tag) => {
     const { token } = this.root.authStore;
-    const { id: portfolioId } = this.selectedPortfolio;
     try {
-      const res = await PortfolioRepository.createTag(portfolioId, tag, token);
+      const res = await PortfolioRepository.createTag(
+        this.selectedPortfolio.id,
+        tag,
+        token,
+      );
       const { id: tagId } = res.data;
       this.selectedPortfolio.tags.push({ id: tagId, name: tag.name });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  deleteStock = async (stockId) => {
+    const { token } = this.root.authStore;
+    try {
+      const res = await PortfolioRepository.deleteStock(stockId, token);
+      const { id } = res;
+      this.selectedPortfolio.stocks = this.selectedPortfolio.stocks.filter(
+        (stock) => stock.id !== stockId,
+      );
+      // this.selectedPortfolio.stocks = this.selectedPortfolio.stocks.filter()
+
+      this.updateCalcFields();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  updateCalcFields = async () => {
+    const { token } = this.root.authStore;
+    try {
+      const res = await PortfolioRepository.updateCalcFields(
+        this.selectedPortfolio.id,
+        token,
+      );
+      this.selectedPortfolio.profit = res.data;
     } catch (e) {
       console.log(e);
     }
@@ -172,4 +209,6 @@ decorate(PortfolioStore, {
   getPortfolioById: action,
   addStock: action,
   addTag: action,
+  deleteStock: action,
+  updateCalcFields: action,
 });

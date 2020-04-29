@@ -48,6 +48,11 @@ function DetailContent({
 }) {
   const { buy_price, currency } = stock;
   const { exchangeRate } = portfolioStore.selectedPortfolio.profit;
+
+  const onDelete = () => {
+    portfolioStore.deleteStock(stock.id);
+  };
+
   return (
     <DetailWrapper>
       <PriceWrapper>
@@ -114,7 +119,7 @@ function DetailContent({
       </PriceWrapper>
       <ButtonWrapper>
         <MaterialButton>수정</MaterialButton>
-        <MaterialButton>삭제</MaterialButton>
+        <MaterialButton onClick={onDelete}>삭제</MaterialButton>
       </ButtonWrapper>
     </DetailWrapper>
   );
