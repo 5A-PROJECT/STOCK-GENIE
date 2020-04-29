@@ -7,6 +7,7 @@ import { inject, observer } from 'mobx-react';
 import { useEffect } from 'react';
 import Spinner from '../../atoms/Spinner';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const SearchPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -69,6 +70,9 @@ function SearchPage({ newsStore, match }) {
         <Spinner />
       ) : (
         <>
+          <Helmet>
+            <title>스톡지니 | 분석결과 - {query}</title>
+          </Helmet>
           {newsData ? (
             <SearchPageWrapper>
               <Title>관련 뉴스 데이터 분석</Title>

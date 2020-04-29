@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import PortfolioItemSection from './PortfolioItemSection';
 import Spinner from '../../atoms/Spinner';
+import { Helmet } from 'react-helmet-async';
 
 const PortfolioItemPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -33,6 +34,9 @@ function PortfolioItemPage({ match, history, portfolioStore }) {
     <>
       {!loading['getPortfolioById'] && selectedPortfolio ? (
         <PortfolioItemPageWrapper>
+          <Helmet>
+            <title>스톡지니 | {selectedPortfolio.name}</title>
+          </Helmet>
           <PortfolioItemSection portfolio={selectedPortfolio} />
         </PortfolioItemPageWrapper>
       ) : (

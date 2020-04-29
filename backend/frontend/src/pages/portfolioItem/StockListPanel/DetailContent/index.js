@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MaterialButton from '../../../../atoms/Button/MaterialButton';
 import { inject, observer } from 'mobx-react';
+import StockAddModal from '../../StockAddModal';
 
 const DetailWrapper = styled.div`
   width: 100%;
@@ -10,6 +11,10 @@ const DetailWrapper = styled.div`
 const PriceWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
   .label {
   }
   .profit {
@@ -18,6 +23,15 @@ const PriceWrapper = styled.div`
   .currency {
     margin-left: 0.3rem;
     color: ${({ theme }) => theme.color.portfolio.currency};
+  }
+  .currency-block {
+    display: flex;
+    align-items: center;
+  }
+  .arrow {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 0.5rem;
   }
 `;
 
@@ -35,58 +49,78 @@ function DetailContent({
 }) {
   const { buy_price, currency } = stock;
   const { exchangeRate } = portfolioStore.selectedPortfolio.profit;
+
+  const onDelete = () => {
+    portfolioStore.deleteStock(stock.id);
+  };
+
   return (
     <DetailWrapper>
       <PriceWrapper>
         <div>
           <div className="label">매수 평균가</div>
-          <div>
-            <span className="profit">{buy_price.toLocaleString()}</span>
-            <span className="currency">{currency}</span>
-          </div>
-          {currency === 'USD' && (
+          <div className="currency-block">
             <div>
-              <span className="profit">
-                {Math.floor(buy_price * exchangeRate).toLocaleString()}
-              </span>
-              <span className="currency">KRW</span>
+              <span className="profit">{buy_price.toLocaleString()}</span>
+              <span className="currency">{currency}</span>
             </div>
-          )}
+            {currency === 'USD' && (
+              <div>
+                <span className="arrow">↔</span>
+                <span className="profit">
+                  {Math.floor(buy_price * exchangeRate).toLocaleString()}
+                </span>
+                <span className="currency">KRW</span>
+              </div>
+            )}
+          </div>
         </div>
         <div>
           <div className="label">매수금액</div>
-          <div>
-            <span className="profit">{totalBuyingPrice.toLocaleString()}</span>
-            <span className="currency">{currency}</span>
-          </div>
-          {currency === 'USD' && (
+          <div className="currency-block">
             <div>
               <span className="profit">
-                {Math.floor(totalBuyingPrice * exchangeRate).toLocaleString()}
+                {totalBuyingPrice.toLocaleString()}
               </span>
-              <span className="currency">KRW</span>
+              <span className="currency">{currency}</span>
             </div>
-          )}
+            {currency === 'USD' && (
+              <div>
+                <span className="arrow">↔</span>
+                <span className="profit">
+                  {Math.floor(totalBuyingPrice * exchangeRate).toLocaleString()}
+                </span>
+                <span className="currency">KRW</span>
+              </div>
+            )}
+          </div>
         </div>
         <div>
           <div className="label">평가금액</div>
-          <div>
-            <span className="profit">{totalCurrentPrice.toLocaleString()}</span>
-            <span className="currency">{currency}</span>
-          </div>
-          {currency === 'USD' && (
+          <div className="currency-block">
             <div>
               <span className="profit">
-                {Math.floor(totalCurrentPrice * exchangeRate).toLocaleString()}
+                {totalCurrentPrice.toLocaleString()}
               </span>
-              <span className="currency">KRW</span>
+              <span className="currency">{currency}</span>
             </div>
-          )}
+            {currency === 'USD' && (
+              <div>
+                <span className="arrow">↔</span>
+                <span className="profit">
+                  {Math.floor(
+                    totalCurrentPrice * exchangeRate,
+                  ).toLocaleString()}
+                </span>
+                <span className="currency">KRW</span>
+              </div>
+            )}
+          </div>
         </div>
       </PriceWrapper>
       <ButtonWrapper>
-        <MaterialButton>수정</MaterialButton>
-        <MaterialButton>삭제</MaterialButton>
+        <StockAddModal update={true} stock={stock} />
+        <MaterialButton onClick={onDelete}>삭제</MaterialButton>
       </ButtonWrapper>
     </DetailWrapper>
   );

@@ -13,6 +13,9 @@ const StockWrapper = styled.div`
   border: 1px solid ${colors.grey[300]};
   border-radius: 5px;
   box-shadow: 2px 2px 1px 1px ${colors.grey[300]};
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr 1fr;
+  }
   cursor: pointer;
   :hover {
     transition-duration: 0.3s;

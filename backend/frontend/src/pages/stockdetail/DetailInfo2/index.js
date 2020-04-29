@@ -30,6 +30,9 @@ const InfoGridWapper = styled.div`
   @media (max-width: 900px) {
     grid-template-columns: 1fr 1fr;
   }
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
   border-radius: 5px;
 `;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
+import { Helmet } from 'react-helmet-async';
 
 const MainPageWrapper = styled.div`
   height: 100%;
@@ -28,6 +29,9 @@ const Logo = styled.span`
   @media (max-width: 900px) {
     font-size: 1.4rem;
   }
+  @media (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 const TextContents = styled.div`
@@ -36,6 +40,9 @@ const TextContents = styled.div`
     font-size: 4rem;
     @media (max-width: 900px) {
       font-size: 2rem;
+    }
+    @media (max-width: 500px) {
+      font-size: 1.5rem;
     }
   }
   .sub {
@@ -72,6 +79,9 @@ const Contents = styled.div`
 function MainPage() {
   return (
     <MainPageWrapper>
+      <Helmet>
+        <title>스톡지니 : 뉴스분석</title>
+      </Helmet>
       <Contents>
         <TextContents>
           <div className="main">

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Dialog } from '@material-ui/core';
+import { Dialog, MenuItem } from '@material-ui/core';
 import MaterialInput from '../../../../atoms/Input/MaterialInput';
 import MaterialButton from '../../../../atoms/Button/MaterialButton';
 import { inject, observer } from 'mobx-react';
+import { useEffect } from 'react';
 
 const DialogWrapper = styled.div`
   min-width: 300px;
@@ -20,13 +21,24 @@ const ButtonGroup = styled.div`
   justify-content: flex-end;
 `;
 
-function ModalContents({ open, onClose, portfolioStore }) {
+function ModalContents({
+  open,
+  onClose,
+  portfolioStore,
+  update = false,
+  stock,
+}) {
+  useEffect(() => {
+    if (update && stock) {
+      setStockForm(stock);
+    }
+  }, []);
   const [stockForm, setStockForm] = useState({
     name: '',
     count: 1,
     code: '',
-    buy_price: 1,
-    current_price: 1,
+    buy_price: 10000,
+    current_price: 10000,
     currency: 'USD',
     category: 'STOCK',
   });
@@ -39,10 +51,38 @@ function ModalContents({ open, onClose, portfolioStore }) {
     });
   };
 
-  const addStock = () => {
-    portfolioStore.addStock(stockForm);
-    onClose();
+  const addStock = async () => {
+    const isAdded = await portfolioStore.addStock(stockForm);
+    if (isAdded) {
+      setStockForm({
+        name: '',
+        count: 1,
+        code: '',
+        buy_price: 10000,
+        current_price: 10000,
+        currency: 'USD',
+        category: 'STOCK',
+      });
+      onClose();
+    }
   };
+
+  const updateStock = () => {
+    const isUpdated = portfolioStore.updateStock(stock.id, stockForm);
+    if (isUpdated) {
+      setStockForm({
+        name: '',
+        count: 1,
+        code: '',
+        buy_price: 10000,
+        current_price: 10000,
+        currency: 'USD',
+        category: 'STOCK',
+      });
+      onClose();
+    }
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogWrapper>
@@ -101,7 +141,11 @@ function ModalContents({ open, onClose, portfolioStore }) {
             onChange={handleInputChange}
             placeholder="카테고리를 선택하세요"
             required
-          />
+            select
+          >
+            <MenuItem value={'STOCK'}>주식</MenuItem>
+            <MenuItem value={'DERIVATIVES'}>선물/옵션</MenuItem>
+          </MaterialInput>
           <MaterialInput
             label="통화"
             value={stockForm.currency}
@@ -110,11 +154,17 @@ function ModalContents({ open, onClose, portfolioStore }) {
             onChange={handleInputChange}
             placeholder="통화를 선택하세요."
             required
-          />
+            select
+          >
+            <MenuItem value={'USD'}>USD</MenuItem>
+            <MenuItem value={'KRW'}>KRW</MenuItem>
+          </MaterialInput>
         </ModalForm>
         <ButtonGroup>
           <MaterialButton onClick={onClose}>취소</MaterialButton>
-          <MaterialButton onClick={addStock}>추가</MaterialButton>
+          <MaterialButton onClick={update ? updateStock : addStock}>
+            {update ? '수정' : '추가'}
+          </MaterialButton>
         </ButtonGroup>
       </DialogWrapper>
     </Dialog>

@@ -17,7 +17,7 @@ const AddIcon = styled(ShowChartIcon)`
   margin-right: 0.5rem;
 `;
 
-function StockAddModal() {
+function StockAddModal({ update = false, stock = null }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -29,10 +29,21 @@ function StockAddModal() {
   return (
     <>
       <ModalButton onClick={handleOpen}>
-        <AddIcon />
-        <span>종목 추가</span>
+        {update ? (
+          <span>수정</span>
+        ) : (
+          <>
+            <AddIcon />
+            <span>종목 추가</span>
+          </>
+        )}
       </ModalButton>
-      <ModalContents open={open} onClose={handleClose} />
+      <ModalContents
+        open={open}
+        onClose={handleClose}
+        update={update}
+        stock={stock}
+      />
     </>
   );
 }

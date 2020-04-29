@@ -72,7 +72,7 @@ function StockProfits({ profit }) {
         />
       </Info>
       <Info>
-        <div className="label">기준 환율</div>
+        <div className="label">실시간 기준 환율</div>
         <span className="price">1</span>
         <span className="won-unit">USD</span>
         <span className="equal">=</span>

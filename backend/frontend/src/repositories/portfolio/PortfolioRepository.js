@@ -76,6 +76,22 @@ class PortfolioRepository {
       },
     });
   }
+
+  deleteStock(stockId, token) {
+    return axios.delete(`${BASE_URL}/stock/${stockId}/`, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
+
+  updateStcok(stockId, stockForm, token) {
+    return axios.patch(`${BASE_URL}/stock/${stockId}/`, stockForm, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
 }
 
 export default new PortfolioRepository();
