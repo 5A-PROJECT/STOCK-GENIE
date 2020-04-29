@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from datetime import datetime
 from decouple import config
 import numpy as np
 import requests
@@ -21,7 +22,7 @@ def check_lang(titles):
 
     tokenizer = Tokenizer(
         num_words=5000, oov_token='<unk>',
-        filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n\'’…‘“”'
+        filters='~!@#$^&*()-+_=`{};:\'",.<>/?※ㆍ\\‘’“”…·↓↑[]|'
     )
     tokenizer.fit_on_texts(titles)
 
@@ -66,24 +67,51 @@ def evaluate(request):
 
     lang = check_lang(titles)
     from tensorflow.keras.models import load_model
-    from tensorflow.keras.preprocessing.sequence import pad_sequences
-    from tensorflow.keras.preprocessing.text import Tokenizer
 
     if lang == 'ko':
-        tokenizer = Tokenizer(
-            num_words=5000, oov_token='<unk>',
-            filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n\'’…‘“”'
-        )
+        from konlpy.tag import Okt
+        import nltk
+
+        tokenizer = Okt()
+
+        for i in range(len(titles)):
+            titles[i] = re.sub(
+                '[~!@#$^&*()-+_=`{};:\'",.<>/?※ㆍ\\‘’“”…·↓↑\[\]|]', '', titles[i]
+            )
+
+        words = []
+        for title in titles:
+            words += tokenizer.morphs(title, norm=True, stem=True)
+
+        text = nltk.Text(words, name='Tokenizer')
+        word_index = {}
+        for char, _ in text.vocab().most_common(5000):
+            word_index[char] = len(word_index) + 1
+
+        X = []
+        for title in titles:
+            tokens = tokenizer.morphs(title, norm=True, stem=True)
+            idx = []
+            for token in tokens:
+                idx.append(word_index[token] if token in word_index else 0)
+            idx = idx[:50] if len(idx) > 50 else idx + [0] * (50 - len(idx))
+            X.append(idx)
+
         model = load_model('./news/models/best_model_ko.h5')
+        X = np.array(X)
+        words = word_index
     else:
+        from tensorflow.keras.preprocessing.sequence import pad_sequences
+        from tensorflow.keras.preprocessing.text import Tokenizer
+
         tokenizer = Tokenizer(num_words=5000, oov_token='<unk>')
+        tokenizer.fit_on_texts(titles)
+
+        X = tokenizer.texts_to_sequences(titles)
+        X = pad_sequences(X, maxlen=50, padding='post')
+
         model = load_model('./news/models/best_model_us.h5')
-
-    tokenizer.fit_on_texts(titles)
-
-    X = tokenizer.texts_to_sequences(titles)
-    X = pad_sequences(X, maxlen=50, padding='post')
-    words = tokenizer.word_index
+        words = tokenizer.word_index
 
     predicts = model.predict(X)
     y = []
