@@ -46,6 +46,9 @@ const TextContents = styled.div`
     @media (max-width: 900px) {
       font-size: 1.4rem;
     }
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
   }
 
   .accent {
@@ -81,8 +84,8 @@ function MainPage() {
             </span>
           </div>
           <div className="sub">
-            <Logo>5A</Logo>
-            <span>가 대신 관리하고 찾아드릴께요.</span>
+            <Logo>스톡지니</Logo>
+            <span>가 당신의 고민을 해결해드립니다.</span>
           </div>
         </TextContents>
         <SearchInput />

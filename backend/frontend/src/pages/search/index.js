@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import AccessProtection from '../../molecules/AccessProtection';
 import WordCloud from './WordCloud';
 import PieGraph from './Graph/PieGraph';
 import AllNewsList from './NewsList/AllNewsList';
 import { inject, observer } from 'mobx-react';
 import { useEffect } from 'react';
 import Spinner from '../../atoms/Spinner';
+import { Link } from 'react-router-dom';
 
 const SearchPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -14,51 +14,81 @@ const SearchPageWrapper = styled.div`
   padding: 1rem;
 `;
 
-const WordCloudSection = styled.section``;
-
 const Title = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
 `;
 
-const NewsSection = styled.section`
-  margin-top: 5%;
+const DataWrapper = styled.section`
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  grid-template-rows: auto;
+  grid-template-columns: 50% 50%;
+  margin-bottom: 2rem;
+  @media (max-width: 900px) {
+    grid-template-columns: 100%;
+  }
 `;
 
-function SearchPage({ newsStore }) {
-  const { loading, newsData, formatedNewsData } = newsStore;
+const NoData = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .text {
+    font-size: 1.5rem;
+  }
+`;
+
+const SyledLink = styled(Link)`
+  font-size: 2rem;
+  margin-top: 1rem;
+`;
+
+function SearchPage({ newsStore, match }) {
+  const { query } = match.params;
+  const {
+    loading,
+    newsData,
+    formatedNewsData,
+    goodNewses,
+    clearNewsData,
+  } = newsStore;
   useEffect(() => {
-    newsStore.getNews();
+    newsStore.getNews(query);
+    console.log(query);
+    return () => {
+      clearNewsData();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <AccessProtection authed={true} redirectPath={'/login'}>
+    <>
       {loading['getNews'] ? (
         <Spinner />
       ) : (
         <>
           {newsData ? (
             <SearchPageWrapper>
-              <WordCloudSection>
-                <Title>검색어 기반 워드클라우드</Title>
+              <Title>관련 뉴스 데이터 분석</Title>
+              <DataWrapper>
                 <WordCloud words={newsData.words} />
-              </WordCloudSection>
-
-              <NewsSection>
-                <Title>검색어 기반 워드클라우드</Title>
-                <AllNewsList news={formatedNewsData} />
                 <PieGraph news={formatedNewsData} />
-              </NewsSection>
+              </DataWrapper>
+              <Title>관련 뉴스 호재 / 악재 분석</Title>
+              <AllNewsList news={goodNewses} />
             </SearchPageWrapper>
           ) : (
-            <div>뉴스 데이터 없음</div>
+            <NoData>
+              <div className="text">"{query}" 검색어에 관련된</div>
+              <div className="text">뉴스 데이터가 없습니다.</div>
+              <SyledLink to="/">홈으로</SyledLink>
+            </NoData>
           )}
         </>
       )}
-    </AccessProtection>
+    </>
   );
 }
 

@@ -16,7 +16,7 @@ const LogoWrapper = styled.div`
 function Logo(props) {
   return (
     <LogoWrapper>
-      <Link to="/">5A</Link>
+      <Link to="/">스톡지니</Link>
     </LogoWrapper>
   );
 }

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ResponsivePie } from '@nivo/pie';
+import { observer, inject } from 'mobx-react';
 
 const MyResponsivePie = ({ data /* see data tab */ }) => (
   <ResponsivePie
     data={data}
-    margin={{ top: 10, right: 60, bottom: 80, left: 80 }}
+    margin={{ top: 10, right: 80, bottom: 80, left: 80 }}
     radialLabelsTextColor="#333333"
     radialLabelsLinkStrokeWidth={2}
     radialLabelsLinkColor={{ from: 'color' }}
@@ -14,7 +15,7 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
     innerRadius={0.4}
     padAngle={0.7}
     cornerRadius={3}
-    colors={{ scheme: 'nivo' }}
+    colors={{ scheme: 'category10' }}
     borderWidth={1}
     borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
     animate={true}
@@ -43,26 +44,13 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
   />
 );
 
-function PieGraph(news) {
-  const [data] = useState([
-    {
-      id: 'good',
-      label: '호재',
-      value: news.news[0].good,
-      color: 'hsl(99, 70%, 50%)',
-    },
-    {
-      id: 'bad',
-      label: '악재',
-      value: news.news[0].bad,
-      color: 'hsl(323, 70%, 50%)',
-    },
-  ]);
+function PieGraph({ newsStore }) {
+  const { goodBadData } = newsStore;
   return (
     <div style={{ height: '480px' }}>
-      <MyResponsivePie data={data} />
+      <MyResponsivePie data={goodBadData} />
     </div>
   );
 }
 
-export default PieGraph;
+export default inject('newsStore')(observer(PieGraph));

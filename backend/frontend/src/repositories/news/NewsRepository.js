@@ -7,13 +7,10 @@ class NewsRepository {
     this.URL = url || this.URL;
   }
 
-  getNews(token, keyword) {
+  getNews(keyword) {
     return axios.get(`${this.URL}/news`, {
       params: {
         query: keyword,
-      },
-      headers: {
-        Authorization: `JWT ${token}`,
       },
     });
   }

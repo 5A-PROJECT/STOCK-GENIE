@@ -14,7 +14,6 @@ import PortFolioPage from './pages/portfolio';
 import NotFound from './pages/notfound';
 import PortfolioItem from './pages/portfolioItem';
 import StockDetailPage from './pages/stockdetail';
-import SearchResultPage from './pages/searchResult';
 
 const AppWrppar = styled.div`
   display: flex;
@@ -48,8 +47,7 @@ function App({ authStore }) {
             <Route path="/predict" component={PredictPage} exact />
             <Route path="/dashboard" component={PortFolioPage} exact />
             <Route path="/portfolio/:id" component={PortfolioItem} />
-            <Route path="/search" component={SearchPage} exact />
-            <Route path="/search/:query" component={SearchResultPage} />
+            <Route path="/search/:query" component={SearchPage} />
             <Route path="/stockdetail" component={StockDetailPage} exact />
             <Route path="*" component={NotFound} />
           </Switch>
