@@ -1,6 +1,6 @@
 import React from 'react';
 import AccessProtection from '../../molecules/AccessProtection';
-import IndexListHeader from './MainChart/IndexListHeader';
+import IndexListHeader from './IndexListHeader';
 import styled from 'styled-components';
 import IndexListSection from './IndexListSection';
 

@@ -65,8 +65,13 @@ function AllNewsList({ news }) {
     setPageItem((pageItem) => tmpData);
   };
 
-  for (let i = 0; i < 10; i++) {
-    pageItem.push(news[i]);
+  if (pageItem.length === 0) {
+    for (let i = 0; i < 10; i++) {
+      pageItem.push(news[i]);
+    }
+  } else {
+    console.log(useState.pageItem);
+    console.log(pageItem);
   }
 
   return (
