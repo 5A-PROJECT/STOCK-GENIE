@@ -6,8 +6,8 @@ from datetime import datetime
 
 def set_currency():
     currency = Currency.objects.all()
+    sg = gccrd('USD/KRW').iloc[-1, 3]
     if len(currency) == 0:
-        sg = gccrd('USD/KRW').iloc[-1, 3]
         Currency.objects.create(ratio=sg)
     else:
         currency = currency[0]
