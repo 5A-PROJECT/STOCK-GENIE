@@ -1,84 +1,67 @@
 import React from 'react';
 import styled from 'styled-components';
-import Chart from '../../predict/Chart/index';
-import DetailInfo from '../DetailInfo/index';
-import DetailInfo2 from '../DetailInfo2/index';
-import Button from '@material-ui/core/Button';
-import FindInPageIcon from '@material-ui/icons/FindInPage';
-import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+import { observer, inject } from 'mobx-react';
 
-const DetailHeaderWrapper = styled.div``;
-
-const CompanyBasicWrapper = styled.div`
+const DetailHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 `;
 
-const NameCode = styled.div`
+const Title = styled.div`
   display: flex;
+  align-items: center;
+
+  .name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  .code {
+    color: grey;
+  }
 `;
 
-const ChartWarpper = styled.div`
-  display: center;
-  margin-top: 3rem;
+const Price = styled.div`
+  font-size: 1.5rem;
+  font-weight: bold;
 `;
 
-const DetailInfoWrapper = styled.div`
-  margin-top: 2rem;
+// const ButtonContainer = styled.div`
+//   display: flex;
+// `;
+
+const StyledCurrency = styled.span`
+  margin-left: 0.3rem;
+  color: grey;
 `;
 
-function DetaillHeader({ info }) {
+const Currency = ({ country }) => {
+  return (
+    <>
+      {country === 'south korea' ? (
+        <StyledCurrency>KRW</StyledCurrency>
+      ) : (
+        <StyledCurrency>USD</StyledCurrency>
+      )}
+    </>
+  );
+};
+
+function DetaillHeader({ stock }) {
+  const { name, code, country, currentprice } = stock;
   return (
     <DetailHeaderWrapper>
-      <CompanyBasicWrapper>
-        <NameCode>
-          <h1>{info.state.name}</h1>
-          <h3>({info.state.code})</h3>
-        </NameCode>
-        <NameCode>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<CreateNewFolderIcon />}
-          >
-            내 포트폴리오에 추가하기
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            startIcon={<FindInPageIcon />}
-          >
-            관련 기사 검색하기
-          </Button>
-        </NameCode>
-      </CompanyBasicWrapper>
-      <h3>금일 시가 : {info.state.currentprice.toLocaleString()}</h3>
-      <hr></hr>
-
-      <ChartWarpper>
-        <Chart
-          width="1000"
-          height="300"
-          url="indices"
-          params={{
-            country: info.state.country,
-            name: info.state.index,
-          }}
-        />
-      </ChartWarpper>
-      <DetailInfoWrapper>
-        {/* <DetailInfo
-          code={info.state.code}
-          country={info.state.country}
-          url={info.pathname}
-        /> */}
-        <DetailInfo2
-          code={info.state.code}
-          country={info.state.country}
-          url={info.pathname}
-        />
-      </DetailInfoWrapper>
+      <Title>
+        <span className="name">{name}</span>
+        <span className="code">{code}</span>
+      </Title>
+      <Price>
+        {currentprice.toLocaleString()}
+        <Currency country={country} />
+      </Price>
     </DetailHeaderWrapper>
   );
 }
-export default DetaillHeader;
+export default inject('predictStore')(observer(DetaillHeader));

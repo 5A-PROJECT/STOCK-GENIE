@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
 import IndexList from '../IndexList';
+import { inject, observer } from 'mobx-react';
 
 const IndexListSectionWrapper = styled.section``;
 
@@ -52,9 +52,8 @@ const indexes = [
   },
 ];
 
-function IndexListSection() {
-  const [selectedIndex, setSelectedIndex] = useState('KOSPI');
-
+function IndexListSection({ predictStore }) {
+  const { selectedIndex, setSelectedIndex } = predictStore;
   const onChangeIndex = (index) => {
     setSelectedIndex(index);
   };
@@ -72,9 +71,9 @@ function IndexListSection() {
           </SelectButton>
         ))}
       </ButtonContainer>
-      <IndexList index={selectedIndex} />
+      <IndexList />
     </IndexListSectionWrapper>
   );
 }
 
-export default IndexListSection;
+export default inject('predictStore')(observer(IndexListSection));

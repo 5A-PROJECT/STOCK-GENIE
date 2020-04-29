@@ -1,11 +1,10 @@
 import React from 'react';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { BASE_URL } from '../../../constants';
 import Spinner from '../../../atoms/Spinner';
 import ListTableHeader from './ListTableHeader';
 import ListTableItem from './ListTableItem';
+import { inject, observer } from 'mobx-react';
 
 const TableWrapper = styled.div`
   display: grid;
@@ -18,47 +17,32 @@ const SpinnerBox = styled.div`
   height: 800px;
 `;
 
-function IndexList({ index }) {
-  const [datas, setDatas] = useState([]);
-  const [loading, setLoading] = useState(false);
+function IndexList({ predictStore }) {
+  const { stockTable, loading, getTableData, selectedIndex } = predictStore;
 
   useEffect(() => {
-    getData(index);
+    getTableData(selectedIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index]);
-
-  const getData = async (index) => {
-    setLoading(true);
-    const token = sessionStorage.getItem('access_token');
-    try {
-      const result = await axios.get(`${BASE_URL}/predict/stocktable`, {
-        params: {
-          index: index.toUpperCase(),
-        },
-        headers: {
-          Authorization: `JWT ${token}`,
-        },
-      });
-
-      setDatas(result.data);
-    } catch (e) {
-      console.log(e);
-    }
-    setLoading(false);
-  };
+  }, [selectedIndex]);
 
   return (
     <TableWrapper>
       <ListTableHeader />
-      {loading ? (
+      {loading['getTableData'] ? (
         <SpinnerBox>
           <Spinner />
         </SpinnerBox>
       ) : (
-        datas.map((data) => <ListTableItem data={data} index={index} />)
+        stockTable.map((data) => (
+          <ListTableItem
+            key={data.id}
+            data={data}
+            selectedIndex={selectedIndex}
+          />
+        ))
       )}
     </TableWrapper>
   );
 }
 
-export default IndexList;
+export default inject('predictStore')(observer(IndexList));
