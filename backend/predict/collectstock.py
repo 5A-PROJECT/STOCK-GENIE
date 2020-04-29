@@ -94,6 +94,7 @@ def prediction_range(stock, indices, df, dateData):
         temp["time"] = dateData[len(dateData) - (len(y)-1-i) - 1]
         temp["value"] = y[i][0]
         result.append(temp)
+    result.reverse()
     with open(file_path, 'wb') as fw:
         pickle.dump(result, fw)
     return y
@@ -189,29 +190,29 @@ def get_stock_data(path, country, indices):
         stockinfo.save()
 
 
-def get_company_data(path, country, indices):
-    stocks = get_stocks_list(path)
+def get_company_data():
+    stocks = StockInfo.objects.all()
     date = DateUtil(-90)
     from_date = date.from_date
     to_date = date.to_date
     commodities_df = get_commodities(from_date, to_date)
-    for stock, name in stocks:
-        if path != 'nasdaq':
-            stock = str(stock)
-            stock = '0' * (6 - len(stock)) + stock
+    for stock in stocks:
+        country = stock.country
+        indices = stock.index
+        code = stock.code
         try:
             data = investpy.stocks.get_stock_information(
-                stock=stock, country=country, as_json=True
+                stock=code, country=country, as_json=True
             )
             stock_df = investpy.stocks.get_stock_historical_data(
-                stock, country, from_date, to_date
+                code, country, from_date, to_date
             )
         except:
-            print(stock)
+            print(code)
             continue
-        print(stock)
+        print(code)
         stock_df['date'] = stock_df.index.map(lambda x: str(x).split(' ')[0])
         testData = pd.merge(stock_df, commodities_df, on='date')
         dateData = testData['date']
         testData = testData.drop(['Currency', 'date'], axis=1)
-        predict_ = prediction_range(stock, indices, testData, dateData)
+        predict_ = prediction_range(code, indices, testData, dateData)

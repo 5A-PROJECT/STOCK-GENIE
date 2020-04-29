@@ -8,5 +8,6 @@ urlpatterns = [
     path('stocktable/', views.stock_table),
     path('stockdetail/', views.stock_detail),
     path('stock/', views.get_stock),
-    path('refresh/', views.refresh)
+    path('refresh/', views.refresh),
+    path('resetpickle/', views.resetpickle)
 ]
