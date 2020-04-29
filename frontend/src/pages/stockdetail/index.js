@@ -15,7 +15,7 @@ const StockDetailWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  margin-top: 1rem;
+  margin: 1rem 0;
   font-size: 2rem;
   font-weight: bold;
 `;
@@ -30,7 +30,6 @@ function StockDetailPage({ predictStore, history }) {
     }
 
     return () => {
-      console.log('뒷정리?');
       clearSelectedStock();
     };
   }, [selectedStock, history, clearSelectedStock]);
@@ -40,9 +39,9 @@ function StockDetailPage({ predictStore, history }) {
       <StockDetailWrapper>
         <Title>
           <span role="img" aria-label="">
-            🔎{' '}
+            📑{' '}
           </span>
-          주식 상세보기
+          예측 보고서
         </Title>
         {selectedStock !== null && (
           <>

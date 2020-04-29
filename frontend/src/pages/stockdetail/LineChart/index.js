@@ -5,50 +5,36 @@ function LineChart({ data }) {
   return (
     <ResponsiveLine
       data={data}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      margin={{ top: 30, right: 30, bottom: 50, left: 30 }}
       xScale={{ type: 'point' }}
       yScale={{
         type: 'linear',
         min: 'auto',
         max: 'auto',
-        stacked: true,
         reverse: false,
       }}
       axisTop={null}
       axisRight={null}
-      axisBottom={{
-        orient: 'bottom',
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'transportation',
-        legendOffset: 36,
-        legendPosition: 'middle',
-      }}
-      axisLeft={{
-        orient: 'left',
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'count',
-        legendOffset: -40,
-        legendPosition: 'middle',
-      }}
-      colors={{ scheme: 'nivo' }}
-      pointSize={10}
+      axisBottom={null}
+      axisLeft={null}
+      colors={{ scheme: 'dark2' }}
+      pointSize={4}
       pointColor={{ theme: 'background' }}
-      pointBorderWidth={2}
+      pointBorderWidth={5}
       pointBorderColor={{ from: 'serieColor' }}
+      enablePointLabel={true}
       pointLabel="y"
       pointLabelYOffset={-12}
       useMesh={true}
+      enableGridX={false}
+      enableGridY={false}
       legends={[
         {
-          anchor: 'bottom-right',
-          direction: 'column',
+          anchor: 'bottom',
+          direction: 'row',
           justify: false,
-          translateX: 100,
-          translateY: 0,
+          translateX: 20,
+          translateY: 30,
           itemsSpacing: 0,
           itemDirection: 'left-to-right',
           itemWidth: 80,

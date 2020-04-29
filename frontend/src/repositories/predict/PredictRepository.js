@@ -29,6 +29,19 @@ class PredictRepository {
       },
     });
   }
+
+  getStockRealAndPredict(code, country, index, token) {
+    return axios.get(`${this.URL}/stock/`, {
+      params: {
+        code,
+        country,
+        index,
+      },
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
 }
 
 export default new PredictRepository();

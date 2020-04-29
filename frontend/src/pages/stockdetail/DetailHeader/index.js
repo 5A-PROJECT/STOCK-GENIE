@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Button from '@material-ui/core/Button';
-// import FindInPageIcon from '@material-ui/icons/FindInPage';
-// import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 import { observer, inject } from 'mobx-react';
 
 const DetailHeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 1rem;
-  /* padding: 1rem; */
 `;
 
 const Title = styled.div`
@@ -26,7 +24,7 @@ const Title = styled.div`
 `;
 
 const Price = styled.div`
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
 `;
 
@@ -63,22 +61,6 @@ function DetaillHeader({ stock }) {
         {currentprice.toLocaleString()}
         <Currency country={country} />
       </Price>
-      {/* <ButtonContainer>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<CreateNewFolderIcon />}
-          >
-            내 포트폴리오에 추가하기
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            startIcon={<FindInPageIcon />}
-          >
-            관련 기사 검색하기
-          </Button>
-        </ButtonContainer> */}
     </DetailHeaderWrapper>
   );
 }

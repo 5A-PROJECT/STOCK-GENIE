@@ -7,26 +7,50 @@ import LineChart from '../LineChart';
 import BarChart from '../BarChart';
 
 const DetailInfoWrapper = styled.div`
-  border: 2px solid ${colors.grey[300]};
   padding: 1rem;
-  border-radius: 5px;
   margin-bottom: 1rem;
   min-height: 400px;
+`;
+
+const Title = styled.div`
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: underline;
 `;
 
 const SpinnerWrapper = styled.div`
   height: 380px;
 `;
 
+const InfoGridWapper = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 2rem;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  border-radius: 5px;
+`;
+
 const GridWapper = styled.div`
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 100%;
   align-items: center;
+  .block {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+
+    @media (max-width: 800px) {
+      grid-template-columns: 100%;
+    }
+  }
 `;
 
 const ChartWrapper = styled.div`
-  height: 400px;
+  height: 320px;
 `;
 
 const InfoWrapper = styled.div`
@@ -44,7 +68,7 @@ const InfoWrapper = styled.div`
   }
 
   .value {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     color: ${colors.grey[700]};
   }
@@ -57,13 +81,14 @@ function DetailInfo({ predictStore }) {
     loading,
     salesFormatedData,
     tradeAmountFormatedData,
-    fluctuationFormatedData
+    fluctuationFormatedData,
   } = predictStore;
-  console.log(predictData);
+
   useEffect(() => {
     getPredictData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <DetailInfoWrapper>
       {loading['getPredictData'] ? (
@@ -73,87 +98,31 @@ function DetailInfo({ predictStore }) {
       ) : (
         <>
           {predictData && (
-            <GridWapper>
-              <div>
+            <>
+              <Title>기본 정보</Title>
+              <InfoGridWapper>
                 <InfoWrapper>
-                  <div className="title">시가총액</div>
+                  <div className="title">발행주식</div>
+                  <div className="content">발행한 주식 수</div>
+                  <div className="value">
+                    {predictData.base['Shares Outstanding'].toLocaleString()}
+                  </div>
+                </InfoWrapper>
+                <InfoWrapper>
+                  <div className="title">주가수익률(PER)</div>
                   <div className="content">
-                    주가와 발행주식 수의 곱. 기업가치를 평가하는 지표
+                    현재의 주식가격 / 1주당 순이익(EPS)
                   </div>
                   <div className="value">
-                    {predictData.base['Market Cap'].toLocaleString()}
+                    {predictData.base['P/E Ratio']
+                      ? predictData.base['P/E Ratio'].toLocaleString()
+                      : predictData.base['P/E Ratio']}
                   </div>
                 </InfoWrapper>
-                <InfoWrapper>
-                  <div className="title">매출</div>
-                  <div className="content">
-                    상품의 매출 또는 서비스의 제공에 대한 수입금액
-                  </div>
-                  <div className="value">
-                    {predictData.base['Revenue'].toLocaleString()}
-                  </div>
-                </InfoWrapper>
-              </div>
-
-              <ChartWrapper>
-                <h1>평균 시가총액, 매출 비교</h1>
-                <BarChart data={salesFormatedData} />
-              </ChartWrapper>
-
-              <ChartWrapper>
-                <h1>변동폭 비교 그래프</h1>
-                <LineChart data={fluctuationFormatedData} />
-              </ChartWrapper>
-
-              <div>
-                <InfoWrapper>
-                  <div className="title">52주 변동폭</div>
-                  <div className="content">1년 동안의 주가 움직임</div>
-                  <div className="value">
-                    {predictData.base['52 wk Range'].toLocaleString()}
-                  </div>
-                </InfoWrapper>
-                <InfoWrapper>
-                  <div className="title">금일 변동폭</div>
-                  <div className="content">금일 주가 움직임</div>
-                  <div className="value">
-                    {predictData.base['Todays Range'].toLocaleString()}
-                  </div>
-                </InfoWrapper>
-              </div>
-
-              <div>
-                <InfoWrapper>
-                  <div className="title">거래량</div>
-                  <div className="content">
-                    주식시장에서 주식이 거래된 총량. 주가상승에 있어서 가장
-                    중요한 지표
-                  </div>
-                  <div className="value">
-                    {predictData.base['Volume'].toLocaleString()}
-                  </div>
-                </InfoWrapper>
-                <InfoWrapper>
-                  <div className="title">평균거래량</div>
-                  <div className="content">거래량의 평균</div>
-                  <div className="value">
-                    {predictData.base['Average Vol. (3m)'].toLocaleString()}
-                  </div>
-                </InfoWrapper>
-              </div>
-              <ChartWrapper>
-                <h1>거래량 비교 그래프</h1>
-                <BarChart scheme="dark2" data={tradeAmountFormatedData} />
-              </ChartWrapper>
-              <ChartWrapper>
-                <h1>???뭐든 그래프</h1>
-                <LineChart data={fluctuationFormatedData} />
-              </ChartWrapper>
-              <div>
                 <InfoWrapper>
                   <div className="title">주당순이익(EPS)</div>
                   <div className="content">
-                    기업의 순이익(당기순이익)을 유통주식수로 나눈것
+                    기업의 순이익(당기순이익) / 유통주식수
                   </div>
                   <div className="value">
                     {predictData.base['EPS'].toLocaleString()}
@@ -166,15 +135,7 @@ function DetailInfo({ predictStore }) {
                     {predictData.base['Dividend (Yield)'].toLocaleString()}
                   </div>
                 </InfoWrapper>
-                <InfoWrapper>
-                  <div className="title">주가수익률(PER)</div>
-                  <div className="content">
-                    현재의 주식가격을 1주당 순이익(EPS)로 나눈값
-                  </div>
-                  <div className="value">
-                    {predictData.base['P/E Ratio'].toLocaleString()}
-                  </div>
-                </InfoWrapper>
+
                 <InfoWrapper>
                   <div className="title">시장민감도(Beta)</div>
                   <div className="content">시장의 움직임에 대한 민감도</div>
@@ -187,15 +148,90 @@ function DetailInfo({ predictStore }) {
                     {predictData.base['1-Year Change']}
                   </div>
                 </InfoWrapper>
-                <InfoWrapper>
-                  <div className="title">발행주식</div>
-                  <div className="content">발행한 주식 수</div>
-                  <div className="value">
-                    {predictData.base['Shares Outstanding'].toLocaleString()}
+              </InfoGridWapper>
+              <Title>비교 정보</Title>
+              <GridWapper>
+                <div className="block">
+                  <div>
+                    <InfoWrapper>
+                      <div className="title">시가총액</div>
+                      <div className="content">
+                        주가 * 발행주식 수. 기업가치를 평가하는 지표
+                      </div>
+                      <div className="value">
+                        {Math.floor(
+                          predictData.base['Market Cap'] / 1000000,
+                        ).toLocaleString()}{' '}
+                        백만
+                      </div>
+                    </InfoWrapper>
+                    <InfoWrapper>
+                      <div className="title">매출</div>
+                      <div className="content">
+                        상품의 매출 또는 서비스의 제공에 대한 수입금액
+                      </div>
+                      <div className="value">
+                        {Math.floor(
+                          predictData.base['Revenue'] / 1000000,
+                        ).toLocaleString()}{' '}
+                        백만
+                      </div>
+                    </InfoWrapper>
                   </div>
-                </InfoWrapper>
-              </div>
-            </GridWapper>
+
+                  <ChartWrapper>
+                    <BarChart data={salesFormatedData} />
+                  </ChartWrapper>
+                </div>
+
+                <div className="block">
+                  <div>
+                    <InfoWrapper>
+                      <div className="title">52주 변동폭</div>
+                      <div className="content">1년 동안의 주가 움직임</div>
+                      <div className="value">
+                        {predictData.base['52 wk Range'].toLocaleString()}
+                      </div>
+                    </InfoWrapper>
+                    <InfoWrapper>
+                      <div className="title">금일 변동폭</div>
+                      <div className="content">금일 주가 움직임</div>
+                      <div className="value">
+                        {predictData.base['Todays Range'].toLocaleString()}
+                      </div>
+                    </InfoWrapper>
+                  </div>
+                  <ChartWrapper>
+                    <LineChart data={fluctuationFormatedData} />
+                  </ChartWrapper>
+                </div>
+
+                <div className="block">
+                  <div>
+                    <InfoWrapper>
+                      <div className="title">현재거래량</div>
+                      <div className="content">
+                        주식시장에서 주식이 거래된 총량
+                      </div>
+                      <div className="value">
+                        {predictData.base['Volume'].toLocaleString()} 회
+                      </div>
+                    </InfoWrapper>
+                    <InfoWrapper>
+                      <div className="title">평균거래량</div>
+                      <div className="content">거래량의 평균</div>
+                      <div className="value">
+                        {predictData.base['Average Vol. (3m)'].toLocaleString()}{' '}
+                        회
+                      </div>
+                    </InfoWrapper>
+                  </div>
+                  <ChartWrapper>
+                    <BarChart scheme="dark2" data={tradeAmountFormatedData} />
+                  </ChartWrapper>
+                </div>
+              </GridWapper>
+            </>
           )}
         </>
       )}

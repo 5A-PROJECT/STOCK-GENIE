@@ -10,9 +10,11 @@ export default class PredictStore {
   predictData = null;
   selectedIndex = 'KOSPI';
   selectedStock = null;
+  stockRealAndPredictData = null;
   loading = {
     getTableData: false,
     getPredictData: false,
+    getStockRealAndPredictData: false,
   };
 
   get salesFormatedData() {
@@ -34,8 +36,8 @@ export default class PredictStore {
     if (this.predictData) {
       return [
         {
-          name: '거래량',
-          거래량: this.predictData.base['Volume'],
+          name: '현재거래량',
+          현재거래량: this.predictData.base['Volume'],
         },
         {
           name: '평균거래량',
@@ -47,22 +49,21 @@ export default class PredictStore {
 
   get fluctuationFormatedData() {
     if (this.predictData) {
-      console.log(this.predictData, '??');
       const today = this.predictData.base['Todays Range'];
-      const [past, now] = today.split('-');
+      const [todayPast, todayNow] = today.split('-');
       const week = this.predictData.base['52 wk Range'];
-
+      const [weekPast, weekNow] = week.split('-');
       return [
         {
           id: '52주 변동폭',
           data: [
             {
               x: '과거',
-              y: 130,
+              y: parseInt(weekPast.replace(',', '').replace(',', '')),
             },
             {
               x: '최근',
-              y: 213,
+              y: parseInt(weekNow.replace(',', '').replace(',', '')),
             },
           ],
         },
@@ -71,16 +72,47 @@ export default class PredictStore {
           data: [
             {
               x: '과거',
-              y: parseInt(past),
+              y: parseInt(todayPast.replace(',', '').replace(',', '')),
             },
             {
               x: '최근',
-              y: parseInt(now),
+              y: parseInt(todayNow.replace(',', '').replace(',', '')),
             },
           ],
         },
       ];
     } else return null;
+  }
+
+  get stockRealAndPredictFormatedData() {
+    if (this.stockRealAndPredictData) {
+      return [
+        {
+          id: '실제 주가',
+          data: this.stockRealAndPredictData['real'].map((data) => ({
+            x: data['time'],
+            y: data['value'],
+          })),
+        },
+        {
+          id: '예측 주가',
+          data: this.stockRealAndPredictData['predict'].map((data) => ({
+            x: data['time'],
+            y: data['value'],
+          })),
+        },
+      ];
+    } else
+      return [
+        {
+          id: '실제 주가',
+          data: [],
+        },
+        {
+          id: '예측 주가',
+          data: [],
+        },
+      ];
   }
 
   getTableData = async (index) => {
@@ -111,6 +143,24 @@ export default class PredictStore {
     this.loading['getPredictData'] = false;
   };
 
+  getStockRealAndPredictData = async () => {
+    const { token } = this.root.authStore;
+    this.loading['getStockRealAndPredictData'] = true;
+    try {
+      const res = await PredictRepository.getStockRealAndPredict(
+        this.selectedStock.code,
+        this.selectedStock.country,
+        this.selectedIndex,
+        token,
+      );
+
+      this.stockRealAndPredictData = res.data;
+    } catch (e) {
+      console.log(e);
+    }
+    this.loading['getStockRealAndPredictData'] = false;
+  };
+
   setSelectedIndex = (index) => {
     this.selectedIndex = index;
   };
@@ -122,6 +172,7 @@ export default class PredictStore {
   clearSelectedStock = () => {
     this.selectedStock = null;
     this.predictData = null;
+    this.stockRealAndPredictData = null;
   };
 }
 
@@ -131,10 +182,13 @@ decorate(PredictStore, {
   predictData: observable,
   selectedStock: observable,
   loading: observable,
+  stockRealAndPredictData: observable,
   salesFormatedData: computed,
   tradeAmountFormatedData: computed,
   fluctuationFormatedData: computed,
+  stockRealAndPredictFormatedData: computed,
   getTableData: action,
+  getStockRealAndPredictData: action,
   setSelectedIndex: action,
   setSelectedStock: action,
   clearSelectedStock: action,

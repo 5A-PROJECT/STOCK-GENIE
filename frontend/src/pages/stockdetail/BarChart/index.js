@@ -2,16 +2,17 @@ import { ResponsiveBar } from '@nivo/bar';
 import React from 'react';
 
 function BarChart({ data, scheme = 'category10' }) {
-  console.log(data);
   return (
     <ResponsiveBar
       data={data}
-      keys={['시가총액', '매출', '거래량', '평균거래량']}
+      keys={['시가총액', '매출', '현재거래량', '평균거래량']}
       indexBy="name"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       colors={{ scheme }}
       labelFormat={'.2s'}
+      enableGridX={false}
+      enableGridY={false}
       defs={[
         {
           id: 'dots',
@@ -38,7 +39,6 @@ function BarChart({ data, scheme = 'category10' }) {
       axisRight={null}
       axisBottom={null}
       axisLeft={null}
-      // axisLeft={{ format: (v) => `${v / 1000000000}G` }}
       labelSkipWidth={12}
       labelSkipHeight={12}
       labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
