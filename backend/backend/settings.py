@@ -169,6 +169,6 @@ CRONJOBS = [
      '>> /home/ubuntu/s02p23c101/backend/refresh_predict.log')
 ]
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'frontend', 'build', 'static')
-# ]
+STATICFILES_DIRS = [
+    os.path.join('home', 's02p23c101', 'frontend', 'build', 'static')
+]
