@@ -8,6 +8,10 @@ import { Helmet } from 'react-helmet-async';
 const AuthPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.authForm};
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 `;
 
 function AuthPage({ type }) {
