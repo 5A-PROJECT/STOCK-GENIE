@@ -9,15 +9,17 @@ const AppBarWrapper = styled.nav`
   justify-content: center;
   background-color: ${({ theme }) => theme.color.main.appbar};
   align-items: center;
-  ul {
-    width: 100%;
-    max-width: 1024px;
-    padding: 0;
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
-  }
+`;
+
+const NavUl = styled.ul`
+  width: 100%;
+  max-width: 1024px;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: ${({ isLoggedIn }) =>
+    isLoggedIn ? `1fr 1fr 1fr 1fr` : `1fr 1fr 1fr`};
+  justify-items: center;
 `;
 
 const NavLink = styled(Link)`
@@ -29,9 +31,9 @@ const NavLink = styled(Link)`
 function AppBarTemplate({ isLoggedIn }) {
   return (
     <AppBarWrapper>
-      <ul>
+      <NavUl isLoggedIn={isLoggedIn}>
         <li>
-          <NavLink to="/">5A(로고)</NavLink>
+          <NavLink to="/">스톡지니</NavLink>
         </li>
         {isLoggedIn ? (
           <>
@@ -56,7 +58,7 @@ function AppBarTemplate({ isLoggedIn }) {
             </li>
           </>
         )}
-      </ul>
+      </NavUl>
     </AppBarWrapper>
   );
 }

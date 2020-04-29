@@ -15,45 +15,80 @@ export default class NewsStore {
 
   get formatedNewsData() {
     if (this.newsData) {
-      return this.newsData.map((data, i) => ({
+      return this.newsData.newses.map((data, i) => ({
         news: data.news,
         link: data.link,
         result: data.result,
-        good: data.good,
-        bad: data.bad,
       }));
     }
     return null;
   }
 
+  get goodNewses() {
+    if (this.newsData) {
+      return this.newsData.newses.filter((news) => news.result === 1);
+    } else return [];
+  }
+
+  get badNewses() {
+    if (this.newsData) {
+      return this.newsData.newses.filter((news) => news.result === 0);
+    } else return [];
+  }
+
+  get goodBadData() {
+    return [
+      {
+        id: 'GOOD',
+        label: '호재',
+        value: this.newsData.good,
+      },
+      {
+        id: 'BAD',
+        label: '악재',
+        value: this.newsData.bad,
+      },
+    ];
+  }
+
   getNews = async (keyword = 'LG') => {
     this.loading['getNews'] = true;
-    const { token } = this.root.authStore;
     try {
-      const res = await NewsRepository.getNews(token, keyword);
+      const res = await NewsRepository.getNews(keyword);
       let tmpData = [];
-      const news = res.data.news;
-      const link = res.data.links;
-      const result = res.data.results;
+
+      const descriptions = res.data.descriptions;
+      const newses = res.data.news;
+      const links = res.data.links;
+      const results = res.data.results;
       const good = res.data.good;
       const bad = res.data.bad;
 
       for (let i = 0; i < res.data.news.length; i++) {
         tmpData.push({
-          news: news[i],
-          link: link[i],
-          result: result[i],
-          good: good,
-          bad: bad,
+          news: newses[i],
+          link: links[i],
+          result: results[i],
+          description: descriptions[i],
         });
       }
-      this.newsData = tmpData;
+
+      this.newsData = {
+        good,
+        bad,
+        newses: tmpData,
+      };
       this.wordData = res.data.words;
     } catch (e) {
       console.log(e);
     }
 
     this.loading['getNews'] = false;
+  };
+
+  clearNewsData = () => {
+    this.newsData = null;
+    this.wordData = null;
   };
 }
 
@@ -62,5 +97,9 @@ decorate(NewsStore, {
   wordData: observable,
   loading: observable,
   formatedNewsData: computed,
+  goodNewses: computed,
+  badNewses: computed,
+  goodBadData: computed,
   getNews: action,
+  clearNewsData: action,
 });

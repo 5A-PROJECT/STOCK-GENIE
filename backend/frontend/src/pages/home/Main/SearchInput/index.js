@@ -66,7 +66,11 @@ function SearchInput(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.history.push(`/search/${query}`);
+    if (query.length > 0) {
+      props.history.push(`/search/${query}`);
+    } else {
+      alert('검색어는 1글자 이상이어야 합니다.');
+    }
   };
 
   return (
@@ -77,7 +81,7 @@ function SearchInput(props) {
           fullWidth
           value={query}
           onChange={onInputChange}
-          placeholder="관심 종목을 찾아보세요."
+          placeholder="키워드 / 관심 종목의 뉴스 데이터를 분석해보세요."
           autoFocus
         />
         <CustomButton variant="contained" type="submit">

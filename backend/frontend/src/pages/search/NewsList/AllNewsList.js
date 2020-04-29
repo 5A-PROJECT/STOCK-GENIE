@@ -1,97 +1,108 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Paging from '../Utils/Paging';
-import ShowAllNews from './ShowAllNews';
+import NewsListItem from '../NewsListItem';
+import { inject, observer } from 'mobx-react';
 
-const TitleWrapper = styled.div`
-  margin-left: 20%;
-  margin-top: 5%;
-  align-items: center;
-  .Button {
-    size: large;
-  }
-`;
+const AllNewsListWrapper = styled.div``;
 
 const NewsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem 1rem;
 `;
 
-const PageList = styled.ul`
-  display: flex;
+const ButtonContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 0.5rem;
 `;
 
-function AllNewsList({ news }) {
-  const [pageItem, setPageItem] = useState([]);
-  const [type, setType] = useState('all');
-  let itemCount = 0;
-
-  const handlerAll = () => {
-    setType((type) => 'all');
-    let tmpData = [];
-    for (let i = 0; i < 10; i++) {
-      tmpData.push(news[i]);
-    }
-    setPageItem((pageItem) => tmpData);
-  };
-  const handlerGood = () => {
-    setType((type) => 'good');
-    itemCount = 0;
-    let tmpData = [];
-    for (let i = 0; i < news.length; i++) {
-      if (news[i].result === 1) {
-        itemCount++;
-        tmpData.push(news[i]);
-      }
-      if (itemCount === 10) break;
-    }
-    setPageItem((pageItem) => tmpData);
-  };
-  const handlerBad = () => {
-    setType((type) => 'bad');
-    itemCount = 0;
-    let tmpData = [];
-    for (let i = 0; i < news.length; i++) {
-      if (news[i].result === 0) {
-        itemCount++;
-        tmpData.push(news[i]);
-      }
-      if (itemCount === 10) break;
-    }
-    setPageItem((pageItem) => tmpData);
-  };
-
-  if (pageItem.length === 0) {
-    for (let i = 0; i < 10; i++) {
-      pageItem.push(news[i]);
-    }
+const SelectedButton = styled.button`
+  border: none;
+  background-color: ${({ active, theme }) =>
+    active ? theme.color.main.color[700] : theme.color.main.color[500]};
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  :focus {
+    outline: none;
   }
+  :hover {
+    background-color: ${({ theme }) => theme.color.main.color[700]};
+    transition-duration: 0.5s;
+  }
+  :first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  :last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+`;
+
+function AllNewsList({ newsStore }) {
+  const [category, setCategory] = useState('ALL');
+  const { goodNewses, badNewses, newsData } = newsStore;
+  const categories = [
+    {
+      name: '전체',
+      code: 'ALL',
+    },
+    {
+      name: '호재 뉴스',
+      code: 'GOOD',
+    },
+    {
+      name: '악재 뉴스',
+      code: 'BAD',
+    },
+  ];
+
+  const onSelectCategory = (cat) => {
+    setCategory(cat);
+  };
 
   return (
-    <>
-      <div>
-        <TitleWrapper>
-          <ButtonGroup variant="text">
-            <Button onClick={handlerAll}>전체</Button>
-            <Button onClick={handlerGood}>Good News</Button>
-            <Button onClick={handlerBad}>Bad News</Button>
-          </ButtonGroup>
-        </TitleWrapper>
-        <NewsWrapper>
-          {pageItem.map((data, index) => (
-            <ShowAllNews key={index} news={data} />
-          ))}
-          <PageList>
-            <Paging pageSize={news.length} />
-          </PageList>
-        </NewsWrapper>
-      </div>
-    </>
+    <AllNewsListWrapper>
+      <ButtonContainer>
+        {categories.map((cat) => (
+          <SelectedButton
+            key={cat.name}
+            onClick={() => onSelectCategory(cat.code)}
+            active={category === cat.code}
+          >
+            {cat.name}
+          </SelectedButton>
+        ))}
+      </ButtonContainer>
+
+      <NewsWrapper>
+        {category === 'ALL' && (
+          <>
+            {newsData.newses.map((news, index) => (
+              <NewsListItem key={index} news={news} />
+            ))}
+          </>
+        )}
+        {category === 'GOOD' && (
+          <>
+            {goodNewses.map((news, index) => (
+              <NewsListItem key={index} news={news} />
+            ))}
+          </>
+        )}
+        {category === 'BAD' && (
+          <>
+            {badNewses.map((news, index) => (
+              <NewsListItem key={index} news={news} />
+            ))}
+          </>
+        )}
+      </NewsWrapper>
+    </AllNewsListWrapper>
   );
 }
 
-export default AllNewsList;
+export default inject('newsStore')(observer(AllNewsList));
