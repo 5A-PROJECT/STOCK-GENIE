@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from . import invest
 from .models import StockInfo
 from .serializers import StockInfoSerializer
+from .collectstock import refresh_predict
 import pickle
 import json
 
@@ -101,7 +102,18 @@ def get_stock(request):
             dt['value'] = float(dt['value'])
         result = {}
         result['real'] = data['data']
-        result['predict'] = predict_data
+        result['predict'] = reversed(predict_data)
         return Response(result)
     else:
         return HttpResponse(status=405)
+
+
+@permission_classes([IsAuthenticated, ])
+@authentication_classes([JSONWebTokenAuthentication, ])
+@api_view(['POST'])
+def refresh(request):
+    if not request.user.is_staff:
+        return HttpResponse(status=404)
+    if request.method == 'POST':
+        refresh_predict()
+        return HttpResponse(status=200)
