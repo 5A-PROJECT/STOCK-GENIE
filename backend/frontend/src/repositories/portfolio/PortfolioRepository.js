@@ -84,6 +84,14 @@ class PortfolioRepository {
       },
     });
   }
+
+  updateStcok(stockId, stockForm, token) {
+    return axios.patch(`${BASE_URL}/stock/${stockId}/`, stockForm, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
+  }
 }
 
 export default new PortfolioRepository();

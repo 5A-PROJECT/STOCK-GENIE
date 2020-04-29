@@ -4,6 +4,7 @@ import { Dialog, MenuItem } from '@material-ui/core';
 import MaterialInput from '../../../../atoms/Input/MaterialInput';
 import MaterialButton from '../../../../atoms/Button/MaterialButton';
 import { inject, observer } from 'mobx-react';
+import { useEffect } from 'react';
 
 const DialogWrapper = styled.div`
   min-width: 300px;
@@ -20,7 +21,18 @@ const ButtonGroup = styled.div`
   justify-content: flex-end;
 `;
 
-function ModalContents({ open, onClose, portfolioStore }) {
+function ModalContents({
+  open,
+  onClose,
+  portfolioStore,
+  update = false,
+  stock,
+}) {
+  useEffect(() => {
+    if (update && stock) {
+      setStockForm(stock);
+    }
+  }, []);
   const [stockForm, setStockForm] = useState({
     name: '',
     count: 1,
@@ -42,6 +54,22 @@ function ModalContents({ open, onClose, portfolioStore }) {
   const addStock = async () => {
     const isAdded = await portfolioStore.addStock(stockForm);
     if (isAdded) {
+      setStockForm({
+        name: '',
+        count: 1,
+        code: '',
+        buy_price: 10000,
+        current_price: 10000,
+        currency: 'USD',
+        category: 'STOCK',
+      });
+      onClose();
+    }
+  };
+
+  const updateStock = () => {
+    const isUpdated = portfolioStore.updateStock(stock.id, stockForm);
+    if (isUpdated) {
       setStockForm({
         name: '',
         count: 1,
@@ -134,7 +162,9 @@ function ModalContents({ open, onClose, portfolioStore }) {
         </ModalForm>
         <ButtonGroup>
           <MaterialButton onClick={onClose}>취소</MaterialButton>
-          <MaterialButton onClick={addStock}>추가</MaterialButton>
+          <MaterialButton onClick={update ? updateStock : addStock}>
+            {update ? '수정' : '추가'}
+          </MaterialButton>
         </ButtonGroup>
       </DialogWrapper>
     </Dialog>

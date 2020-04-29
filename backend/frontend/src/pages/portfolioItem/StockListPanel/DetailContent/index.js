@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MaterialButton from '../../../../atoms/Button/MaterialButton';
 import { inject, observer } from 'mobx-react';
+import StockAddModal from '../../StockAddModal';
 
 const DetailWrapper = styled.div`
   width: 100%;
@@ -118,7 +119,7 @@ function DetailContent({
         </div>
       </PriceWrapper>
       <ButtonWrapper>
-        <MaterialButton>수정</MaterialButton>
+        <StockAddModal update={true} stock={stock} />
         <MaterialButton onClick={onDelete}>삭제</MaterialButton>
       </ButtonWrapper>
     </DetailWrapper>

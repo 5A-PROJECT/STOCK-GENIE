@@ -128,6 +128,7 @@ export default class PortfolioStore {
       if (!this.stockValidation(stock)) {
         throw new Error('올바르지 않은 주식 형태');
       }
+      console.log(stock);
       const res = await PortfolioRepository.createStock(
         this.selectedPortfolio.id,
         stock,
@@ -169,8 +170,7 @@ export default class PortfolioStore {
   deleteStock = async (stockId) => {
     const { token } = this.root.authStore;
     try {
-      const res = await PortfolioRepository.deleteStock(stockId, token);
-      const { id } = res;
+      await PortfolioRepository.deleteStock(stockId, token);
       this.selectedPortfolio.stocks = this.selectedPortfolio.stocks.filter(
         (stock) => stock.id !== stockId,
       );
@@ -194,6 +194,37 @@ export default class PortfolioStore {
       console.log(e);
     }
   };
+
+  updateStock = async (stockId, stockForm) => {
+    const { token } = this.root.authStore;
+    let isUpdated = true;
+    try {
+      if (!this.stockValidation(stockForm)) {
+        throw new Error('올바르지 않은 주식 형태');
+      }
+      await PortfolioRepository.updateStcok(stockId, stockForm, token);
+      // foreach는 안되고 map은 댄당 ?
+      this.selectedPortfolio.stocks = this.selectedPortfolio.stocks.map(
+        (stock) => {
+          if (stock.id === stockId) {
+            const edited = {
+              ...stock,
+              ...stockForm,
+            };
+            return edited;
+          } else {
+            return stock;
+          }
+        },
+      );
+
+      this.updateCalcFields();
+    } catch (e) {
+      console.log(e);
+      isUpdated = false;
+    }
+    return isUpdated;
+  };
 }
 
 decorate(PortfolioStore, {
@@ -211,4 +242,5 @@ decorate(PortfolioStore, {
   addTag: action,
   deleteStock: action,
   updateCalcFields: action,
+  updateStock: action,
 });
