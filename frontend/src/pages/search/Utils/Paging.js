@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import _ from 'lodash';
 
 const Wrapper = styled.li`
   display: flex;
@@ -18,7 +17,7 @@ const PageButton = styled.button`
   border: none;
 `;
 function Paging(props) {
-  const { pageSize } = props;
+  // const { pageSize } = props;
 
   const pageNumbers = [];
 

@@ -18,7 +18,6 @@ function DetailChart({ stock, predictStore }) {
   useEffect(() => {
     getStockRealAndPredictData();
   }, [getStockRealAndPredictData]);
-  console.log(stockRealAndPredictFormatedData);
   return (
     <ChartWarpper>
       <ResponsiveLine
