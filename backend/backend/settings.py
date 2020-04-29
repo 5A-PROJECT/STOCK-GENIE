@@ -27,7 +27,8 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '52.78.142.77', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '52.78.142.77',
+                 '127.0.0.1', 'i02c101.p.ssafy.io']
 
 
 # Application definition
@@ -70,7 +71,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['../frontend/build'],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend', 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -170,5 +171,5 @@ CRONJOBS = [
 ]
 
 STATICFILES_DIRS = [
-    '/home/s02p23c101/frontend/build/static'
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static')
 ]
