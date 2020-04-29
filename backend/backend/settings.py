@@ -170,5 +170,5 @@ CRONJOBS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join('home', 's02p23c101', 'frontend', 'build', 'static')
+    '/home/s02p23c101/frontend/build/static'
 ]
