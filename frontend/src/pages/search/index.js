@@ -11,16 +11,17 @@ import Spinner from '../../atoms/Spinner';
 const SearchPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
   margin: 0 auto;
+  padding: 1rem;
 `;
 
-const WordWrapper = styled.div`
-  margin-top: 5%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+const WordCloudSection = styled.section``;
+
+const Title = styled.div`
+  font-size: 1.5rem;
+  font-weight: bold;
 `;
 
-const NewsWrapper = styled.div`
+const NewsSection = styled.section`
   margin-top: 5%;
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -41,13 +42,16 @@ function SearchPage({ newsStore }) {
         <>
           {newsData ? (
             <SearchPageWrapper>
-              <WordWrapper>
+              <WordCloudSection>
+                <Title>검색어 기반 워드클라우드</Title>
                 <WordCloud words={newsData.words} />
-              </WordWrapper>
-              <NewsWrapper>
+              </WordCloudSection>
+
+              <NewsSection>
+                <Title>검색어 기반 워드클라우드</Title>
                 <AllNewsList news={formatedNewsData} />
                 <PieGraph news={formatedNewsData} />
-              </NewsWrapper>
+              </NewsSection>
             </SearchPageWrapper>
           ) : (
             <div>뉴스 데이터 없음</div>
