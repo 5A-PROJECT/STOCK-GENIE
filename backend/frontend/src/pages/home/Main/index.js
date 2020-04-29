@@ -29,6 +29,9 @@ const Logo = styled.span`
   @media (max-width: 900px) {
     font-size: 1.4rem;
   }
+  @media (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 const TextContents = styled.div`
@@ -37,6 +40,9 @@ const TextContents = styled.div`
     font-size: 4rem;
     @media (max-width: 900px) {
       font-size: 2rem;
+    }
+    @media (max-width: 500px) {
+      font-size: 1.5rem;
     }
   }
   .sub {

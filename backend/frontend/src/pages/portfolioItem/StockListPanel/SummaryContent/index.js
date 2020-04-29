@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react';
 
 const SummaryWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
 `;
@@ -12,6 +13,7 @@ const SummaryWrapper = styled.div`
 const StockInfo = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   .code {
     color: ${({ theme }) => theme.color.portfolio.code};
     font-size: 0.6rem;

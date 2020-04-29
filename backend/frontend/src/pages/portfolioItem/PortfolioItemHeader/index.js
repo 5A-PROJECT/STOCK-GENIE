@@ -6,6 +6,10 @@ const HeaderWrapper = styled.header`
   margin: 1rem 0;
   display: grid;
   grid-template-columns: 3fr 1fr;
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
 `;
 
 const TitleWrapper = styled.div`

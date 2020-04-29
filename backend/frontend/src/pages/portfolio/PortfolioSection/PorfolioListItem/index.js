@@ -18,6 +18,9 @@ const ItemWrapper = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 3fr 1fr;
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
 
   .info-containter {
     display: flex;
@@ -69,7 +72,7 @@ function PortfolioListItem(props) {
               <span className="name">{name}</span>
               {tags && <TagList tags={tags} slice={true} />}
             </div>
-            <div className="date">생성일 : {formatedCreatedAt}</div>
+            <div className="date">{formatedCreatedAt}</div>
           </div>
         </div>
         <div className="profit-containter">
