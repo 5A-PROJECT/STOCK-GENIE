@@ -14,6 +14,7 @@ import PortFolioPage from './pages/portfolio';
 import NotFound from './pages/notfound';
 import PortfolioItem from './pages/portfolioItem';
 import StockDetailPage from './pages/stockdetail';
+import { Helmet } from 'react-helmet-async';
 
 const AppWrppar = styled.div`
   display: flex;
@@ -30,6 +31,9 @@ function App({ authStore }) {
   // const { loading } = authStore;
   return (
     <ThemeProvider theme={theme}>
+      <Helmet>
+        <title>스톡지니</title>
+      </Helmet>
       <AppWrppar>
         <CustomAppBar />
         <Content>

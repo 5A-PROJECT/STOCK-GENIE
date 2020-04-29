@@ -3,6 +3,7 @@ import AuthFormContainer from './AuthForm/AuthFormContainer';
 import styled from 'styled-components';
 import Logo from '../../molecules/Logo';
 import AccessProtection from '../../molecules/AccessProtection';
+import { Helmet } from 'react-helmet-async';
 
 const AuthPageWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.authForm};
@@ -12,6 +13,9 @@ const AuthPageWrapper = styled.div`
 function AuthPage({ type }) {
   return (
     <AccessProtection authed={false} redirectPath={'/'}>
+      <Helmet>
+        <title>스톡지니 | {type.toUpperCase()}</title>
+      </Helmet>
       <AuthPageWrapper>
         <Logo />
         <AuthFormContainer type={type} />

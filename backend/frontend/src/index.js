@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import RootStore from './stores/RootStore';
+import { HelmetProvider } from 'react-helmet-async';
 
 const root = new RootStore();
 
@@ -13,7 +14,9 @@ ReactDOM.render(
   // <React.StrictMode>
   <Provider {...root}>
     <Router>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </Router>
   </Provider>,
   // </React.StrictMode >

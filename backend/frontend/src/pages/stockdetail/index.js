@@ -6,6 +6,7 @@ import DetailInfo from './DetailInfo2';
 import { inject, observer } from 'mobx-react';
 import { useEffect } from 'react';
 import DetailChart from './DetailChart';
+import { Helmet } from 'react-helmet-async';
 
 const StockDetailWrapper = styled.div`
   max-width: ${({ theme }) => theme.width.page};
@@ -36,6 +37,9 @@ function StockDetailPage({ predictStore, history }) {
 
   return (
     <AccessProtection authed={true} redirectPath="/">
+      <Helmet>
+        <title>스톡지니 | 예측보고서</title>
+      </Helmet>
       <StockDetailWrapper>
         <Title>
           <span role="img" aria-label="">
