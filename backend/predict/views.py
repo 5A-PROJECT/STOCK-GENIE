@@ -102,7 +102,7 @@ def get_stock(request):
             dt['value'] = float(dt['value'])
         result = {}
         result['real'] = data['data']
-        result['predict'] = reversed(predict_data)
+        result['predict'] = predict_data
         return Response(result)
     else:
         return HttpResponse(status=405)
