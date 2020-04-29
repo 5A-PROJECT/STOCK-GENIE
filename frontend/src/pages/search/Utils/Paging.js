@@ -6,6 +6,7 @@ const Wrapper = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 15%;
 `;
 
 const PageButton = styled.button`

@@ -19,12 +19,14 @@ export default class NewsStore {
         news: data.news,
         link: data.link,
         result: data.result,
+        good: data.good,
+        bad: data.bad,
       }));
     }
     return null;
   }
 
-  getNews = async (keyword = '삼성') => {
+  getNews = async (keyword = 'LG') => {
     this.loading['getNews'] = true;
     const { token } = this.root.authStore;
     try {
@@ -33,12 +35,16 @@ export default class NewsStore {
       const news = res.data.news;
       const link = res.data.links;
       const result = res.data.results;
+      const good = res.data.good;
+      const bad = res.data.bad;
 
       for (let i = 0; i < res.data.news.length; i++) {
         tmpData.push({
           news: news[i],
           link: link[i],
           result: result[i],
+          good: good,
+          bad: bad,
         });
       }
       this.newsData = tmpData;

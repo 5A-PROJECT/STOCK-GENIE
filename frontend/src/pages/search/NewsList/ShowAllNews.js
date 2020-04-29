@@ -5,9 +5,9 @@ const ItemWrapper = styled.a`
   /* width: '90%'; */
   /* display: flex; */
   /* flex-direction: column; */
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
-  & + & {
+  margin-left: 20% & + & {
     margin-top: 1rem;
   }
   color: black;
