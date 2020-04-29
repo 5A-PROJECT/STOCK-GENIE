@@ -48,11 +48,12 @@ def refresh_predict():
         now = datetime.now()
         now = str(now).split()[0]
         graph_data.append({'time': now, 'value': predict})
-        with open(file_path, 'rb') as fw:
+        with open(file_path, 'wb') as fw:
             pickle.dump(graph_data, fw)
 
 
 def prediction(stock, indices, df):
+    import tensorflow as tf
     scaler = MinMaxScaler()
     scaler.fit(df)
     data_ = scaler.transform(df)
