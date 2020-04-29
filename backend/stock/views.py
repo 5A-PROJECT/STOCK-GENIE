@@ -22,7 +22,7 @@ def stock(request, sc_id):
         )
         sc.currency = sc.currency or request.data.get('currency')
         sc.category = sc.category or request.data.get('category')
-        sc.save()
+        sc.save(update_fields='__all__')
         return JsonResponse({'id': sc_id})
     elif request.method == 'DELETE':
         sc.delete()
