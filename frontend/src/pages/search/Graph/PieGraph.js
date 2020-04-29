@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ResponsivePie } from '@nivo/pie';
-import { inject, observer } from 'mobx-react';
 
 const MyResponsivePie = ({ data /* see data tab */ }) => (
   <ResponsivePie

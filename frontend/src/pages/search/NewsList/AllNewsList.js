@@ -69,9 +69,6 @@ function AllNewsList({ news }) {
     for (let i = 0; i < 10; i++) {
       pageItem.push(news[i]);
     }
-  } else {
-    console.log(useState.pageItem);
-    console.log(pageItem);
   }
 
   return (
