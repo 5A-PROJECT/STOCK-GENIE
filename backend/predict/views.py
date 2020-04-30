@@ -95,6 +95,8 @@ def get_stock(request):
         country = request.GET.get('country')
         index = request.GET.get('index')
         data = invest.get_stock(code, country)
+        if index == "Nasdaq":
+            index = "NASDAQ"
         file_path = f'predict/dataset/{index}/{code}.pickle'
         with open(file_path, "rb") as fr:
             predict_data = pickle.load(fr)
