@@ -103,12 +103,12 @@ def get_stock(request):
         for dt in predict_data:
             dt['value'] = float(dt['value'])
         n = len(data['data'])
-        for i in range(n):
-            print(data['data'][i], predict_data[len(predict_data)-n:][i])
-
         result = {}
         result['real'] = data['data']
-        result['predict'] = predict_data[len(predict_data)-n:]
+        if len(predict_data) > n:
+            result['predict'] = predict_data[len(predict_data)-n:]
+        else:
+            result['predict'] = predict_data
         return Response(result)
     else:
         return HttpResponse(status=405)
