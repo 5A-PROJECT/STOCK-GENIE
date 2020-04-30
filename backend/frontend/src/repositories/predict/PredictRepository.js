@@ -31,6 +31,9 @@ class PredictRepository {
   }
 
   getStockRealAndPredict(code, country, index, token) {
+    if (index === 'NASDAQ') {
+      index = 'Nasdaq';
+    }
     return axios.get(`${this.URL}/stock/`, {
       params: {
         code,
