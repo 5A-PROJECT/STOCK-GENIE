@@ -108,7 +108,9 @@ function DetailInfo({ predictStore }) {
                   <div className="title">발행주식</div>
                   <div className="content">발행한 주식 수</div>
                   <div className="value">
-                    {predictData.base['Shares Outstanding'].toLocaleString()}
+                    {predictData.base['Shares Outstanding']
+                      ? predictData.base['Shares Outstanding'].toLocaleString()
+                      : predictData.base['Shares Outstanding']}
                   </div>
                 </InfoWrapper>
                 <InfoWrapper>
@@ -128,14 +130,18 @@ function DetailInfo({ predictStore }) {
                     기업의 순이익(당기순이익) / 유통주식수
                   </div>
                   <div className="value">
-                    {predictData.base['EPS'].toLocaleString()}
+                    {predictData.base['EPS']
+                      ? predictData.base['EPS'].toLocaleString()
+                      : predictData.base['EPS']}
                   </div>
                 </InfoWrapper>
                 <InfoWrapper>
                   <div className="title">배당률</div>
                   <div className="content">액면가 대비 배당금의 비율</div>
                   <div className="value">
-                    {predictData.base['Dividend (Yield)'].toLocaleString()}
+                    {predictData.base['Dividend (Yield)']
+                      ? predictData.base['Dividend (Yield)'].toLocaleString()
+                      : predictData.base['Dividend (Yield)']}
                   </div>
                 </InfoWrapper>
 
@@ -217,14 +223,21 @@ function DetailInfo({ predictStore }) {
                         주식시장에서 주식이 거래된 총량
                       </div>
                       <div className="value">
-                        {predictData.base['Volume'].toLocaleString()} 회
+                        {predictData.base['Volume']
+                          ? predictData.base['Volume'].toLocaleString()
+                          : '-'}{' '}
+                        회
                       </div>
                     </InfoWrapper>
                     <InfoWrapper>
                       <div className="title">평균거래량</div>
                       <div className="content">거래량의 평균</div>
                       <div className="value">
-                        {predictData.base['Average Vol. (3m)'].toLocaleString()}{' '}
+                        {predictData.base['Average Vol. (3m)']
+                          ? predictData.base[
+                              'Average Vol. (3m)'
+                            ].toLocaleString()
+                          : predictData.base['Average Vol. (3m)']}{' '}
                         회
                       </div>
                     </InfoWrapper>
