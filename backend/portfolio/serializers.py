@@ -40,15 +40,15 @@ class PortfolioDetailSerializer(serializers.ModelSerializer):
         for stock in obj.stocks.all():
             if stock.currency == 'KRW':
                 exchange = 1
-                kr += stock.current_price * exchange
+                kr += stock.count * stock.current_price * exchange
             elif stock.currency == 'USD':
                 exchange = sg
-                us += stock.current_price * exchange
+                us += stock.count * stock.current_price * exchange
 
             if stock.category == 'STOCK':
-                s += stock.current_price * exchange
+                s += stock.count * stock.current_price * exchange
             else:
-                o += stock.current_price * exchange
+                o += stock.count * stock.current_price * exchange
 
             buy += stock.count * stock.buy_price * exchange
             now += stock.count * stock.current_price * exchange
