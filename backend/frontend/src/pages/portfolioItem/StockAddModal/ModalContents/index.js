@@ -32,6 +32,7 @@ function ModalContents({
     if (update && stock) {
       setStockForm(stock);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [stockForm, setStockForm] = useState({
     name: '',
