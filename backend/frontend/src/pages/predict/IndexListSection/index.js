@@ -39,15 +39,15 @@ const SelectButton = styled.button`
 
 const indexes = [
   {
-    name: '🇰🇷KOSPI',
+    name: 'KOSPI',
     index: 'KOSPI',
   },
   {
-    name: '🇰🇷KOSDAQ',
+    name: 'KOSDAQ',
     index: 'KOSDAQ',
   },
   {
-    name: '🇺🇸NASDAQ',
+    name: 'NASDAQ',
     index: 'NASDAQ',
   },
 ];
