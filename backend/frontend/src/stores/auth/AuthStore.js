@@ -101,6 +101,7 @@ export default class AuthStore {
   logout = () => {
     sessionStorage.removeItem('access_token');
     this.isLoggedIn = false;
+    this.token = null;
     this.loggedInUser = {
       id: null,
       username: null,
