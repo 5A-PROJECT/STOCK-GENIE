@@ -57,7 +57,7 @@ export default class AuthStore {
         username: authForm.username,
       };
     } catch (e) {
-      console.log(e);
+      alert('존재하지 않는 사용자입니다.');
     }
 
     this.loading = false;
@@ -67,13 +67,15 @@ export default class AuthStore {
     this.loading = true;
     // TODO: 반환된 응답을 보고 로그인 여부 토글
     try {
-      if (!this.authformValidation()) return;
+      if (!this.authformValidation()) {
+        alert('올바르지 않은 폼 형식입니다.');
+      }
       const res = await AuthRepository.register(authForm);
       const { token } = res.data;
       sessionStorage.setItem('access_token', token);
       this.isLoggedIn = true;
     } catch (e) {
-      console.log(e);
+      alert('잘못된 형식 또는 중복된 사용자명입니다.');
     }
     this.loading = false;
   };
