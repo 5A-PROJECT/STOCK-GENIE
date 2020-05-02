@@ -14,7 +14,6 @@
 
 ```python
 python -m pip install -r requirements.txt
-python -m pip install python-decouple
 python manage.py makemigrations
 python maange.py migrate
 python manage.py loaddata predict/fixtures/stockinfo-data.json
