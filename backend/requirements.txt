@@ -58,5 +58,5 @@ tqdm==4.66.3
 tweepy==3.8.0
 Unidecode==1.1.1
 urllib3==1.26.19
-Werkzeug==3.0.3
+Werkzeug==3.0.6
 wrapt==1.12.1
