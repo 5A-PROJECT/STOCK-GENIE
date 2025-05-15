@@ -955,11 +955,10 @@
     "@babel/plugin-transform-typescript" "^7.16.7"
 
 "@babel/runtime-corejs3@^7.10.2":
-  version "7.17.9"
-  resolved "https://registry.npmjs.org/@babel/runtime-corejs3/-/runtime-corejs3-7.17.9.tgz"
+  version "7.27.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.27.1.tgz#386c7a737dd893da056f6c7972526e827020b47d"
   dependencies:
-    core-js-pure "^3.20.2"
-    regenerator-runtime "^0.13.4"
+    core-js-pure "^3.30.2"
 
 "@babel/runtime@7.0.0":
   version "7.0.0"
@@ -3253,7 +3252,11 @@ core-js-compat@^3.21.0, core-js-compat@^3.22.1:
     browserslist "^4.20.3"
     semver "7.0.0"
 
-core-js-pure@^3.20.2, core-js-pure@^3.8.1:
+core-js-pure@^3.30.2:
+  version "3.42.0"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.42.0.tgz#e86c45a7f3bdcb608823e872f73d1ad9ddf0531d"
+
+core-js-pure@^3.8.1:
   version "3.22.5"
   resolved "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.22.5.tgz"
 
