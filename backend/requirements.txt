@@ -34,7 +34,7 @@ oauthlib==3.1.0
 opt-einsum==3.2.1
 pandas==1.0.3
 protobuf==4.25.8
-pyasn1==0.4.8
+pyasn1==0.6.3
 pyasn1-modules==0.2.8
 pycodestyle==2.5.0
 PyJWT==2.4.0
