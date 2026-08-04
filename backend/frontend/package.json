@@ -20,7 +20,7 @@
     "react-helmet-async": "^1.0.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^5.0.1",
-    "react-swipeable-views": "^0.13.9",
+    "react-swipeable-views": "^0.14.2",
     "react-wordcloud": "^1.2.2",
     "styled-components": "^5.0.1",
     "wordcloud": "^1.1.1"
